@@ -20,6 +20,9 @@ class Home extends Common_Controller {
                 $this->data['header'] = 'one';
                 $this->data['performer'] = $this->getPerformerDetails('Yes');
                 $this->data['user'] = $this->getUserDetails($this->session->userdata('UserId'));
+                // echo "<pre>";
+                // print_r($this->data);
+                // exit;
             }
             $this->load->view('frontend/layout/header', $this->data);
             $this->load->view('frontend/pages/index');
@@ -120,7 +123,10 @@ class Home extends Common_Controller {
             'attribute'     => $attr,
             'willingness'   => $will,
             'appearance'    => $apnc,
-            'feature'       => $featr
+            'feature'       => $featr,
+            'currency'       => $this->input->post('currency'),
+            'price_in_private'       => $this->input->post('price_in_private'),
+            'price_in_group'       => $this->input->post('price_in_group'),
         );
         $chkTwo = $this->cm->get_all('user_preference', array("user_id" => $this->input->post('editpro_id')));
         if($this->session->userdata('UserType') == 2 && count($files['gallery']['name'])> 0){

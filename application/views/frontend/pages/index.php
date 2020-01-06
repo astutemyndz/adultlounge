@@ -266,6 +266,7 @@ if(!$this->session->userdata('UserType') || $this->session->userdata('UserType')
         </div>
     </div>
 </section>-->
+
 <section class="content-sec">
     <div class="list-widget">
         <div class="col gridview index-p-div">
@@ -293,8 +294,8 @@ if(!$this->session->userdata('UserType') || $this->session->userdata('UserType')
                             </a>
                         </h4>
                         <ul>
-                            <li>PRIVATE: <span>£6.99</span> p/m</li>
-                            <li>GROUP: <span>£3.99</span> p/M</li>
+                            <li>PRIVATE: <span>£ <?php echo $performer[$k]['price_in_private'];?></span> p/m</li>
+                            <li>GROUP: <span>£ <?php echo $performer[$k]['price_in_group'];?></span> p/M</li>
                         </ul>
                     </figcaption>
                 </figure>

@@ -34,6 +34,7 @@ $active_url = $controller.'/'.$method;
 <script>
 
         var base_url = "<?=base_url()?>";
+        var API_URL = "<?=base_url()?>api/v1";
 
         var UserId = "<?=$this->session->userdata('UserId')?>";
 
@@ -54,18 +55,32 @@ $active_url = $controller.'/'.$method;
       <div class="hdr-rgt">
         <div class="hdr-rwidgt d-flex">
             <div class="search-item">
-                <form>
-                    <input type="text" class="form-control" placeholder="Search..."/>
-                </form>
+              <form action="" method="get">
+              <input type="hidden" name="mode" value="users">
+              <div class="Typeahead Typeahead--twitterUsers">
+                <div class="u-posRelative">
+                  <input class="Typeahead-hint" type="text" tabindex="-1" readonly>
+                  <input class="Typeahead-input" id="demo-input" type="text" name="q" placeholder="Search all girls cams...">
+                  <img class="Typeahead-spinner" src="<?php echo base_url('assets/plugins/typeahead/img/spinner.gif');?>">
+                </div>
+                <div class="Typeahead-menu"></div>
+              </div>
+              <!-- <button class="u-hidden" type="submit">blah</button> -->
+            </form>
             </div>
-            <div class="select-dropdown">
+            <!-- <div class="select-dropdown">
             	<select class="form-control">
                 	<option>--Select One--</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
                 </select>
+            </div> -->
+            <!--Advance Search-->
+            <div>
+              <button type="button" >Filter</button>
             </div>
+            <!--Advance Search-->
           <ul class="inline-styled text-right">
             
             <!--<li><a href="javascript:void(0)" title="country"><img src="images/icon-flag.png" alt="uk"></a></li>-->

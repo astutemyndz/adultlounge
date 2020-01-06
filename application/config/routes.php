@@ -15,3 +15,5 @@ require APPPATH . '/routes/front.php';
     This route for admin
 */
 require APPPATH . '/routes/admin.php';
+
+$route['api/v1/search/model'] = 'ApiController/searchModel';

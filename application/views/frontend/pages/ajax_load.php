@@ -1,3 +1,8 @@
+<!-- <?php 
+echo "<pre>";
+print_r($performer);
+exit;
+?> -->
 <?php
 if(isset($subs)){
     for($k=0;$k<count($subs);$k++){

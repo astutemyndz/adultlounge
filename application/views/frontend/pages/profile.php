@@ -218,6 +218,23 @@
                                     <?php } ?>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <select class="custom-select requiredCheck" name="currency" id="currency" data-check="Display Currency As">
+                                    <option value="">Currency</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="check">Private price</label>
+                                <input type="text" class="form-control" id="price_in_private" name="price_in_private" placeholder="0.00">
+                            </div>
+                           
+                            <div class="form-group">
+                                <label class="check">Group price</label>
+                                <input type="text" class="form-control" id="price_in_group" name="price_in_group" placeholder="0.00">
+                            </div>
                         </div>
                         <div class="form-two-col">
                             <div class="form-group">
@@ -243,6 +260,7 @@
                                     <option value="None" <?php if(isset($user)){ if($user[0]['pubic_hair'] == 'None'){ print 'selected'; }}?>>None</option>
                                 </select>
                             </div>
+                            
                         </div>
                     </div>
 

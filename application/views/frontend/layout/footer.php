@@ -45,6 +45,7 @@
 <!-- Buy Credits -->
 
 <script src="<?=base_url('assets/js/jquery.min.js')?>"></script>
+
 <script src="<?=base_url('assets/js/owl.carousel.min.js')?>"></script>
 <script src="<?=base_url('assets/js/sweetalert2.min.js')?>"></script>
 <script src="<?=base_url('assets/js/jquery.mCustomScrollbar.concat.min.js')?>"></script>
@@ -52,8 +53,41 @@
 <script src="<?=base_url('assets/js/jquery.overlayScrollbars.min.js')?>"></script>
 <script src="<?=base_url('assets/js/waitMe.min.js')?>"></script>
 <script src="<?= base_url('assets/js/jquery.switcher.min.js') ?>"></script>
+<!--Result Template-->
+<script id="result-template" type="text/x-handlebars-template">
+    <div class="ProfileCard u-cf">
+    <img class="ProfileCard-avatar" src="{{profile_image_url_https}}">
+    <span class="active-circle"></span>
 
+    <div class="ProfileCard-details">
+        <div class="ProfileCard-realName">{{name}}</div>
+        <!-- <div class="ProfileCard-screenName">@{{screen_name}}</div>
+        <div class="ProfileCard-description">{{description}}</div> -->
+    </div>
+
+    <!-- <div class="ProfileCard-stats">
+        <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Tweets:</span> {{statuses_count}}</div>
+        <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Following:</span> {{friends_count}}</div>
+        <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Followers:</span> {{followers_count}}</div>
+    </div> -->
+    </div>
+</script>
+<!--Result Template-->
+
+<!--Empty Template-->
+<script id="empty-template" type="text/x-handlebars-template">
+    <div class="EmptyMessage">Sorry, we could not find any results for your search</div>
+</script>
+<!--Empty Template-->
+
+
+<script src="<?= base_url('assets/plugins/typeahead/js/handlebars.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/typeahead/js/jquery.xdomainrequest.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/typeahead/js/typeahead.bundle.js') ?>"></script>
+
+<script src="<?= base_url('assets/js/bundler.js') ?>"></script>
 <script>
+
     $(document).ready(function() {
         $('.sidebar-menu > li > a').click(function() {
             $(this).next().slideToggle();
