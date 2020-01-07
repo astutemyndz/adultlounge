@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <?php
-
 $controller = $this->router->fetch_class();
-
 $method = $this->router->fetch_method();
-
 $active_url = $controller.'/'.$method;
-
 ?>
 <head>
 <meta charset="UTF-8" />
@@ -18,9 +13,7 @@ $active_url = $controller.'/'.$method;
 <meta name="author" content="Basudev Mondal">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="<?=base_url('assets/css/jquery.mCustomScrollbar.css')?>">
-
 <!--<link href="<?=base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css" />-->
-
 <link rel="stylesheet" href="<?=base_url()?>backend/node_modules/bootstrap-utilities/bootstrap-utilities.css">
 <link href="<?=base_url('assets/css/owl.carousel.min.css')?>" rel="stylesheet" type="text/css" />
 <link href="<?=base_url('assets/css/owl.theme.default.css')?>" rel="stylesheet" type="text/css" />
@@ -32,20 +25,14 @@ $active_url = $controller.'/'.$method;
 <link href="<?=base_url('assets/css/style.css')?>" rel="stylesheet" type="text/css" />
 <link href="<?=base_url('assets/css/custom.css')?>" rel="stylesheet" type="text/css" />
 <script>
-
         var base_url = "<?=base_url()?>";
         var API_URL = "<?=base_url()?>api/v1";
-
         var UserId = "<?=$this->session->userdata('UserId')?>";
-
         var UserType = "<?=$this->session->userdata('UserType')?>";
-
-
 
     </script>
 <script src="<?=base_url('assets/js/DetectRTC.js')?>"></script>
 </head>
-
 <body id="body-content" class="hide">
 <section class="pagewrapper">
 <section class="header-wrap">
@@ -54,6 +41,8 @@ $active_url = $controller.'/'.$method;
       <div class="hdr-lft"> <a href="<?=base_url()?>" class="sitelogo"><img src="<?=base_url('assets/images/logo.png')?>" alt="Logo" /></a> </div>
       <div class="hdr-rgt">
         <div class="hdr-rwidgt d-flex">
+            <?php 
+            /*
             <div class="search-item">
               <form action="" method="get">
               <input type="hidden" name="mode" value="users">
@@ -68,18 +57,19 @@ $active_url = $controller.'/'.$method;
               <!-- <button class="u-hidden" type="submit">blah</button> -->
             </form>
             </div>
-            <!-- <div class="select-dropdown">
+            
+            <div class="select-dropdown">
             	<select class="form-control">
                 	<option>--Select One--</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
                 </select>
-            </div> -->
-            <!--Advance Search-->
-            <div>
-              <button type="button" >Filter</button>
             </div>
+            */
+            ?>
+            <!--Advance Search-->
+           
             <!--Advance Search-->
           <ul class="inline-styled text-right">
             
@@ -115,9 +105,10 @@ $active_url = $controller.'/'.$method;
       </div>
     </header>
     <section class="header-bottom">
+      
       <nav>
         <ul>
-          <?php if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
+          <?php //if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
           <li><a href="javascript:void(0)">categories</a>
             <?php if(!empty($show)){ ?>
             <div class="submenu">
@@ -130,7 +121,7 @@ $active_url = $controller.'/'.$method;
                 <?php } ?>
               </ul>
             </div>
-            <?php } ?>
+            <?php //} ?>
           </li>
           <li><a href="javascript:void(0);">Show Types</a>
             <div class="submenu submenu-2">
@@ -174,29 +165,17 @@ $active_url = $controller.'/'.$method;
         <?php } ?>
         
         <!--<div class="search"><span><img src="<?=base_url('assets/images/icon-search.png')?>" alt="search" /></span></div>
-
 <div class="drop-list">
-
     <span>recommended</span>
-
     <ul>
-
         <li><a href="javascript:void(0)">recommended</a></li>
-
         <li><a href="javascript:void(0)">recommended 1</a></li>
-
         <li><a href="javascript:void(0)">recommended 2</a></li>
-
     </ul>
-
 </div>
-
 <div class="switch-view">
-
     <span class="list"><img src="<?=base_url('assets/images/icon-list.png')?>" alt="list" /></span>
-
     <span class="grid"><img src="<?=base_url('assets/images/icon-grid.png')?>" alt="grid" /></span>
-
 </div>--> 
         
       </div>
@@ -226,13 +205,9 @@ $active_url = $controller.'/'.$method;
     </div>
     
     <!--<div class="msg-foo">
-
 					<p> LEGAL DISCLAIMER: 
-
 						<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum lorem nisl. Aliquam erat volutpat. Proin vulputate enim ac hendrerit sagittis. </span>
-
 					</p>
-
 				</div>--> 
     
   </div>
@@ -248,73 +223,49 @@ $active_url = $controller.'/'.$method;
     <?php if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
     <ul class="sidebar-menu">
       <?php
-
                         if(!empty($categories)){
-
                             if(isset($user) && $user[0]['category'] != ''){
-
                         ?>
       <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
         <ul>
           <?php
-
                                 foreach($categories as $cat){
-
                                     if(count(explode($cat->id, $user[0]['category'])) > 1){
-
                                 ?>
           <li> <a href="javascript:void(0);" onclick="refine_performer('category', '<?=$cat->id?>')">#
             <?=$cat->name?>
             </a> </li>
           <?php
-
                                     }
-
                                 }
-
                                 ?>
         </ul>
       </li>
       <?php
-
                             }
-
                         }
-
                         if(!empty($show)){
-
                             if(isset($user) && $user[0]['attribute'] != ''){
-
                         ?>
       <li class="types"><a href="javascript:void(0);">SHOW TYPES</a>
         <ul>
           <?php
-
                                 foreach($show as $shw){
-
                                     if(count(explode($shw->id, $user[0]['attribute'])) > 1){
-
                                 ?>
           <li> <a href="javascript:void(0);" onclick="refine_performer('attribute', '<?=$shw->id?>')">#
             <?=$shw->name?>
             </a> </li>
           <?php
-
                                     }
-
                                 }
-
                                 ?>
         </ul>
       </li>
       <?php
-
                             }
-
                         }
-
                         if(!empty($age)){
-
                         ?>
       <li class="age"><a href="javascript:void(0);">AGE</a>
         <ul>
@@ -326,129 +277,89 @@ $active_url = $controller.'/'.$method;
         </ul>
       </li>
       <?php
-
                         }
-
                         if(!empty($will)){
-
                             if(isset($user) && $user[0]['willingness'] != ''){
-
                         ?>
       <li class="willingers"><a href="javascript:void(0);">WILLINGNESS</a>
         <ul>
           <?php
-
                                 foreach($will as $wll){
-
                                     if(count(explode($wll->id, $user[0]['willingness'])) > 1){
-
                                 ?>
           <li> <a href="javascript:void(0);" onclick="refine_performer('willingness', '<?=$wll->id?>')">#
             <?=$wll->name?>
             </a> </li>
           <?php
-
                                     }
-
                                 }
-
                                 ?>
         </ul>
       </li>
       <?php
-
                             }
-
                         }
-
                         if(!empty($appearence)){
-
                             if(isset($user) && $user[0]['appearance'] != ''){
-
                         ?>
       <li class="appearance"><a href="javascript:void(0);">APPEARANCE</a>
         <ul>
           <?php
-
                                 foreach($appearence as $aprnc){
-
                                     if(count(explode($aprnc->id, $user[0]['appearance'])) > 1){
-
                                 ?>
           <li> <a href="javascript:void(0);" onclick="refine_performer('appearance', '<?=$aprnc->id?>')">#
             <?=$aprnc->name?>
             </a> </li>
           <?php
-
                                     }
-
                                 }
-
                                 ?>
         </ul>
       </li>
       <?php
-
                             }
-
                         }
-
                         ?>
     </ul>
     <?php }else{ ?>
     <ul class="sidebar-menu">
       <?php
-
                         if(!empty($categories)){
-
                         ?>
       <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
         <ul>
           <?php
-
                                 foreach($categories as $cat){
-
                                 ?>
           <li> <a href="javascript:void(0);" onclick="refine_performer('category', '<?=$cat->id?>')">#
             <?=$cat->name?>
             </a> </li>
           <?php
-
                                 }
-
                                 ?>
         </ul>
       </li>
       <?php
-
                         }
-
                         if(!empty($show)){
-
                         ?>
       <li class="types"><a href="javascript:void(0);">SHOW TYPES</a>
         <ul>
           <?php
-
                                 foreach($show as $shw){
-
                                 ?>
           <li> <a href="javascript:void(0);" onclick="refine_performer('attribute', '<?=$shw->id?>')">#
             <?=$shw->name?>
             </a> </li>
           <?php
-
                                 }
-
                                 ?>
         </ul>
       </li>
       <?php
-
                         }
-
                         if(!empty($age)){
-
                         ?>
       <li class="age"><a href="javascript:void(0);">AGE</a>
         <ul>
@@ -460,57 +371,41 @@ $active_url = $controller.'/'.$method;
         </ul>
       </li>
       <?php
-
                         }
-
                         if(!empty($will)){
-
                         ?>
       <li class="willingers"><a href="javascript:void(0);">WILLINGNESS</a>
         <ul>
           <?php
-
                                 foreach($will as $wll){
-
                                 ?>
           <li> <a href="javascript:void(0);" onclick="refine_performer('willingness', '<?=$wll->id?>')">#
             <?=$wll->name?>
             </a> </li>
           <?php
-
                                 }
-
                                 ?>
         </ul>
       </li>
       <?php
-
                         }
-
                         if(!empty($appearence)){
-
                         ?>
       <li class="appearance"><a href="javascript:void(0);">APPEARANCE</a>
         <ul>
           <?php
-
                                 foreach($appearence as $aprnc){
-
                                 ?>
           <li> <a href="javascript:void(0);" onclick="refine_performer('appearance', '<?=$aprnc->id?>')">#
             <?=$aprnc->name?>
             </a> </li>
           <?php
-
                                 }
-
                                 ?>
         </ul>
       </li>
       <?php
-
                         }
-
                         ?>
     </ul>
     <?php } ?>

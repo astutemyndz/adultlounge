@@ -60,4 +60,9 @@ $(document).ready(function () {
         //var slug = suggestion.name;
         window.location.href = "".concat(base_url, "performer/").concat(suggestion.id, "/").concat(suggestion.slug, "/");
   });
+
+  const filterButton = document.querySelector('#filterButton');
+  console.log(filterButton);
+    
+  
 });

@@ -53,6 +53,7 @@
 <script src="<?=base_url('assets/js/jquery.overlayScrollbars.min.js')?>"></script>
 <script src="<?=base_url('assets/js/waitMe.min.js')?>"></script>
 <script src="<?= base_url('assets/js/jquery.switcher.min.js') ?>"></script>
+
 <!--Result Template-->
 <script id="result-template" type="text/x-handlebars-template">
     <div class="ProfileCard u-cf">

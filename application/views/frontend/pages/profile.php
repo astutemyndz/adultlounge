@@ -221,7 +221,7 @@
                             <div class="form-group">
                                 <select class="custom-select requiredCheck" name="currency" id="currency" data-check="Display Currency As">
                                     <option value="">Currency</option>
-                                    <option value="USD">USD</option>
+                                    <option selected value="USD">USD</option>
                                     <option value="EUR">EUR</option>
                                     <option value="GBP">GBP</option>
                                 </select>
@@ -347,7 +347,7 @@
 
                     <?php } ?>
                     <div class="box-content-widget">
-                        <!--<h4>LANGUAGES</h4>
+                        <h4>LANGUAGES</h4>
 
                         <div class="form-two-col per2 leftsc">
                             <div class="show">
@@ -370,7 +370,7 @@
                                 </div>
                                 <?php } ?>
                                 <?php if(!empty($show)){ ?>
-                                <h3>ATTRIBUTES</h3>
+                                <h3>SHOW TYPES</h3>
                                 <div class="inline-items">
                                     <?php
                                     for($p=0;$p<count($show); $p++){
@@ -527,7 +527,7 @@
                                     <?php } ?>
                                 </div>
                                 <?php } ?>
-                                <h3>FEATURE</h3>
+                                <!-- <h3>FEATURE</h3>
                                 <div class="inline-items">
                                     <div class="form-check">
                                         <label class="check">TATTOOS
@@ -553,7 +553,7 @@
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
                                 <h3>DESCRIPTION INFORMATION </h3>
                                 <p>PLEASE WRITE A DESCRIPTION TO GRAB ATTENTION OF THE USER</p>
                                 

@@ -53,15 +53,12 @@ class ApiController extends Common_Controller {
     public function filterModel() {
         
         if($this->isPost()) {
-
             $this->setRequest($this->input->post());
             if(!empty($this->request) && is_array($this->request)) {
                 $this->setFilterData($this->request);
             }
             if($this->filterData) {
-                $this->setPerformer($this->performer->filter('Yes','','','', '', $this->sexualPref));
-            } else {
-                $this->setPerformer($this->performer->all('Yes'));
+                $this->setPerformer($this->performer->filter($this->filterData));
             }
             if($this->performer) {
                 $this->data = $this->performer;

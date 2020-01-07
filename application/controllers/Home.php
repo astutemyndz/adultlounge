@@ -2,12 +2,18 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends Common_Controller {
     
-    public function __construct(){
+    
+    public function __construct() {
+
         parent::__construct();
         $this->getCommonMenu();
         $this->data['header'] = 'two';
         $this->data['plans'] = $this->cm->select('credit_plans', ['status'=>1], '', 'id', 'ASC');
+
+        $this->load->model('Performer_model', 'performer');
     }
+
+    
 
     public function index() {
         if($this->session->userdata('setAge')){
@@ -63,6 +69,13 @@ class Home extends Common_Controller {
             'image'         => $pro_image,
             'updated_at'    => date('Y-m-d H:i:s')
         );
+        if($this->input->post('editpro_id')) {
+            $this->performer->setUserId($this->input->post('editpro_id'));
+        }
+        
+
+       
+
         $this->cm->update('users', array("id" => $this->input->post('editpro_id')), $updateArray);
         $this->session->set_userdata('UserName', $this->input->post('name_edit'));
         $category = $this->input->post('editpro_category');
@@ -78,11 +91,13 @@ class Home extends Common_Controller {
         if(!empty($category)){
             foreach($category as $categry){
                 $cat .= $categry.',';
+                $this->performer->categories[] = $categry;
             }
         }
         if(!empty($attribute)){
             foreach($attribute as $attribut){
                 $attr .= $attribut.',';
+                $this->performer->showTypes[] = $attribut;
             }
         }
         if(!empty($feature)){
@@ -91,15 +106,34 @@ class Home extends Common_Controller {
             }
         }
         if(!empty($willing)){
-            foreach($willing as $willin){
-                $will .= $willin.',';
+            foreach($willing as $willing){
+                $will .= $willing.',';
+                $this->performer->willingness[] = $willing;
             }
         }
         if(!empty($appearence)){
             foreach($appearence as $aprnc){
                 $apnc .= $aprnc.',';
+                $this->performer->appearances[] = $aprnc;
             }
         }
+
+        // if(isset($this->appearances) && !empty($this->appearances)) {
+        //     foreach($this->appearances as $appearance) {
+                
+        //     }
+        // }
+        $this->performer->setAppearances($this->performer->appearances);
+        $this->performer->setCategories($this->performer->categories);
+        $this->performer->setShowTypes($this->performer->showTypes);
+        $this->performer->setWillingness($this->performer->willingness);
+        
+        $this->performer->updateUserAppearance();
+        $this->performer->updateUserCategory();
+        $this->performer->updateUserShowType();
+        $this->performer->updateUserWillingness();
+        
+
         $cat = trim($cat, ",");
         $attr = trim($attr, ",");
         $featr = trim($featr, ",");
