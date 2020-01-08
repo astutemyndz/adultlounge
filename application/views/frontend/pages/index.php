@@ -267,8 +267,57 @@ if(!$this->session->userdata('UserType') || $this->session->userdata('UserType')
     </div>
 </section>-->
 
+
+
+
 <section class="content-sec">
+    <!--Search Filter-->
     <div class="list-widget">
+        <div class="main-heading">
+            <h3>BBW <a href="#"><img src="<?=base_url('assets/images/icon-reload.png')?>"></a> <span><a href="#">703 members</a></span></h3>
+        </div>
+        <div class="shorting-list">
+            <ul>
+                <li>Girl <a href="#"><i class="fa fa-times-circle" aria-hidden="true"></i></a></li>
+                <li>Boy <a href="#"><i class="fa fa-times-circle" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+        <div class="col gridview">
+            <div class="col-grid">
+                <figure class="active">
+                    <span class="strapbox">In Group</span>
+                    <a href="#"><img src="<?=base_url('assets/images/img-001_d.jpg')?>" alt="img" /></a>
+                    <figcaption>
+                        <h4><span class="active-circle"></span><a href="javascript:void(0)">AlisMorris</a></h4>
+                        <ul>
+                            <li>PRIVATE: <span>£6.99</span> p/m</li>
+                            <li>GROUP: <span>£3.99</span> p/M</li>
+                        </ul>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-grid">
+                <figure class="active">
+                    <span class="strapbox">In Group</span>
+                    <a href="#"><img src="<?=base_url('assets/images/img-001_d.jpg')?>" alt="img" /></a>
+                    <figcaption>
+                        <h4><span class="active-circle"></span><a href="javascript:void(0)">AlisMorris</a></h4>
+                        <ul>
+                            <li>PRIVATE: <span>£6.99</span> p/m</li>
+                            <li>GROUP: <span>£3.99</span> p/M</li>
+                        </ul>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+    <!--Search Filter-->
+    <hr  class="divider-line"/>
+    <!--Main Section-->
+    <div class="list-widget">
+        <div class="main-heading">
+            <h3>You might also like these performers <a href="#"><img src="<?=base_url('assets/images/icon-reload.png')?>"></a> <span><a href="#">703 members</a></span></h3>
+        </div>
         <div class="col gridview index-p-div">
             <?php
             if(!empty($performer)){

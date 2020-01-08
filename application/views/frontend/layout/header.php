@@ -177,13 +177,14 @@ $active_url = $controller.'/'.$method;
               </div>
             </div>
         </div>
-        <div class="drop-list">
-            <span>recommended</span>
-            <ul>
-                <li><a href="javascript:void(0)">recommended</a></li>
-                <li><a href="javascript:void(0)">recommended 1</a></li>
-                <li><a href="javascript:void(0)">recommended 2</a></li>
-            </ul>
+        <div class="drop-list select-filter">
+            <Select class="form-control">
+                <option>recommended</option>
+                <option>recommended</option>
+                <option>recommended</option>
+                <option>recommended</option>
+            </select>
+            
         </div>
         <div class="switch-view">
             <span class="list"><img src="<?=base_url('assets/images/icon-list.png')?>" alt="list"/></span>
