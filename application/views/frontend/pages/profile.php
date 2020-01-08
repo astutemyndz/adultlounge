@@ -219,6 +219,15 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <select class="custom-select requiredCheck" name="performer_type" id="performer_type" data-check="Display Currency As">
+                                    <option value="">Perform Role</option>
+                                    <option selected value="1">MALE</option>
+                                    <option value="2">FEMALE</option>
+                                    <option value="3">COUPLES</option>
+                                    <option value="4">TV/TS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <select class="custom-select requiredCheck" name="currency" id="currency" data-check="Display Currency As">
                                     <option value="">Currency</option>
                                     <option selected value="USD">USD</option>

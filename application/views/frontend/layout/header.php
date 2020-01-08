@@ -110,13 +110,13 @@ $active_url = $controller.'/'.$method;
         <ul>
           <?php //if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
           <li><a href="javascript:void(0)">categories</a>
-            <?php if(!empty($show)){ ?>
+            <?php if(!empty($categories)){ ?>
             <div class="submenu">
               <h3>Filter By: Catagories</h3>
               <ul>
-                <?php foreach($show as $shw){ ?>
-                <li><a href="javascript:void(0);" onclick="refine_performer('category', '<?=$shw->id?>')">#
-                  <?=$shw->name?>
+                <?php foreach($categories as $category){ ?>
+                <li><a href="javascript:void(0);" onclick="refine_performer('category', '<?=$category->id?>')">#
+                  <?=$category->name?>
                   </a></li>
                 <?php } ?>
               </ul>
@@ -222,11 +222,19 @@ $active_url = $controller.'/'.$method;
   <div class="sidebar">
     <?php if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
     <ul class="sidebar-menu">
+          <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
+            <ul>
+              <li><a href="<?php echo base_url('/search?performer=1');?>" >GIRLS</a></li>              
+              <li><a href="<?php echo base_url('/search?performer=2');?>" >BOYS</a></li>              
+              <li><a href="<?php echo base_url('/search?performer=2');?>" >COUPLES</a></li>              
+              <li><a href="<?php echo base_url('/search?performer=2');?>" >TV/TS</a></li>              
+          </ul>
+      </li>
       <?php
                         if(!empty($categories)){
                             if(isset($user) && $user[0]['category'] != ''){
                         ?>
-      <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
+      <li class="performers"><a href="javascript:void(0);">CATEGORIES</a>
         <ul>
           <?php
                                 foreach($categories as $cat){
@@ -324,15 +332,23 @@ $active_url = $controller.'/'.$method;
     </ul>
     <?php }else{ ?>
     <ul class="sidebar-menu">
+          <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
+            <ul>
+              <li><a class="filter" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'GIRLS'));?>')" href="javascript:void(0);" >GIRLS</a></li>              
+              <li><a class="filter" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'BOYS'));?>');" href="javascript:void(0);" >BOYS</a></li>              
+              <li><a class="filter" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'COUPLES'));?>');" href="javascript:void(0);" >COUPLES</a></li>              
+              <li><a class="filter" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'TV_TS'));?>');" href="javascript:void(0);" >TV/TS</a></li>    
+          </ul>
+      </li>
       <?php
                         if(!empty($categories)){
                         ?>
-      <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
+      <li class="performers"><a href="javascript:void(0);">CATEGORIES</a>
         <ul>
           <?php
                                 foreach($categories as $cat){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('category', '<?=$cat->id?>')">#
+          <li> <a href="javascript:void(0);" onclick="onClickFilterEventHandler('category', '<?php echo strtolower(str_replace(' ', '_', ''.$cat->name.''));?>');">#
             <?=$cat->name?>
             </a> </li>
           <?php

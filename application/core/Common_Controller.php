@@ -326,6 +326,11 @@ class Common_Controller extends CI_Controller {
         $this->data['categories'] = $this->cm->get_specific('categories', array("status" => 1));
         $this->data['will'] = $this->cm->get_specific('willingness', array("status" => 1));
         $this->data['appearence'] = $this->cm->get_specific('appearence', array("status" => 1));
+
+        // echo "<pre>";
+        // print_r($this->data);
+
+        // exit;
     }
 
     public function getNewSubs($condition = array()){

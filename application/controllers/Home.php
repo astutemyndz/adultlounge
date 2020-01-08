@@ -161,6 +161,7 @@ class Home extends Common_Controller {
             'currency'       => $this->input->post('currency'),
             'price_in_private'       => $this->input->post('price_in_private'),
             'price_in_group'       => $this->input->post('price_in_group'),
+            'performer_type'       => $this->input->post('performer_type'),
         );
         $chkTwo = $this->cm->get_all('user_preference', array("user_id" => $this->input->post('editpro_id')));
         if($this->session->userdata('UserType') == 2 && count($files['gallery']['name'])> 0){
@@ -305,6 +306,9 @@ class Home extends Common_Controller {
         $this->load->view('frontend/layout/footer', $this->data);
     }
 
+    public function search() {
+        
+    }
     public function filterPerformer(){
         $this->checkAge();
         if($this->input->post('type') == 'age'){
