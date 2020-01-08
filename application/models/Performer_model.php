@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Performer_model extends CI_model {
     
     public $tables;
-    public $whereConditions;
+    public $conditions;
     public $data;
 
     public $categories;
@@ -13,7 +13,7 @@ class Performer_model extends CI_model {
     public $willingness;
     public $userId;
 
-    
+    public $query;
 
     public function __construct(){
         parent::__construct();
@@ -21,10 +21,15 @@ class Performer_model extends CI_model {
     }
 
     public function init() {
-        $this->tables['user']                   = 'users';
+        $this->tables['users']                   = 'users';
+        $this->tables['categories']                   = 'categories';
+        $this->tables['show_type']                   = 'show_type';
+        $this->tables['appearance']                   = 'appearence';
+        $this->tables['willingness']                   = 'willingness';
 
         // Mapping tables
-        $this->tables['users_preference']       = 'users_preference';
+        $this->tables['user_preference']       = 'user_preference';
+
         $this->tables['users_appearance']       = 'users_appearence';
         $this->tables['users_show_type']        = 'users_show_type';
         $this->tables['users_categories']       = 'users_categories';
@@ -68,46 +73,66 @@ class Performer_model extends CI_model {
         if(!empty($data) && is_array($data)) {
             $this->data = $data;
             foreach($this->data as $key => $value) {
-                if(array_key_exists('sexual_pref', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
+                if(array_key_exists('performer', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
+                    $this->conditions['up.performer_type'] = $value;
                 }
-                if(array_key_exists('gender', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
+                if(array_key_exists('category', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
+                    $this->conditions['c.name'] = $value;
+                }
+                if(array_key_exists('show_type', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
+                    $this->conditions['st.'.$key.''] = $value;
                 }
                 if(array_key_exists('age', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
+                    $this->conditions['u.'.$key.''] = $value;
                 }
-                if(array_key_exists('country', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
+                if(array_key_exists('willingness', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
+                    $this->conditions['wi.'.$key.''] = $value;
                 }
-                if(array_key_exists('city', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
+                if(array_key_exists('appearances', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
+                    $this->whereConditions['ap.'.$key.''] = $value;
                 }
-                if(array_key_exists('hasWebcam', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
-                }
-                if(array_key_exists('account_verified', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
-                }
-                if(array_key_exists('us_citizen', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
-                }
-                if(array_key_exists('country', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['u.'.$key.''] = $value;
-                }
+                
             }
-
-            echo "<pre>";
-            print_r($this->whereConditions);
-            exit;
+           
         }
-        // $this->db->from($this->tables['users'].' as u');
-        // $this->db->join($this->tables['user_preference'].' as up', 'user_preference.user_id = users.id', 'left');
-        // $this->db->where($this->whereCondition);
-        // $this->db->select('u.id, u.name, u.email, u.phone_no, u.usernm, u.gender, u.sexual_pref, u.age, u.image, u.isLogin, up.display_name, up.height, up.weight, up.hair, up.eye, up.zodiac, up.build, up.chest, up.burst, up.cup, up.pubic_hair, up.penis, up.description,up.currency, up.price_in_private,up.price_in_group, up.category, up.attribute, up.willingness, up.appearance, up.feature, (select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id) images');
-        // $this->setQuery($this->db->get());
+        if($this->conditions) {
+            $this->db->from($this->tables['users'].' as u');
+            $this->db->join($this->tables['users_categories'].' as uc', 'uc.id_users = u.id', 'left');
+            $this->db->join($this->tables['categories'].' as c', 'c.id = uc.id_categories', 'left');
+          
+            $this->db->join($this->tables['user_preference'].' as up', 'up.user_id = u.id', 'left');
 
-        // return $performer;
+            $this->db->join($this->tables['users_show_type'].' as ust', 'ust.id_users = u.id', 'left');
+            $this->db->join($this->tables['show_type'].' as st', 'st.id = ust.id_show_type', 'left');
+
+            $this->db->join($this->tables['users_willingness'].' as uwi', 'uwi.id_users = u.id', 'left');
+            $this->db->join($this->tables['willingness'].' as wi', 'wi.id = uwi.id_willingness', 'left');
+
+            $this->db->join($this->tables['users_appearance'].' as uap', 'uap.id_users = u.id', 'left');
+            $this->db->join($this->tables['appearance'].' as ap', 'ap.id = uap.id_appearence', 'left');
+
+            $this->db->where($this->conditions);
+            $this->db->select('u.id, u.name, u.email, u.phone_no, u.usernm, u.gender, u.sexual_pref, 
+            u.age, u.image, u.isLogin, up.display_name, up.height, up.weight, 
+            up.hair, up.eye, up.zodiac, up.build, up.chest, up.burst, 
+            up.cup, up.pubic_hair, up.penis, up.description,up.currency, 
+            up.price_in_private,up.price_in_group, up.category, up.attribute, 
+            up.willingness, up.appearance, up.feature, 
+            (select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id) images,
+            c.id as categoryId, c.name as categoryName,st.id as showId, st.name as showName, ap.id as appearanceId, ap.name as appearanceName, wi.id as willingnessId, wi.name as willingness
+            ');
+            $this->setQuery($this->db->get());
+        }
+        
+        if($this->query) {
+            return $this->query->result_array();
+        }
+        return array();
+    }
+
+    public function setQuery($query) {
+        $this->query = $query;
+        return $this;
     }
 
     public function setUserId($value) {

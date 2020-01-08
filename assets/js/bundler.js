@@ -70,10 +70,11 @@ $(document).ready(function () {
 
 
 function onClickFilterEventHandler(key, value) {
+  var params;
   var updateQueryStringParam = function (key, value) {
     var baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
     urlQueryString = document.location.search,
-    newParam = key + '=' + value,
+    newParam = key + '=' + value;
     params = '?' + newParam;
   
     // If the "search" string exists, then build params from it
@@ -101,7 +102,13 @@ function onClickFilterEventHandler(key, value) {
   }
 
   updateQueryStringParam(key, value);
-   
+  fetch(API_URL + '/filter/model' + params)
+  .then((response) => {
+    return response.json();
+  })
+  .then((myJson) => {
+    console.log(myJson);
+  });
   
 }
 

@@ -52,11 +52,14 @@ class ApiController extends Common_Controller {
     }
     public function filterModel() {
         
-        if($this->isPost()) {
-            $this->setRequest($this->input->post());
+        if(!$this->isPost()) {
+            $this->setRequest($this->input->get());
             if(!empty($this->request) && is_array($this->request)) {
                 $this->setFilterData($this->request);
             }
+            // echo "<pre>";
+            // print_r($this->filterData);
+            // exit;
             if($this->filterData) {
                 $this->setPerformer($this->performer->filter($this->filterData));
             }

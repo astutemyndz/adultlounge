@@ -220,11 +220,11 @@
                             </div>
                             <div class="form-group">
                                 <select class="custom-select requiredCheck" name="performer_type" id="performer_type" data-check="Display Currency As">
-                                    <option value="">Perform Role</option>
-                                    <option selected value="1">MALE</option>
-                                    <option value="2">FEMALE</option>
-                                    <option value="3">COUPLES</option>
-                                    <option value="4">TV/TS</option>
+                                    <option selected value="">Perform Type</option>
+                                    <option value="girls">GIRLS</option>
+                                    <option value="boys">BOYS</option>
+                                    <option value="couples">COUPLES</option>
+                                    <option value="tv_ts">TV/TS</option>
                                 </select>
                             </div>
                             <div class="form-group">
