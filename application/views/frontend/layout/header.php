@@ -40,8 +40,8 @@ $active_url = $controller.'/'.$method;
     <header class="main-header">
       <div class="hdr-lft"> <a href="<?=base_url()?>" class="sitelogo"><img src="<?=base_url('assets/images/logo.png')?>" alt="Logo" /></a> </div>
       <div class="hdr-rgt">
-        <div class="hdr-rwidgt d-flex">
-            <?php 
+        <div class="hdr-rwidgt">
+          <?php 
             /*
             <div class="search-item">
               <form action="" method="get">
@@ -68,9 +68,9 @@ $active_url = $controller.'/'.$method;
             </div>
             */
             ?>
-            <!--Advance Search-->
-           
-            <!--Advance Search-->
+          <!--Advance Search--> 
+          
+          <!--Advance Search-->
           <ul class="inline-styled text-right">
             
             <!--<li><a href="javascript:void(0)" title="country"><img src="images/icon-flag.png" alt="uk"></a></li>-->
@@ -105,7 +105,6 @@ $active_url = $controller.'/'.$method;
       </div>
     </header>
     <section class="header-bottom">
-      
       <nav>
         <ul>
           <?php //if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
@@ -158,6 +157,38 @@ $active_url = $controller.'/'.$method;
         </ul>
       </nav>
       <div class="right-filters">
+      	<div class="search">
+        	<!--<span><img src="<?=base_url('assets/images/icon-search.png')?>" alt="search"/></span>-->
+            <div class="search-top-box">
+              <div class="container-2">
+                  <span class="icon"><img src="<?=base_url('assets/images/icon-search.png')?>" alt="search"/></span>
+                  <form action="" method="get">
+                  	<!--<input type="search" id="search" placeholder="Search..." />-->
+                    <input type="hidden" name="mode" value="users">
+                      <div class="Typeahead Typeahead--twitterUsers">
+                        <div class="u-posRelative">
+                          <input class="Typeahead-hint" id="search" type="text" tabindex="-1" readonly>
+                          <input class="Typeahead-input" id="demo-input" type="text" name="q" placeholder="Search all girls cams...">
+                          <img class="Typeahead-spinner" src="<?php echo base_url('assets/plugins/typeahead/img/spinner.gif');?>">
+                        </div>
+                        <div class="Typeahead-menu"></div>
+                      </div>
+                  </form>
+              </div>
+            </div>
+        </div>
+        <div class="drop-list">
+            <span>recommended</span>
+            <ul>
+                <li><a href="javascript:void(0)">recommended</a></li>
+                <li><a href="javascript:void(0)">recommended 1</a></li>
+                <li><a href="javascript:void(0)">recommended 2</a></li>
+            </ul>
+        </div>
+        <div class="switch-view">
+            <span class="list"><img src="<?=base_url('assets/images/icon-list.png')?>" alt="list"/></span>
+            <span class="grid"><img src="<?=base_url('assets/images/icon-grid.png')?>" alt="grid"/></span>
+        </div>
         <?php if(($this->session->userdata('UserType') || $this->session->userdata('UserType') != '') && $this->session->userdata('UserType') == '1'){ ?>
         <div class="switch-view" style="color:#fff;"> <span class="list welcome_unm">Welcome
           <?=$this->session->userdata('UserName')?>
