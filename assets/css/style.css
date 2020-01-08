@@ -4607,7 +4607,7 @@ h2.overview {
 	width: 100%;
 	padding: 5px 8px;
 	font-size: 13px;
-	line-height: 30px;
+	line-height: 25px;
 	border: none;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
@@ -4626,6 +4626,7 @@ h2.overview {
 	/*background-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);*/
 	outline: none;
 	color:#fff;
+	border: 1px solid #b8a368;
 }
 .Typeahead-menu {
 	position: absolute;
@@ -4788,7 +4789,7 @@ h2.overview {
 	width: 300px;
 	border: 1px solid #b8a368;
 }
-.container-2:hover input#search, .container-2:focus input#search {
+.container-2:focus input#search {
 	width: 300px;
 	border: 1px solid #b8a368;
 }
@@ -4808,3 +4809,56 @@ h2.overview {
 	margin-top: 12px;
     margin-left: 6px;
 }
+.select-filter select.form-control{
+	background: transparent;
+	color: #fff;
+	border: none;
+}
+.select-filter select.form-control option{
+	color: #000;
+}
+.main-heading h3{
+	display: inline-flex;
+	color: #fff;
+	margin: 10px 0;
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 27px;
+}
+.main-heading h3 a{
+	margin: 0 10px;
+}
+.main-heading h3 a img{
+	display: inline;
+}
+.main-heading h3 span{
+	font-size: 12px;
+}
+.main-heading h3 span a{
+	color: #d4be7b;
+}
+hr.divider-line{
+	margin: 15px 0;
+    border-color: #52441f;
+}
+.shorting-list{
+	margin: 10px 0 15px;
+}
+.shorting-list ul li{
+	display: inline-flex;
+	background: #d4be7b;
+	color: #fff;
+	border-radius: 3px;
+	margin: 0 2px;
+	padding: 5px 10px;
+	font-size: 13px;
+}
+.shorting-list ul li a{
+	color: #fff;
+	margin-left: 7px;
+}
+.shorting-list ul li a:hover{
+	color: #000;
+}
+
+
