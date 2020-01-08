@@ -95,8 +95,8 @@
             $(this).parent().siblings().find('ul').slideUp();
         });
         $('.list').click(function() {
-            // $('.list-widget .col').removeClass('gridview').addClass('listview');
-            $('.list-widget .col').toggleClass('gridview listview');
+            $('.list-widget .col').removeClass('gridview').addClass('listview');
+            //$('.list-widget .col').toggleClass('gridview listview');
         });
         $('.grid').click(function() {
             $('.list-widget .col').removeClass('listview').addClass('gridview');
