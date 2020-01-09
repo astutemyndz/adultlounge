@@ -6,52 +6,58 @@ class FilterComponent {
     key;
     value;
     qs;
-    _context;
     apiURL;
     _renderFilterElement;
     state;
     assetsDirPath;
     baseURL;
     _app;
-    _reload;
     constructor() {
-        this.onInit();
-        this.state = {};
-        this.apiURL = this.qs.getBaseUrl() + 'api/v1';
-        this.assetsDirPath = 'assets/';
-        this.baseURL = this.qs.getBaseUrl();
-        this._context = this;
-        this.onload();
+        this.onInitDOM();
+        this.state          = {};
+        this.apiURL         = this.qs.getBaseUrl() + 'api/v1';
+        this.assetsDirPath  = 'assets/';
+        this.baseURL        = this.qs.getBaseUrl();
+        
+
+        this.qs = new QueryStringComponent();
+
+        this.onClickFilterElementEventHandler   = this.onClickFilterElementEventHandler.bind(this);
+        this.FilterEmptyComponent               = this.FilterEmptyComponent.bind(this);
+        this.HeadingComponent                   = this.HeadingComponent.bind(this);
+        this.render                             = this.render.bind(this);
+        this.reload                              = this.reload.bind(this);
     }
     setState(value) {
         this.state = value;
         return this;
     }
-    onInit() {
-        this._filterElements = document.querySelectorAll('._filter');
-        this._renderModelElement = document.querySelector('#_render_model_element');
-        this._renderFilterElement = document.querySelector('#_render_filter_element');
-        this._app = document.querySelector('._app');
-        
-
-        
-        
-        this.qs = new QueryStringComponent();
-        
-        this.onClickFilterElementEventHandler();
+    onInitDOM() {
+        this._filterElements                = document.querySelectorAll('._filter');
+        this._renderModelElement            = document.querySelector('#_render_model_element');
+        this._renderFilterElement           = document.querySelector('#_render_filter_element');
+        this._app                           = document.querySelector('._app');
+        this.onload();
+        this.reload();
         
     }
     initReloadDOMCallBack() {
-        this._reload = document.querySelector('#_reload');
+        //this._reload = document.querySelector('#_reload');
     }
     reload() {
-        this._reload.addEventListener('click', () => {
+        //Event Delegation 
+        this._renderModelElement.addEventListener('click', (e) => {
             console.log('fetching...');
-            window.setTimeout(() => {
-                this.onload();
-                console.log('fetched');
-            }, 500);
-          });
+            if(!e.target.matches('#reload')) {
+                console.log(e.target);
+            }  else {
+                console.log(event.currentTarget);
+                window.setTimeout(() => {
+                    this.onload();
+                    console.log('fetched');
+                }, 200);
+            }
+        })
     }
     onload() {
         window.addEventListener('load', (event) => {
@@ -65,9 +71,8 @@ class FilterComponent {
                     models: res.data,
                 });
                 this._renderModelElement.innerHTML =  this.render();
-                //this.initReloadDOMCallBack();
             } else{
-                this._renderModelElement.innerHTML =  this.FilterEmptyComponent({_context: this, message: res.message});
+                this._renderModelElement.innerHTML =  this.FilterEmptyComponent({message: res.message});
             }
             
         })
@@ -82,12 +87,10 @@ class FilterComponent {
         return this.qs.jSObjectToQueryString(obj);
     }
     onClickFilterElementEventHandler() {
-        let _context = this;
-        const urlParams = new URLSearchParams(window.location.search);
         this._filterElements.forEach((filterElement) => {
             filterElement.addEventListener('click', function() {
-                const queryString = _context.setQueryString(filterElement.getAttribute('data-key'),filterElement.getAttribute('data-value'));
-                const params = _context.queryStringToObject(queryString);
+                const queryString = this.setQueryString(filterElement.getAttribute('data-key'),filterElement.getAttribute('data-value'));
+                const params = this.queryStringToObject(queryString);
                 let paramsArr = [];
                 for (const property in params) {
                     if(property != 'category') {
@@ -98,17 +101,17 @@ class FilterComponent {
                     }
                 }
                   
-                _context.fetchModels(_context.apiURL + '/filter/model?', params)
+                this.fetchModels(this.apiURL + '/filter/model?', params)
                 .then(res => {
                     if(res.data.length > 0) {
-                        _context.setState({
+                        this.setState({
                             models: res.data,
                             tags: paramsArr,
                             category: (params.category) ? params.category: ''
                         });
-                        _context._renderFilterElement.innerHTML =  _context.render();
+                        this._renderFilterElement.innerHTML =  this.render();
                     } else{
-                        _context._renderFilterElement.innerHTML =  _context.FilterEmptyComponent({_context: _context, message: res.message});
+                        this._renderFilterElement.innerHTML =  this.FilterEmptyComponent({message: res.message});
                     }
                     
                 })
@@ -139,10 +142,9 @@ class FilterComponent {
             });
         }
         
-        let _context = this;
-        let heading = this.HeadingComponent({_context, category: 'All Girls Cams', totalModel: models.length});
+        let heading = this.HeadingComponent({category: 'All Girls Cams', totalModel: models.length});
         if(category) {
-            heading = this.HeadingComponent({_context, category, totalModel: models.length});
+            heading = this.HeadingComponent({category, totalModel: models.length});
         } 
         return(
         `<div class="list-widget">
@@ -159,14 +161,14 @@ class FilterComponent {
         );
     }
     FilterEmptyComponent = (props) => {
-        const {_context, message} = props;
-        return (`<div class="main-heading"><h3>${message}<a href="javascript:void(0);"><img src="${_context.baseURL}${_context.assetsDirPath}images/icon-reload.png"></a> <span><a href="#">0 Models Found</a></span></h3></div>`)
+        const {message} = props;
+        return (`<div class="main-heading"><h3>${message}<a href="javascript:void(0);"><img src="${this.baseURL}${this.assetsDirPath}images/icon-reload.png"></a> <span><a href="#">0 Models Found</a></span></h3></div>`)
     }
     HeadingComponent = (props) => {
-        const {_context, category, totalModel} = props;
+        const {category, totalModel} = props;
         return (`
             <div class="main-heading">
-                <h3>${category.toUpperCase()} <a href="javascript:void(0);" id="_reload"><img src="${_context.baseURL}${_context.assetsDirPath}images/icon-reload.png"></a> <span><a href="#">${totalModel} Models Found </a></span></h3>
+                <h3>${category.toUpperCase()} <a href="javascript:void(0);" id="reload"><img src="${this.baseURL}${this.assetsDirPath}images/icon-reload.png"></a> <span><a href="#">${totalModel} Models Found </a></span></h3>
             </div>
         `);
     }
