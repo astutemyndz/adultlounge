@@ -57,33 +57,47 @@ class ApiController extends Common_Controller {
             if(!empty($this->request) && is_array($this->request)) {
                 $this->setFilterData($this->request);
             }
-            // echo "<pre>";
-            // print_r($this->filterData);
-            // exit;
+            
             if($this->filterData) {
                 $this->setPerformer($this->performer->filter($this->filterData));
+            } else {
+                $this->setPerformer($this->performer->all());
             }
+            // echo "<pre>";
+            // print_r($this->performer);
+            // exit;
             if($this->performer) {
-                $this->data = $this->performer;
+                foreach($this->performer as $performer) {
+                    $this->data[] = array(
+                        'id'                => $performer['id'],
+                        'name'              => $performer['name'],
+                        'slug'              => strtolower(str_replace(' ', '_', ($performer['name']))),
+                        'display_name'      => $performer['display_name'],
+                        'price_in_private'  => $performer['price_in_private'],
+                        'price_in_group'    => $performer['price_in_group'],
+                        'img'             => base_url('assets/profile_image/'.$performer['image']),
+                    );
+                }
                 return $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(200)
-                ->set_output(json_encode($this->data));
+                ->set_output(json_encode(array(
+                    'data' => $this->data
+                )));
             } else {
                 return $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(200)
-                ->set_output(json_encode([]));
+                ->set_output(json_encode(array(
+                    'data' => [],
+                    'message' => 'Sorry, we can\t find any results that match your criteria.'
+                )));
             }
         } else {
             return $this->output
                 ->set_content_type('application/json')
-                ->set_status_header(200)
+                ->set_status_header(405)
                 ->set_output(json_encode(array(
-                    'status'    => array(
-                        'code' => Common_Controller::HTTP_METHOD_NOT_ALLOWED,
-                        'text' => Common_Controller::$statusTexts[405],
-                    ),
                     'message'   => Common_Controller::$statusTexts[405]
                 )));
         }

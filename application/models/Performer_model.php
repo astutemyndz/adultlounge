@@ -73,23 +73,23 @@ class Performer_model extends CI_model {
         if(!empty($data) && is_array($data)) {
             $this->data = $data;
             foreach($this->data as $key => $value) {
-                if(array_key_exists('performer', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->conditions['up.performer_type'] = $value;
+                if(array_key_exists('performer', $this->data)) {
+                    $this->conditions['up.performer_type'] = $this->data['performer'];
                 }
-                if(array_key_exists('category', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->conditions['c.name'] = $value;
+                if(array_key_exists('category', $this->data)) {
+                    $this->conditions['c.name LIKE'] = '%'.$this->data['category'].'%';
                 }
-                if(array_key_exists('show_type', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->conditions['st.'.$key.''] = $value;
+                if(array_key_exists('show_type', $this->data)) {
+                    $this->conditions['st.name LIKE'] = '%'.$this->data['show_type'].'%';
                 }
-                if(array_key_exists('age', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->conditions['u.'.$key.''] = $value;
+                if(array_key_exists('age', $this->data)) {
+                    $this->conditions['u.age'] = $this->data['age'];
                 }
-                if(array_key_exists('willingness', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->conditions['wi.'.$key.''] = $value;
+                if(array_key_exists('willingness', $this->data)) {
+                    $this->conditions['wi.name LIKE'] = '%'.$this->data['willingness'].'%';
                 }
-                if(array_key_exists('appearances', $this->data) && isset($this->data[$key]) && !empty($this->data[$key])) {
-                    $this->whereConditions['ap.'.$key.''] = $value;
+                if(array_key_exists('appearances', $this->data)) {
+                    $this->conditions['ap.name LIKE'] = '%'.$this->data['appearances'].'%';
                 }
                 
             }
@@ -97,27 +97,49 @@ class Performer_model extends CI_model {
         }
         if($this->conditions) {
             $this->db->from($this->tables['users'].' as u');
-            $this->db->join($this->tables['users_categories'].' as uc', 'uc.id_users = u.id', 'left');
-            $this->db->join($this->tables['categories'].' as c', 'c.id = uc.id_categories', 'left');
-          
-            $this->db->join($this->tables['user_preference'].' as up', 'up.user_id = u.id', 'left');
-
-            $this->db->join($this->tables['users_show_type'].' as ust', 'ust.id_users = u.id', 'left');
-            $this->db->join($this->tables['show_type'].' as st', 'st.id = ust.id_show_type', 'left');
-
-            $this->db->join($this->tables['users_willingness'].' as uwi', 'uwi.id_users = u.id', 'left');
-            $this->db->join($this->tables['willingness'].' as wi', 'wi.id = uwi.id_willingness', 'left');
-
-            $this->db->join($this->tables['users_appearance'].' as uap', 'uap.id_users = u.id', 'left');
-            $this->db->join($this->tables['appearance'].' as ap', 'ap.id = uap.id_appearence', 'left');
-
+            $this->db->join($this->tables['user_preference'].' as up', 'up.user_id = u.id', 'left outer');
+            $this->db->join($this->tables['users_categories'].' as uc', 'uc.id_users = u.id', 'left outer');
+            $this->db->join($this->tables['categories'].' as c', 'c.id = uc.id_categories', 'left outer');
+            $this->db->join($this->tables['users_show_type'].' as ust', 'ust.id_users = u.id', 'left outer');
+            $this->db->join($this->tables['show_type'].' as st', 'st.id = ust.id_show_type', 'left outer');
+            $this->db->join($this->tables['users_willingness'].' as uwi', 'uwi.id_users = u.id', 'left outer');
+            $this->db->join($this->tables['willingness'].' as wi', 'wi.id = uwi.id_willingness', 'left outer');
+            $this->db->join($this->tables['users_appearance'].' as uap', 'uap.id_users = u.id', 'left outer');
+            $this->db->join($this->tables['appearance'].' as ap', 'ap.id = uap.id_appearence', 'left outer');
             $this->db->where($this->conditions);
+            $this->db->group_by('u.id');
+            $this->db->order_by('u.id', 'DESC');
             $this->db->select('u.id, u.name, u.email, u.phone_no, u.usernm, u.gender, u.sexual_pref, 
             u.age, u.image, u.isLogin, up.display_name, up.height, up.weight, 
             up.hair, up.eye, up.zodiac, up.build, up.chest, up.burst, 
             up.cup, up.pubic_hair, up.penis, up.description,up.currency, 
             up.price_in_private,up.price_in_group, up.category, up.attribute, 
             up.willingness, up.appearance, up.feature, 
+            up.performer_type,
+            (select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id) images,
+            c.id as categoryId, c.name as categoryName,st.id as showId, st.name as showName, ap.id as appearanceId, ap.name as appearanceName, wi.id as willingnessId, wi.name as willingness
+            ');
+            $this->setQuery($this->db->get());
+        } else {
+            $this->db->from($this->tables['users'].' as u');
+            $this->db->join($this->tables['user_preference'].' as up', 'up.user_id = u.id', 'left outer');
+            $this->db->join($this->tables['users_categories'].' as uc', 'uc.id_users = u.id', 'left outer');
+            $this->db->join($this->tables['categories'].' as c', 'c.id = uc.id_categories', 'left outer');
+            $this->db->join($this->tables['users_show_type'].' as ust', 'ust.id_users = u.id', 'left outer');
+            $this->db->join($this->tables['show_type'].' as st', 'st.id = ust.id_show_type', 'left outer');
+            $this->db->join($this->tables['users_willingness'].' as uwi', 'uwi.id_users = u.id', 'left outer');
+            $this->db->join($this->tables['willingness'].' as wi', 'wi.id = uwi.id_willingness', 'left outer');
+            $this->db->join($this->tables['users_appearance'].' as uap', 'uap.id_users = u.id', 'left outer');
+            $this->db->join($this->tables['appearance'].' as ap', 'ap.id = uap.id_appearence', 'left outer');
+            $this->db->group_by('u.id');
+            $this->db->order_by('u.id', 'DESC');
+            $this->db->select('u.id, u.name, u.email, u.phone_no, u.usernm, u.gender, u.sexual_pref, 
+            u.age, u.image, u.isLogin, up.display_name, up.height, up.weight, 
+            up.hair, up.eye, up.zodiac, up.build, up.chest, up.burst, 
+            up.cup, up.pubic_hair, up.penis, up.description,up.currency, 
+            up.price_in_private,up.price_in_group, up.category, up.attribute, 
+            up.willingness, up.appearance, up.feature, 
+            up.performer_type,
             (select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id) images,
             c.id as categoryId, c.name as categoryName,st.id as showId, st.name as showName, ap.id as appearanceId, ap.name as appearanceName, wi.id as willingnessId, wi.name as willingness
             ');

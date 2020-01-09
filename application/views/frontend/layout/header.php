@@ -366,10 +366,10 @@ $active_url = $controller.'/'.$method;
     <ul class="sidebar-menu">
           <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
             <ul>
-              <li><a class="filter" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'GIRLS'));?>')" href="javascript:void(0);" >GIRLS</a></li>              
-              <li><a class="filter" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'BOYS'));?>');" href="javascript:void(0);" >BOYS</a></li>              
-              <li><a class="filter" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'COUPLES'));?>');" href="javascript:void(0);" >COUPLES</a></li>              
-              <li><a class="filter" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'TV_TS'));?>');" href="javascript:void(0);" >TV/TS</a></li>    
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'GIRLS'));?>" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'GIRLS'));?>')" href="javascript:void(0);" >GIRLS</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'BOYS'));?>" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'BOYS'));?>');" href="javascript:void(0);" >BOYS</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'COUPLES'));?>" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'COUPLES'));?>');" href="javascript:void(0);" >COUPLES</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'TV_TS'));?>" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'TV_TS'));?>');" href="javascript:void(0);" >TV/TS</a></li>    
           </ul>
       </li>
       <?php
@@ -380,7 +380,7 @@ $active_url = $controller.'/'.$method;
           <?php
                                 foreach($categories as $cat){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="onClickFilterEventHandler('category', '<?php echo strtolower(str_replace(' ', '_', ''.$cat->name.''));?>');">#
+          <li> <a class="_filter" data-key="category" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$cat->name.''));?>" href="javascript:void(0);" onclick="onClickFilterEventHandler('category', '<?php echo strtolower(str_replace(' ', '_', ''.$cat->name.''));?>');">#
             <?=$cat->name?>
             </a> </li>
           <?php
@@ -397,7 +397,7 @@ $active_url = $controller.'/'.$method;
           <?php
                                 foreach($show as $shw){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('attribute', '<?=$shw->id?>')">#
+          <li> <a class="_filter" data-key="show_type" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$shw->name.''));?>" href="javascript:void(0);">#
             <?=$shw->name?>
             </a> </li>
           <?php
@@ -412,7 +412,7 @@ $active_url = $controller.'/'.$method;
       <li class="age"><a href="javascript:void(0);">AGE</a>
         <ul>
           <?php foreach($age as $ag){ ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('age', '<?=$ag->age?>')">
+          <li> <a class="_filter" data-key="age" data-value="<?=$ag->age?>" href="javascript:void(0);">
             <?=$ag->age?>
             </a> </li>
           <?php } ?>
@@ -427,7 +427,7 @@ $active_url = $controller.'/'.$method;
           <?php
                                 foreach($will as $wll){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('willingness', '<?=$wll->id?>')">#
+          <li> <a class="_filter" data-key="willingness" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$wll->name.''));?>" href="javascript:void(0);">#
             <?=$wll->name?>
             </a> </li>
           <?php
@@ -439,12 +439,12 @@ $active_url = $controller.'/'.$method;
                         }
                         if(!empty($appearence)){
                         ?>
-      <li class="appearance"><a href="javascript:void(0);">APPEARANCE</a>
+      <li class="appearance"><a  href="javascript:void(0);">APPEARANCE</a>
         <ul>
           <?php
                                 foreach($appearence as $aprnc){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('appearance', '<?=$aprnc->id?>')">#
+          <li> <a class="_filter" data-key="appearence" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$aprnc->name.''));?>" href="javascript:void(0);">#
             <?=$aprnc->name?>
             </a> </li>
           <?php

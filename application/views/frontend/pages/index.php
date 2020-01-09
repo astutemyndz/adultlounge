@@ -272,7 +272,7 @@ if(!$this->session->userdata('UserType') || $this->session->userdata('UserType')
 
 <section class="content-sec">
     <!--Search Filter-->
-    <div class="list-widget">
+    <!-- <div class="list-widget">
         <div class="main-heading">
             <h3>BBW <a href="#"><img src="<?=base_url('assets/images/icon-reload.png')?>"></a> <span><a href="#">703 members</a></span></h3>
         </div>
@@ -296,24 +296,18 @@ if(!$this->session->userdata('UserType') || $this->session->userdata('UserType')
                     </figcaption>
                 </figure>
             </div>
-            <div class="col-grid">
-                <figure class="active">
-                    <span class="strapbox">In Group</span>
-                    <a href="#"><img src="<?=base_url('assets/images/img-001_d.jpg')?>" alt="img" /></a>
-                    <figcaption>
-                        <h4><span class="active-circle"></span><a href="javascript:void(0)">AlisMorris</a></h4>
-                        <ul>
-                            <li>PRIVATE: <span>£6.99</span> p/m</li>
-                            <li>GROUP: <span>£3.99</span> p/M</li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </div>
+            
         </div>
+    </div> -->
+    <div class="_app">
+        <div id="_render_filter_element"></div>
+        <!--Search Filter-->
+        <hr  class="divider-line"/>
+        <!--Main Section-->
+        <div id="_render_model_element"></div>
     </div>
-    <!--Search Filter-->
-    <hr  class="divider-line"/>
-    <!--Main Section-->
+    <?php 
+    /*
     <div class="list-widget">
         <div class="main-heading">
             <h3>You might also like these performers <a href="#"><img src="<?=base_url('assets/images/icon-reload.png')?>"></a> <span><a href="#">703 members</a></span></h3>
@@ -355,6 +349,8 @@ if(!$this->session->userdata('UserType') || $this->session->userdata('UserType')
             ?>
         </div>
     </div>
+    */
+    ?>
 </section>
 <?php
 }else{ 

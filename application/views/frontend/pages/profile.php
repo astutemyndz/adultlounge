@@ -1,3 +1,4 @@
+<?php //echo "<pre>"; print_r($user);exit;?>
 <style>
 .video-container {
 	display: grid;
@@ -221,28 +222,35 @@
                             <div class="form-group">
                                 <select class="custom-select requiredCheck" name="performer_type" id="performer_type" data-check="Display Currency As">
                                     <option selected value="">Perform Type</option>
-                                    <option value="girls">GIRLS</option>
-                                    <option value="boys">BOYS</option>
-                                    <option value="couples">COUPLES</option>
-                                    <option value="tv_ts">TV/TS</option>
+                                    <option value="girls" <?php if(isset($user)){ if($user[0]['performer_type'] == 'girls'){ print 'selected'; }}?>>GIRLS</option>
+                                    <option value="boys" <?php if(isset($user)){ if($user[0]['performer_type'] == 'boys'){ print 'selected'; }}?>>BOYS</option>
+                                    <option value="couples" <?php if(isset($user)){ if($user[0]['performer_type'] == 'couples'){ print 'selected'; }}?>>COUPLES</option>
+                                    <option value="tv_ts" <?php if(isset($user)){ if($user[0]['performer_type'] == 'tv_ts'){ print 'selected'; }}?>>TV/TS</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select class="custom-select requiredCheck" name="currency" id="currency" data-check="Display Currency As">
                                     <option value="">Currency</option>
                                     <option selected value="USD">USD</option>
-                                    <option value="EUR">EUR</option>
-                                    <option value="GBP">GBP</option>
+                                    <option value="EUR" <?php if(isset($user)){ if($user[0]['currency'] == 'EUR'){ print 'selected'; }}?>>EUR</option>
+                                    <option value="GBP" <?php if(isset($user)){ if($user[0]['currency'] == 'GBP'){ print 'selected'; }}?>>GBP</option>
                                 </select>
                             </div>
                             <div class="form-group">
+                                <select class="custom-select requiredCheck" name="perform_type" id="perform_type" data-check="Display perform type">
+                                    <option value="" selected>Perform Type</option>
+                                    <option value="private" <?php if(isset($user)){ if($user[0]['price_in_private']){ print 'selected'; }}?>>In Private</option>
+                                    <option value="group" <?php if(isset($user)){ if($user[0]['price_in_group']){ print 'selected'; }}?>>In Group</option>
+                                </select>
+                            </div>
+                            <div id="privatePriceEl" class="form-group" style="display: none;">
                                 <label class="check">Private price</label>
-                                <input type="text" class="form-control" id="price_in_private" name="price_in_private" placeholder="0.00">
+                                <input value="<?php echo ($user['0']['price_in_private']) ? $user['0']['price_in_private'] : 0.00 ?>" type="text" class="form-control" id="price_in_private" name="price_in_private" placeholder="0.00">
                             </div>
                            
-                            <div class="form-group">
+                            <div id="groupPriceEl" class="form-group" style="display: none;">
                                 <label class="check">Group price</label>
-                                <input type="text" class="form-control" id="price_in_group" name="price_in_group" placeholder="0.00">
+                                <input value="<?php echo ($user['0']['price_in_group']) ? $user['0']['price_in_group'] : 0.00 ?>" type="text" class="form-control" id="price_in_group" name="price_in_group" placeholder="0.00">
                             </div>
                         </div>
                         <div class="form-two-col">

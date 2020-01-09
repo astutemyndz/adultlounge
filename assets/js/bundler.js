@@ -1,6 +1,7 @@
 "use strict";
 
 $(document).ready(function () {
+  
   var engine, remoteHost, template, empty;
   $.support.cors = true;
   remoteHost = API_URL;
@@ -70,6 +71,7 @@ $(document).ready(function () {
 
 
 function onClickFilterEventHandler(key, value) {
+ /*
   var params;
   var updateQueryStringParam = function (key, value) {
     var baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
@@ -100,18 +102,89 @@ function onClickFilterEventHandler(key, value) {
     }
     window.history.replaceState({}, "", baseUrl + params);
   }
-
   updateQueryStringParam(key, value);
+  var $ListWidget = document.querySelector('#Filter');
+  
   fetch(API_URL + '/filter/model' + params)
   .then((response) => {
     return response.json();
   })
   .then((myJson) => {
-    console.log(myJson);
+    
+    var data = myJson.data;
+    //console.log(data);
+    const urlParams = new URLSearchParams(window.location.search);
+    if(data.length > 0) {
+      $ListWidget.innerHTML = FilterListWidgetComponent({
+        models: data,
+        params:  [
+          {key: 'performer',  title: (urlParams.has('performer'))?urlParams.get('performer') : ''},
+          {key: 'category',   title: (urlParams.has('category'))?urlParams.get('category') : ''},
+          {key: 'show_type',  title: (urlParams.has('show_type'))?urlParams.get('show_type') : ''},
+          {key: 'age',        title: (urlParams.has('age'))?urlParams.get('age') : ''},
+          {key: 'willingness',title: (urlParams.has('willingness'))?urlParams.get('willingness') : ''},
+          {key: 'appearance', title: (urlParams.has('appearance'))?urlParams.get('appearance') : ''}
+        ]
+      });
+    } else {
+      $ListWidget.innerHTML = FilterEmptyComponent({message: myJson.message});
+    }
   });
-  
+  */
+}
+/*
+const FilterEmptyComponent = (props) => (`<h4>${props.message}</h4>`)
+const FilterHeadingComponent = (props) => (` <div class="main-heading">
+<h3>BBW <a href="#"><img src="`+base_url+`assets/images/icon-reload.png"></a> <span><a href="#">703 members</a></span></h3>
+</div>`);
+const FilterAttributeComponent = (props) => (`<div class="shorting-list">
+<ul>
+`+
+  props.params.map(function(param) {
+    if(param.title) {
+      return `<li>`+param.title+`<a href="javascript:void(0);" onclick="onClickFilterEventHandler('`+param.key+`', '`+param.title+`');"><i class="fa fa-times-circle" aria-hidden="true"></i></a></li>`;
+    }
+    
+  })
++`
+</ul>
+</div>`);
+const FilterGridViewComponent = (props) => {
+  const {models} = props;
+  return(
+  `<div class="col gridview">`+
+    models.map(function(model) {
+      return ModelComponent(model)
+    })
+  +`</div>`
+  );
+};
+
+const FilterListWidgetComponent  = (props) => (
+  `<div class="list-widget">
+    `+FilterHeadingComponent(props)+`
+    `+FilterAttributeComponent(props)+`
+    `+FilterGridViewComponent(props)+`
+  </div>`
+  );
+const ModelComponent = (props) => {
+  return(`
+  <div class="col-grid">
+              <figure class="active">
+                  <span class="strapbox">In Group</span>
+                  <a href="#"><img src="${props.img}" alt="img" /></a>
+                  <figcaption>
+                      <h4><span class="active-circle"></span><a href="javascript:void(0)">${props.display_name}</a></h4>
+                      <ul>
+                          <li>PRIVATE: <span>${props.currency}${props.price_in_private}</span> p/m</li>
+                          <li>GROUP: <span>${props.currency}${props.price_in_group}</span> p/M</li>
+                      </ul>
+                  </figcaption>
+              </figure>
+          </div>
+  `);
 }
 
 
 
-
+*/
