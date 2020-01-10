@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2020 at 08:23 AM
+-- Generation Time: Jan 10, 2020 at 04:24 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 5.6.37
 
@@ -52749,7 +52749,18 @@ INSERT INTO `performer_gallery` (`id`, `user_id`, `image`) VALUES
 (12, '12', '61723f4db2edfff3fea43247227e4ddd.jpg'),
 (13, '3', 'e455bb3c3c1b8fd55636b9a54edfbfb8.png'),
 (14, '30', '70243045cff0513c99a14cb1e758b6e1.jpg'),
-(15, '28', '41bfca88cf933e405f4df2473bd132f6.jpg');
+(15, '28', '41bfca88cf933e405f4df2473bd132f6.jpg'),
+(16, '32', 'ee22a942d92c936e25c3f484ccae2ae1.jpg'),
+(17, '32', '988fa52d29a27bcb00b2b543de7ef679.jpg'),
+(18, '31', '284029ba2fe7e2d2849001090a152057.jpg'),
+(19, '31', '73e08d5c2dd4f897d04d74c353afd510.jpg'),
+(20, '31', '655f8b99fbd655bbe77704bd3fe7f5d8.jpg'),
+(21, '31', '151eec93e4fe4230210aac6967f45d4e.jpg'),
+(22, '26', 'ea2e7a6eeee1b32bae6d6fec5b37f0d9.jpg'),
+(23, '27', 'beea11ba7fa2f55207e72cc8082f8edf.jpg'),
+(24, '24', '5a2bb5ae6980b3651d13b0170d178aeb.jpg'),
+(25, '24', 'a0d4ded868f3471c301b28843812af17.jpg'),
+(26, '24', 'f14d9bc0e2d6fd8a9d0e767ec7bc6c22.jpg');
 
 -- --------------------------------------------------------
 
@@ -52972,7 +52983,7 @@ CREATE TABLE `users` (
   `isLogin` varchar(11) NOT NULL DEFAULT '0',
   `login_time` datetime DEFAULT NULL,
   `login_type` tinyint(2) NOT NULL COMMENT '0=> Admin, 1=> Users, 2=> Performers',
-  `status` tinyint(2) NOT NULL COMMENT '1=> Active, 0=> InActive',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1=> Active, 0=> InActive',
   `hasWebcam` enum('Y','N') DEFAULT 'Y',
   `account_verified` enum('Yes','No') NOT NULL DEFAULT 'No' COMMENT 'Yes,No',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -52985,16 +52996,16 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone_no`, `usernm`, `landline_no`, `gender`, `dob`, `sexual_pref`, `age`, `image`, `address_one`, `address_two`, `city`, `pincode`, `country`, `credit`, `card_no`, `card_month`, `card_year`, `card_cvv`, `i_am_a`, `us_citizen`, `login_password`, `isLogin`, `login_time`, `login_type`, `status`, `hasWebcam`, `account_verified`, `created_at`, `updated_at`) VALUES
 (1, 'Adult Lounge', 'admin@mail.com', '9999999999', NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$a2H.xCldIHbvrtPDmuhazercGso2vCTuxDNaaxrJfZHQctxKVREim', '0', '2019-11-19 18:19:12', 0, 1, 'Y', 'Yes', '2019-03-29 18:26:18', '2019-11-25 18:08:57'),
-(2, 'Test User', 'user@mail.com', '8240949501', '@sammy', NULL, 'Male', NULL, 'Male', '26', '820ab1c3fe92d0f893a9ce1f83da6330.jpeg', '', NULL, NULL, '', NULL, 4576, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', '2020-01-08 13:18:35', 1, 1, 'Y', 'Yes', '2019-03-30 16:49:28', '2020-01-08 13:19:41'),
-(3, 'Test Performer', 'performer@mail.com', '1234567894', '@meggykroft', NULL, 'Female', '1992-12-12', 'Male', '19', 'f48e266301e8e753ebcfd7daad12bf7f.jpg', 'Test address', '', 'London', '789456', 'United Kingdom', 0, NULL, NULL, NULL, NULL, 'individual', 'No', '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', '2020-01-08 15:45:18', 2, 1, 'N', 'Yes', '2019-04-04 15:47:58', '2020-01-08 15:47:48'),
+(2, 'Test User', 'user@mail.com', '8240949501', '@sammy', NULL, 'Male', NULL, 'Male', '26', '820ab1c3fe92d0f893a9ce1f83da6330.jpeg', '', NULL, NULL, '', NULL, 4576, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '1', '2020-01-10 20:53:18', 1, 1, 'Y', 'Yes', '2019-03-30 16:49:28', '2020-01-10 20:53:18'),
+(3, 'Test Performer', 'performer@mail.com', '1234567894', '@meggykroft', NULL, 'Female', '1992-12-12', 'Male', '19', 'f48e266301e8e753ebcfd7daad12bf7f.jpg', 'Test address', '', 'London', '789456', 'United Kingdom', 0, NULL, NULL, NULL, NULL, 'individual', 'No', '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', '2020-01-08 15:45:18', 2, 0, 'N', 'Yes', '2019-04-04 15:47:58', '2020-01-10 20:51:41'),
 (4, 'ASD', 'asd@gmail.com', NULL, '@checkyboy', NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', NULL, 1, 1, 'Y', 'Yes', '2019-08-01 17:38:14', '2019-11-25 15:49:25'),
 (5, 'sadasd', 'as@mail.com', NULL, '@coolchick', NULL, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', NULL, 1, 1, 'Y', 'Yes', '2019-08-01 17:55:27', '2019-11-25 16:04:07'),
 (6, 'Ethen', 'ethenh90@gmail.com', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', '2019-08-30 16:41:31', 1, 1, 'Y', 'Yes', '2019-08-30 15:58:30', '2019-11-26 16:46:27'),
 (7, 'Saran Kumar Maiti', 'saran.maiti07@gmail.com', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', '2019-11-19 18:36:56', 1, 1, 'Y', 'Yes', '2019-08-30 16:29:17', '2019-11-25 16:04:07'),
 (9, 'New Test User', 'asd@mail.com', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', NULL, 1, 1, 'Y', 'Yes', '2019-09-04 16:34:55', '2019-11-25 16:04:07'),
-(10, 'Rose Mary Marlo', 'marlo@mail.com', '9898989898', '@rosymerry', NULL, 'Female', '1995-11-22', 'Male', '20', '1d796ea46a73fea65f7ad703528b561b.jpg', 'ASD', 'DSA', 'QWE', '7878787', 'Guam', 0, NULL, NULL, NULL, NULL, 'individual', 'No', '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '1', '2019-11-20 18:32:31', 2, 1, 'N', 'Yes', '2019-09-05 15:59:38', '2019-11-25 16:04:07'),
+(10, 'Rose Mary Marlo', 'marlo@mail.com', '9898989898', '@rosymerry', NULL, 'Female', '1995-11-22', 'Male', '20', '1d796ea46a73fea65f7ad703528b561b.jpg', 'ASD', 'DSA', 'QWE', '7878787', 'Guam', 0, NULL, NULL, NULL, NULL, 'individual', 'No', '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '1', '2019-11-20 18:32:31', 1, 1, 'N', 'Yes', '2019-09-05 15:59:38', '2020-01-10 20:51:17'),
 (11, 'chris blades', 'c.blades@me.com', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '1', '2019-09-05 17:26:26', 1, 1, 'Y', 'Yes', '2019-09-05 17:11:36', '2019-11-26 16:46:33'),
-(12, 'Saptarshi', 'gunroll@mail.com', '1112223334', '@gunroll', NULL, 'Male', '1975-01-01', 'Both', '22', '26df079ef194c79b529c7950209d6a66.jpg', 'qwqw', 'wqwq', 'Chinsurah', '789456', 'India', 0, NULL, NULL, NULL, NULL, 'individual', 'No', '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '1', '2019-11-29 20:44:46', 2, 1, 'N', 'Yes', '2019-09-06 18:08:05', '2019-11-29 08:14:46'),
+(12, 'Saptarshi', 'gunroll@mail.com', '1112223334', '@gunroll', NULL, 'Male', '1975-01-01', 'Both', '22', '26df079ef194c79b529c7950209d6a66.jpg', 'qwqw', 'wqwq', 'Chinsurah', '789456', 'India', 0, NULL, NULL, NULL, NULL, 'individual', 'No', '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '1', '2019-11-29 20:44:46', 2, 0, 'N', 'Yes', '2019-09-06 18:08:05', '2020-01-10 20:50:55'),
 (13, 'Mila Otber', 'p1@mail.com', NULL, '@mila', NULL, 'Female', NULL, 'Male', '25', 'ad99c38beab4b12bf34d3b0cae84badb.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', '2019-11-21 17:56:17', 2, 1, 'N', 'Yes', '2019-11-21 17:23:50', '2019-11-25 16:04:07'),
 (14, 'jennifer hoss', 'p2@mail.com', NULL, '@jenn', NULL, 'Female', NULL, 'Both', '22', 'fb9ab45c43c6f493539da000899c253d.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', '2019-11-21 18:03:08', 2, 1, 'N', 'Yes', '2019-11-21 17:24:45', '2019-11-25 16:04:07'),
 (15, 'jane', 'janedoe@mail.com', NULL, NULL, NULL, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$QtfBYdgjGg5bU/dKTv8Mr.Uwv7Ohf2OtxWzlCyesZgothh0FDu7Ou', '0', NULL, 1, 1, 'Y', 'Yes', '2019-11-25 15:47:40', NULL),
@@ -53006,13 +53017,15 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone_no`, `usernm`, `landline_no`,
 (21, 'devrakesh2k14', 'dev.rakesh2k14@gmail.com', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$pb8c4BD4.pTVguZONpJAge5C14QhLgbVSZasagICJ/GZt1VbS/4VK', '0', '2020-01-06 12:19:24', 1, 1, 'Y', 'Yes', '2020-01-05 23:49:08', '2020-01-05 23:53:25'),
 (22, 'user2', 'user2@user.com', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$sbMXA3wAu6ZYJmeQhnoqvugtOEF83gGP0hMJ7wpxh4L3UBvwhCYIi', '0', NULL, 2, 0, 'Y', 'No', '2020-01-06 00:46:46', NULL),
 (23, 'user3', 'sourav.ghosh@astutemyndz.com', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$IvDB7sEuyGuTkUi0UPsKXeChcjJbEEtTiScDwv1xT.7/4ZDOtbVgS', '0', NULL, 2, 0, 'Y', 'No', '2020-01-06 00:49:47', NULL),
-(24, 'Oliver', 'oliver@gamil.com', NULL, NULL, NULL, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$yXFC7GhQsvMCqLqvK.njKuOhDJp/MSLIpZe89wkUzcmuiIGcVlf9q', '0', NULL, 2, 1, 'Y', 'No', '2020-01-09 16:55:59', '2020-01-09 16:57:26'),
-(25, 'William', 'william@gmail.com', NULL, '@William', NULL, 'Female', NULL, 'Female', '20', '2a709d51e37ea46dec0dedf30c04cd87.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$Wk1utHVmwRCjJ6DsrOy5tOTPKrllyK86r8FvCoJDYMbLH9ilmdVNG', '0', '2020-01-09 18:12:30', 2, 1, 'N', 'No', '2020-01-09 16:56:24', '2020-01-09 18:13:36'),
-(26, 'Isla', 'isla@gmail.com', NULL, NULL, NULL, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$71rOv.Yr78fCefFJnqziv.Mvu4yE1Hd64SJCRDwSTEu4BK12VCLZS', '0', NULL, 2, 1, 'Y', 'No', '2020-01-09 17:56:12', '2020-01-09 18:13:31'),
-(27, 'Lily', 'lily@gmail.com', NULL, NULL, NULL, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$mVuW60jEpTlzwyB/zn6t1Ojv4XRQkTsC.ytVlxuBobqgcv9FRalnq', '0', NULL, 2, 1, 'Y', 'No', '2020-01-09 17:56:48', '2020-01-09 18:13:28'),
-(28, 'Sophia', 'sophia@gmail.com', NULL, '@Sophia', NULL, 'Female', NULL, 'Female', '23', 'b8ec125651eada8a4966030855e83b8d.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$tEn58qPdZXdAnzbBI13D6./nc.OcF8Vt04OaQ0nq999Mtf9gU/5dW', '0', '2020-01-09 19:12:04', 2, 1, 'N', 'No', '2020-01-09 17:57:22', '2020-01-09 19:12:19'),
-(29, 'Abigaile Johnson', 'abigailejohnson@gmail.com', NULL, '@Abigaile Johnson', NULL, 'Female', NULL, 'Female', '19', 'f8649c4a6db8f51abacdb83e375e0f11.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$Qrd6yhqs4iFHCF7wINXMZuOtGRJyCrNeoupEkkPwK9xYbWOcmaom6', '0', '2020-01-09 18:13:57', 2, 1, 'N', 'No', '2020-01-09 18:00:00', '2020-01-09 18:15:55'),
-(30, 'Aische Pervers', 'aischepervers@gmail.com', NULL, '@Aische Pervers', NULL, 'Female', NULL, 'Female', '30', '0cdbd627e5f1c07d4989bf01a559a399.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$1ME.7r53DLCTQMucGf0xkOOG69B/2fdYORWeRlDWXRVdVrWtItPIO', '0', '2020-01-09 19:04:27', 2, 1, 'N', 'No', '2020-01-09 19:02:45', '2020-01-09 19:06:19');
+(24, 'Oliver', 'oliver@gamil.com', NULL, '@Oliver', NULL, 'Female', NULL, 'Female', '26', 'de5151ac4f3ad59589404f157f08fbc1.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$yXFC7GhQsvMCqLqvK.njKuOhDJp/MSLIpZe89wkUzcmuiIGcVlf9q', '0', '2020-01-10 20:37:05', 2, 1, 'N', 'No', '2020-01-09 16:55:59', '2020-01-10 20:41:20'),
+(25, 'William', 'william@gmail.com', NULL, '@William', NULL, 'Female', NULL, 'Female', '20', '0d42f058e8308a57be82ef1d98f872c4.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$Wk1utHVmwRCjJ6DsrOy5tOTPKrllyK86r8FvCoJDYMbLH9ilmdVNG', '0', '2020-01-10 20:53:02', 2, 1, 'N', 'No', '2020-01-09 16:56:24', '2020-01-10 20:53:07'),
+(26, 'Isla', 'isla@gmail.com', NULL, '@Isla', NULL, 'Female', NULL, 'Female', '22', 'b8a03a4a64c523e4dccb484593f32d9f.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$71rOv.Yr78fCefFJnqziv.Mvu4yE1Hd64SJCRDwSTEu4BK12VCLZS', '0', '2020-01-10 20:33:26', 2, 1, 'N', 'No', '2020-01-09 17:56:12', '2020-01-10 20:34:32'),
+(27, 'Lily', 'lily@gmail.com', NULL, '@Lily', NULL, 'Female', NULL, 'Female', '25', 'b5c12ebcbf2fbd6adb0acaaca52715ef.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$mVuW60jEpTlzwyB/zn6t1Ojv4XRQkTsC.ytVlxuBobqgcv9FRalnq', '0', '2020-01-10 20:34:43', 2, 1, 'N', 'No', '2020-01-09 17:56:48', '2020-01-10 20:35:25'),
+(28, 'Sophia', 'sophia@gmail.com', NULL, '@Sophia', NULL, 'Female', NULL, 'Female', '23', '7fa3533ed73464c0987c412c7044cca4.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$tEn58qPdZXdAnzbBI13D6./nc.OcF8Vt04OaQ0nq999Mtf9gU/5dW', '0', '2020-01-10 20:49:00', 2, 1, 'N', 'No', '2020-01-09 17:57:22', '2020-01-10 20:49:22'),
+(29, 'Abigaile Johnson', 'abigailejohnson@gmail.com', NULL, '@Abigaile Johnson', NULL, 'Female', NULL, 'Female', '19', '3ca5f1bc5d84913411162acade1ed792.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$Qrd6yhqs4iFHCF7wINXMZuOtGRJyCrNeoupEkkPwK9xYbWOcmaom6', '0', '2020-01-10 20:45:50', 2, 1, 'N', 'No', '2020-01-09 18:00:00', '2020-01-10 20:48:40'),
+(30, 'Aische Pervers', 'aischepervers@gmail.com', NULL, '@Aische Pervers', NULL, 'Female', NULL, 'Female', '30', '7822ad5f679c48c77a78bcf9192e3347.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$1ME.7r53DLCTQMucGf0xkOOG69B/2fdYORWeRlDWXRVdVrWtItPIO', '0', '2020-01-10 20:43:00', 2, 1, 'N', 'No', '2020-01-09 19:02:45', '2020-01-10 20:45:28'),
+(31, 'AngelicAnn', 'angelicann@gmail.com', NULL, '@AngelicAnn', NULL, 'Female', NULL, 'Female', '20', '7250dcd4809e968b6a12911db9cb816f.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$UaiCsyhC2pZ54hbJ0X/xsOlDZT8DscDZZMA/nUutDW0EpfLGzCwia', '0', '2020-01-10 20:19:59', 2, 1, 'N', 'No', '2020-01-10 20:10:37', '2020-01-10 20:21:21'),
+(32, 'NatallieLynn', 'natallielynn@gmail.com', NULL, '@NatallieLynn', NULL, 'Female', NULL, 'Female', '20', '2ecd2c9a6d3d185a21b99e6db6dc3c64.jpg', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$nbCSEa4o5ejz6syZlytWDOceRqr/eRTEN/4AckHafwestsBq3yEPi', '0', '2020-01-10 20:17:12', 2, 1, 'N', 'No', '2020-01-10 20:15:40', '2020-01-10 20:19:05');
 
 -- --------------------------------------------------------
 
@@ -53032,9 +53045,12 @@ CREATE TABLE `users_appearence` (
 
 INSERT INTO `users_appearence` (`id`, `id_users`, `id_appearence`) VALUES
 (17, 3, 1),
-(20, 25, 2),
-(21, 29, 1),
-(22, 30, 2);
+(23, 31, 2),
+(24, 26, 2),
+(25, 24, 2),
+(26, 30, 2),
+(27, 29, 1),
+(28, 25, 2);
 
 -- --------------------------------------------------------
 
@@ -53057,24 +53073,42 @@ INSERT INTO `users_categories` (`id`, `id_users`, `id_categories`) VALUES
 (21, 3, 32),
 (22, 3, 33),
 (23, 3, 34),
-(40, 25, 31),
-(41, 25, 32),
-(42, 25, 33),
-(43, 25, 34),
-(44, 25, 35),
-(45, 25, 36),
-(46, 25, 37),
-(47, 25, 38),
-(48, 29, 39),
-(49, 29, 41),
-(50, 30, 31),
-(51, 30, 33),
-(52, 30, 39),
-(53, 30, 45),
-(58, 28, 39),
-(59, 28, 41),
-(60, 28, 45),
-(61, 28, 46);
+(62, 32, 46),
+(63, 31, 31),
+(64, 31, 33),
+(65, 26, 31),
+(66, 26, 37),
+(67, 26, 38),
+(68, 26, 39),
+(69, 26, 40),
+(70, 26, 41),
+(71, 26, 42),
+(72, 26, 43),
+(73, 26, 44),
+(74, 27, 32),
+(75, 24, 39),
+(76, 24, 41),
+(77, 24, 42),
+(78, 24, 45),
+(79, 24, 46),
+(80, 30, 31),
+(81, 30, 33),
+(82, 30, 39),
+(83, 30, 45),
+(84, 29, 39),
+(85, 29, 41),
+(86, 28, 39),
+(87, 28, 41),
+(88, 28, 45),
+(89, 28, 46),
+(90, 25, 31),
+(91, 25, 32),
+(92, 25, 33),
+(93, 25, 34),
+(94, 25, 35),
+(95, 25, 36),
+(96, 25, 37),
+(97, 25, 38);
 
 -- --------------------------------------------------------
 
@@ -53095,12 +53129,21 @@ CREATE TABLE `users_show_type` (
 INSERT INTO `users_show_type` (`id`, `id_users`, `id_show_type`) VALUES
 (28, 3, 45),
 (29, 3, 49),
-(32, 25, 48),
-(33, 29, 47),
-(34, 30, 46),
-(35, 30, 47),
-(38, 28, 45),
-(39, 28, 47);
+(40, 32, 45),
+(41, 32, 47),
+(42, 31, 45),
+(43, 31, 47),
+(44, 26, 45),
+(45, 26, 46),
+(46, 27, 49),
+(47, 24, 45),
+(48, 24, 47),
+(49, 30, 46),
+(50, 30, 47),
+(51, 29, 47),
+(52, 28, 45),
+(53, 28, 47),
+(54, 25, 48);
 
 -- --------------------------------------------------------
 
@@ -53120,12 +53163,20 @@ CREATE TABLE `users_willingness` (
 
 INSERT INTO `users_willingness` (`id`, `id_users`, `id_willingness`) VALUES
 (46, 3, 1),
-(51, 25, 1),
-(52, 25, 2),
-(53, 29, 4),
-(54, 30, 2),
-(55, 30, 3),
-(57, 28, 4);
+(58, 32, 4),
+(59, 32, 5),
+(60, 31, 2),
+(61, 26, 2),
+(62, 26, 3),
+(63, 27, 4),
+(64, 24, 2),
+(65, 24, 4),
+(66, 30, 2),
+(67, 30, 3),
+(68, 29, 4),
+(69, 28, 4),
+(70, 25, 1),
+(71, 25, 2);
 
 -- --------------------------------------------------------
 
@@ -53294,13 +53345,15 @@ INSERT INTO `user_preference` (`id`, `user_id`, `display_name`, `height`, `weigh
 (20, '21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-05 23:49:08', NULL, NULL),
 (21, '22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-06 00:46:46', NULL, NULL),
 (22, '23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-06 00:49:47', NULL, NULL),
-(23, '24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 16:55:59', NULL, NULL),
-(24, '25', '', '', '90', 'Burgundy', 'Brown', '', '', '', '', '', 'Burgundy', '', '', 'USD', 20.00, 50.00, '31,32,33,34,35,36,37,38', '48', '1,2', '2', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 16:56:24', '2020-01-09 17:26:42', 'girls'),
-(25, '26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 17:56:12', NULL, NULL),
-(26, '27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 17:56:48', NULL, NULL),
-(27, '28', 'Sophia', '155', '103', 'Black', 'Black', 'Aquarius', 'Athletic', '', '42', '', '', '', '', 'USD', 7.00, 0.00, '39,41,45,46', '45,47', '4', '', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 17:57:22', '2020-01-09 19:12:15', 'girls'),
-(28, '29', 'Abigaile Johnson', '150', '86', '', '', 'Gemini', 'Moderate', '', '', '', 'Grey', '', '', 'USD', 5.00, 0.00, '39,41', '47', '4', '1', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 18:00:00', '2020-01-09 18:15:52', 'girls'),
-(29, '30', 'Aische Pervers', '156', '95', 'Black', 'Black', 'Libra', '', '', '47', 'A', '', '', '', 'USD', 6.00, 0.00, '31,33,39,45', '46,47', '2,3', '2', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 19:02:46', '2020-01-09 19:06:04', 'girls');
+(23, '24', 'XxHotAnalixX', '', '', '', '', '', '', '', '', '', '', '', '', 'USD', 20.00, 0.00, '39,41,42,45,46', '45,47', '2,4', '2', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 16:55:59', '2020-01-10 20:41:18', 'girls'),
+(24, '25', '', '', '90', 'Burgundy', 'Brown', '', '', '', '', '', 'Burgundy', '', '', 'USD', 20.00, 50.00, '31,32,33,34,35,36,37,38', '48', '1,2', '2', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 16:56:24', '2020-01-10 20:50:03', 'girls'),
+(25, '26', 'Isla', '', '', '', '', '', '', '', '', '', '', '', '', 'USD', 0.00, 40.00, '31,37,38,39,40,41,42,43,44', '45,46', '2,3', '2', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 17:56:12', '2020-01-10 20:34:30', 'girls'),
+(26, '27', 'Lily', '', '', '', '', '', '', '', '', '', '', '', '', 'USD', 10.00, 0.00, '32', '49', '4', '', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 17:56:48', '2020-01-10 20:35:22', 'girls'),
+(27, '28', 'Sophia', '155', '103', 'Black', 'Black', 'Aquarius', 'Athletic', '', '42', '', '', '', '', 'USD', 7.00, 0.00, '39,41,45,46', '45,47', '4', '', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 17:57:22', '2020-01-10 20:49:20', 'girls'),
+(28, '29', 'Abigaile Johnson', '150', '86', '', '', 'Gemini', 'Moderate', '', '', '', 'Grey', '', '', 'USD', 5.00, 0.00, '39,41', '47', '4', '1', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 18:00:00', '2020-01-10 20:48:37', 'girls'),
+(29, '30', 'Aische Pervers', '156', '95', 'Black', 'Black', 'Libra', '', '', '47', 'A', '', '', '', 'USD', 6.00, 0.00, '31,33,39,45', '46,47', '2,3', '2', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-09 19:02:46', '2020-01-10 20:45:25', 'girls'),
+(30, '31', 'AngelicAnn', '', '', '', '', '', '', '', '33', '', '', '', '', 'USD', 10.00, 0.00, '31,33', '45,47', '2', '2', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-10 20:10:37', '2020-01-10 20:21:18', 'girls'),
+(31, '32', 'NatallieLynn', '142', '87', 'Blonde', '', '', 'Slim', '42', '40', '', '', '', '', 'USD', 5.00, 0.00, '46', '45,47', '4,5', '', '', 'N', 'N', 'N', 'N', NULL, 'N', '2020-01-10 20:15:40', '2020-01-10 20:18:57', 'girls');
 
 -- --------------------------------------------------------
 
@@ -53707,7 +53760,7 @@ ALTER TABLE `loyalty_plans`
 -- AUTO_INCREMENT for table `performer_gallery`
 --
 ALTER TABLE `performer_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `performer_video_gallery`
@@ -53749,31 +53802,31 @@ ALTER TABLE `subscribe`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `users_appearence`
 --
 ALTER TABLE `users_appearence`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users_categories`
 --
 ALTER TABLE `users_categories`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `users_show_type`
 --
 ALTER TABLE `users_show_type`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `users_willingness`
 --
 ALTER TABLE `users_willingness`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `user_gifts`
@@ -53797,7 +53850,7 @@ ALTER TABLE `user_payments`
 -- AUTO_INCREMENT for table `user_preference`
 --
 ALTER TABLE `user_preference`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `user_verification`

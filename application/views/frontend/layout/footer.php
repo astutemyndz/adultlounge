@@ -222,10 +222,15 @@
 <script src="<?=base_url('assets/js/custom.js')?>"></script>
 <script src="<?=base_url('assets/js/videoChat.js')?>"></script>
 
-
+<div class=""></div>
 <link href="<?=base_url('assets/plugins/fakeLoader/css/fakeLoader.min.css')?>" rel="stylesheet" type="text/css" />
 <script src="<?= base_url('assets/plugins/fakeLoader/js/fakeLoader.min.js') ?>"></script>
-
+<script>
+    $(document).ready(function(){
+                
+                
+            });
+</script>
 <script type="module" defer src="<?=base_url('assets/js/components/filter/FilterComponent.js')?>"></script>
 <script type="module" defer src="<?=base_url('assets/js/components/profile/ProfileComponent.js')?>"></script>
 </body>

@@ -191,10 +191,10 @@ $active_url = $controller.'/'.$method;
             <span class="grid"><img src="<?=base_url('assets/images/icon-grid.png')?>" alt="grid"/></span>
         </div>
         <?php if(($this->session->userdata('UserType') || $this->session->userdata('UserType') != '') && $this->session->userdata('UserType') == '1'){ ?>
-        <div class="switch-view" style="color:#fff;"> <span class="list welcome_unm">Welcome
+        <!-- <div class="switch-view" style="color:#fff;"> <span class="list welcome_unm">Welcome
           <?=$this->session->userdata('UserName')?>
           </span> </div>
-        <?php } ?>
+        <?php } ?> -->
         
         <!--<div class="search"><span><img src="<?=base_url('assets/images/icon-search.png')?>" alt="search" /></span></div>
 <div class="drop-list">
@@ -253,64 +253,56 @@ $active_url = $controller.'/'.$method;
 <aside>
   <div class="sidebar">
     <?php if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
-    <ul class="sidebar-menu">
+      <ul class="sidebar-menu">
           <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
             <ul>
-              <li><a href="<?php echo base_url('/search?performer=1');?>" >GIRLS</a></li>              
-              <li><a href="<?php echo base_url('/search?performer=2');?>" >BOYS</a></li>              
-              <li><a href="<?php echo base_url('/search?performer=2');?>" >COUPLES</a></li>              
-              <li><a href="<?php echo base_url('/search?performer=2');?>" >TV/TS</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'GIRLS'));?>" href="javascript:void(0);" >GIRLS</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'BOYS'));?>" href="javascript:void(0);" >BOYS</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'COUPLES'));?>"  href="javascript:void(0);" >COUPLES</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'TV_TS'));?>"  href="javascript:void(0);" >TV/TS</a></li>    
           </ul>
       </li>
       <?php
                         if(!empty($categories)){
-                            if(isset($user) && $user[0]['category'] != ''){
                         ?>
       <li class="performers"><a href="javascript:void(0);">CATEGORIES</a>
         <ul>
           <?php
                                 foreach($categories as $cat){
-                                    if(count(explode($cat->id, $user[0]['category'])) > 1){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('category', '<?=$cat->id?>')">#
+          <li> <a class="_filter" data-key="category" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$cat->name.''));?>" href="javascript:void(0);" onclick="onClickFilterEventHandler('category', '<?php echo strtolower(str_replace(' ', '_', ''.$cat->name.''));?>');">#
             <?=$cat->name?>
             </a> </li>
           <?php
-                                    }
                                 }
                                 ?>
         </ul>
       </li>
       <?php
-                            }
                         }
                         if(!empty($show)){
-                            if(isset($user) && $user[0]['attribute'] != ''){
                         ?>
       <li class="types"><a href="javascript:void(0);">SHOW TYPES</a>
         <ul>
           <?php
                                 foreach($show as $shw){
-                                    if(count(explode($shw->id, $user[0]['attribute'])) > 1){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('attribute', '<?=$shw->id?>')">#
+          <li> <a class="_filter" data-key="show_type" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$shw->name.''));?>" href="javascript:void(0);">#
             <?=$shw->name?>
             </a> </li>
           <?php
-                                    }
                                 }
                                 ?>
         </ul>
       </li>
       <?php
-                            }
                         }
                         if(!empty($age)){
                         ?>
       <li class="age"><a href="javascript:void(0);">AGE</a>
         <ul>
           <?php foreach($age as $ag){ ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('age', '<?=$ag->age?>')">
+          <li> <a class="_filter" data-key="age" data-value="<?=$ag->age?>" href="javascript:void(0);">
             <?=$ag->age?>
             </a> </li>
           <?php } ?>
@@ -319,46 +311,38 @@ $active_url = $controller.'/'.$method;
       <?php
                         }
                         if(!empty($will)){
-                            if(isset($user) && $user[0]['willingness'] != ''){
                         ?>
       <li class="willingers"><a href="javascript:void(0);">WILLINGNESS</a>
         <ul>
           <?php
                                 foreach($will as $wll){
-                                    if(count(explode($wll->id, $user[0]['willingness'])) > 1){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('willingness', '<?=$wll->id?>')">#
+          <li> <a class="_filter" data-key="willingness" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$wll->name.''));?>" href="javascript:void(0);">#
             <?=$wll->name?>
             </a> </li>
           <?php
-                                    }
                                 }
                                 ?>
         </ul>
       </li>
       <?php
-                            }
                         }
                         if(!empty($appearence)){
-                            if(isset($user) && $user[0]['appearance'] != ''){
                         ?>
-      <li class="appearance"><a href="javascript:void(0);">APPEARANCE</a>
+      <li class="appearance"><a  href="javascript:void(0);">APPEARANCE</a>
         <ul>
           <?php
                                 foreach($appearence as $aprnc){
-                                    if(count(explode($aprnc->id, $user[0]['appearance'])) > 1){
                                 ?>
-          <li> <a href="javascript:void(0);" onclick="refine_performer('appearance', '<?=$aprnc->id?>')">#
+          <li> <a class="_filter" data-key="appearence" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$aprnc->name.''));?>" href="javascript:void(0);">#
             <?=$aprnc->name?>
             </a> </li>
           <?php
-                                    }
                                 }
                                 ?>
         </ul>
       </li>
       <?php
-                            }
                         }
                         ?>
     </ul>

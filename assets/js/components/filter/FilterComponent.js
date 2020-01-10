@@ -15,8 +15,17 @@ class FilterComponent extends QueryStringComponent {
     _context;
     constructor() {
         super();
+        this.setState({
+            models: [],
+            tags: [],
+            category: null,
+            message: null,
+            paramsArr: [],
+            params: {},
+            isLoading: false,
+        })
         this.onInitDOM();
-        this.state          = {};
+        
         this.api         = this.getBaseUrl() + 'api/v1';
         this.assetsDirPath  = 'assets/';
         this.baseURL        = this.getBaseUrl();
@@ -24,20 +33,20 @@ class FilterComponent extends QueryStringComponent {
         
         
 
-        this.onClickFilterElementEventHandler   = this.onClickFilterElementEventHandler.bind(this);
-        this.FilterEmptyComponent               = this.FilterEmptyComponent.bind(this);
-        this.HeadingComponent                   = this.HeadingComponent.bind(this);
-        this.render                             = this.render.bind(this);
-        this.reload                             = this.reload.bind(this);
-        this.setQueryString                     = this.setQueryString.bind(this);
-        this.objectToQueryString                = this.objectToQueryString.bind(this);
-        this.onInitDOM                          = this.onInitDOM.bind(this);
-        this.onload                             = this.onload.bind(this);
+        // this.onClickFilterElementEventHandler   = this.onClickFilterElementEventHandler.bind(this);
+        // this.FilterEmptyComponent               = this.FilterEmptyComponent.bind(this);
+        // this.HeadingComponent                   = this.HeadingComponent.bind(this);
+        // this.render                             = this.render.bind(this);
+        // this.reload                             = this.reload.bind(this);
+        // this.setQueryString                     = this.setQueryString.bind(this);
+        // this.objectToQueryString                = this.objectToQueryString.bind(this);
+        // this.onInitDOM                          = this.onInitDOM.bind(this);
+        //this.onload                             = this.onload.bind(this);
     }
 
    
-    setState = (value) => {
-        this.state = value;
+    setState = (obj) => {
+        this.state = obj;
         return this;
     }
     onInitDOM = () => {
@@ -47,7 +56,8 @@ class FilterComponent extends QueryStringComponent {
         this._app                           = document.querySelector('._app');
 
         
-        this.onload();
+        this.componentDidMount();
+        
         this.onClickFilterElementEventHandler();
         this.reload();
         
@@ -58,33 +68,83 @@ class FilterComponent extends QueryStringComponent {
     reload = () => {
         //Event Delegation 
         this._app.addEventListener('click', (e) => {
-            console.log(e);
-            if(!e.target.matches('img')) {
-                
+            console.log('fetching...');
+            if(e.target.matches('_tag')) {
+                console.log(event.currentTarget);
                 window.setTimeout(() => {
-                    this.onload();
+                    this.componentDidMount();
                     console.log('fetched');
                 }, 200);
             }  else {
-                //console.log(event.currentTarget);
+                console.log(event.currentTarget);
                 
             }
         })
     }
-    onload = () => {
+    WithLoading(component) {
+        return function WihLoadingComponent({ isLoading, ...props }) {
+          if (!isLoading) return component();
+          return (`<p>Be Hold, fetching data may take some time :)</p>`);
+        }
+    }
+    componentDidMount = () => {
+        const {paramsArr, params} = this.state;
         this.fetchModels('http://localhost/adultlounge/api/v1/filter/model')
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
+                    ...this.state,
                     models: res.data,
+                    tags: paramsArr,
+                    category: (params.category) ? params.category: '',
+                    message: ''
                 });
-                this._renderModelElement.innerHTML =  this.render();
-            } else{
-                this._renderModelElement.innerHTML =  this.FilterEmptyComponent({message: res.message});
+                
+                this.render();
+            } else {
+                this.setState({
+                    ...this.state,
+                    models: [],
+                    tags: [],
+                    category: '',
+                    message: res.message
+                })
+                this.render();
             }
-            
+            console.log('componentDidMount',this.state);
+        })
+        
+    }
+    componentDidUpdate = () => {
+        
+        const {paramsArr, params} = this.state;
+        this.fetchModels('http://localhost/adultlounge/api/v1/filter/model?', params)
+        .then(res => {
+            if(res.data.length > 0) {
+                this.setState({
+                    ...this.state,
+                    models: res.data,
+                    tags: paramsArr,
+                    category: (params.category) ? params.category: '',
+                    message: ''
+                });
+                
+                this.render();
+            } else {
+                this.setState({
+                    ...this.state,
+                    models: [],
+                    tags: [],
+                    category: '',
+                    message: res.message
+                })
+                this.render();
+            }
+            console.log('componentDidUpdate',this.state);
         })
     }
+
+    
     setQueryString = (key, value) => this.updateQueryStringParam(key, value);
     
     queryStringToObject = (str) => this.queryStringToJSObject(str);
@@ -109,26 +169,17 @@ class FilterComponent extends QueryStringComponent {
                         })
                     }
                 }
-                  
-                self.fetchModels('http://localhost/adultlounge/api/v1/filter/model?', params)
-                .then(res => {
-                    if(res.data.length > 0) {
-                        self.setState({
-                            models: res.data,
-                            tags: paramsArr,
-                            category: (params.category) ? params.category: ''
-                        });
-                        self._renderFilterElement.innerHTML =  self.render();
-                    } else{
-                        self._renderFilterElement.innerHTML =  self.FilterEmptyComponent({message: res.message});
-                    }
-                    
+                self.setState({
+                    ...self.state,
+                    paramsArr: paramsArr,
+                    params: params,
                 })
+                //console.log(self.state);
+                self.componentDidUpdate();
+                self.render();
             });
         })
     }
-    
-
     async fetchModels(url, params) {
         const objToQueryString = this.objectToQueryString(params);
         let response = await fetch(`${url}${objToQueryString}`);
@@ -137,12 +188,15 @@ class FilterComponent extends QueryStringComponent {
     }
 
     render = () => {
-        const {models, tags, category} = this.state;
+        var self = this;
+        const {models, tags, category, params} = self.state;
         const items = []
         const _tags = [];
+
         if(models) {
             models.map((model) => items.push(this.ItemComponent(model)));
         }
+
         if(tags) {
             tags.map((tag) => {
                 if(tag.value.length > 0) {
@@ -150,27 +204,56 @@ class FilterComponent extends QueryStringComponent {
                 }
             });
         }
-        
         let heading = this.HeadingComponent({category: 'All Girls Cams', totalModel: models.length});
         if(category) {
             heading = this.HeadingComponent({category, totalModel: models.length});
         } 
-        return(
-        `<div class="list-widget">
-            ${heading}
-            <div class="shorting-list">
-                <ul>
-                    ${_tags}
-                </ul>
-            </div>
-            <div class="col gridview">
-                ${items}
-            </div>
-        </div>`
-        );
+        if(Object.keys(params).length > 0) {
+            if(models.length > 0) {
+                this._renderFilterElement.innerHTML =  (
+                    `<div class="list-widget">
+                        ${heading}
+                        <div class="shorting-list">
+                            <ul>
+                                ${_tags}
+                            </ul>
+                        </div>
+                        <div class="col gridview">
+                            ${items}
+                        </div>
+                    </div>`
+                    );
+            } else {
+                this._renderFilterElement.innerHTML =  this.FilterEmptyComponent();
+            }
+        } else {
+            if(models.length > 0) {
+                this._renderModelElement.innerHTML =  (
+                    `<div class="list-widget">
+                        ${heading}
+                        <div class="shorting-list">
+                            <ul>
+                                ${_tags}
+                            </ul>
+                        </div>
+                        <div class="col gridview">
+                            ${items}
+                        </div>
+                    </div>`
+                    );
+            } else {
+                this._renderModelElement.innerHTML =  this.FilterEmptyComponent();
+            }
+        }
+
+        
+        
+        
+        
+        
     }
-    FilterEmptyComponent = (props) => {
-        const {message} = props;
+    FilterEmptyComponent = () => {
+        const {message} = this.state;
         return (`<div class="main-heading"><h3>${message}<a href="javascript:void(0);"><img src="${this.baseURL}${this.assetsDirPath}images/icon-reload.png"></a> <span><a href="#">0 Models Found</a></span></h3></div>`)
     }
     HeadingComponent = (props) => {
@@ -181,7 +264,7 @@ class FilterComponent extends QueryStringComponent {
             </div>
         `);
     }
-    TagComponent = (props) => (`<li>${props.value.toUpperCase()} <a href="javascript:void(0);" ><i class="fa fa-times-circle" aria-hidden="true"></i></a></li>`);
+    TagComponent = (props) => (`<li class="_tag" data-key="${props.key}" data-value="${props.value}">${props.value.toUpperCase()} <a href="javascript:void(0);" ><i class="fa fa-times-circle" aria-hidden="true"></i></a></li>`);
     
     ItemComponent(props) {
         const {id, name,slug, display_name, price_in_private, price_in_group, img} = props;
