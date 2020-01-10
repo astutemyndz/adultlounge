@@ -1,38 +1,45 @@
 import QueryStringComponent from '../query_string/QueryStringComponent.js';
 
-class FilterComponent {
+class FilterComponent extends QueryStringComponent {
     filterAttrs = null;
     _filterElements;
     key;
     value;
-    qs;
-    apiURL;
+    queryStringInstance;
     _renderFilterElement;
     state;
     assetsDirPath;
     baseURL;
     _app;
+    api;
+    _context;
     constructor() {
+        super();
         this.onInitDOM();
         this.state          = {};
-        this.apiURL         = this.qs.getBaseUrl() + 'api/v1';
+        this.api         = this.getBaseUrl() + 'api/v1';
         this.assetsDirPath  = 'assets/';
-        this.baseURL        = this.qs.getBaseUrl();
+        this.baseURL        = this.getBaseUrl();
+       
         
-
-        this.qs = new QueryStringComponent();
 
         this.onClickFilterElementEventHandler   = this.onClickFilterElementEventHandler.bind(this);
         this.FilterEmptyComponent               = this.FilterEmptyComponent.bind(this);
         this.HeadingComponent                   = this.HeadingComponent.bind(this);
         this.render                             = this.render.bind(this);
-        this.reload                              = this.reload.bind(this);
+        this.reload                             = this.reload.bind(this);
+        this.setQueryString                     = this.setQueryString.bind(this);
+        this.objectToQueryString                = this.objectToQueryString.bind(this);
+        this.onInitDOM                          = this.onInitDOM.bind(this);
+        this.onload                             = this.onload.bind(this);
     }
-    setState(value) {
+
+   
+    setState = (value) => {
         this.state = value;
         return this;
     }
-    onInitDOM() {
+    onInitDOM = () => {
         this._filterElements                = document.querySelectorAll('._filter');
         this._renderModelElement            = document.querySelector('#_render_model_element');
         this._renderFilterElement           = document.querySelector('#_render_filter_element');
@@ -44,7 +51,7 @@ class FilterComponent {
     initReloadDOMCallBack() {
         //this._reload = document.querySelector('#_reload');
     }
-    reload() {
+    reload = () => {
         //Event Delegation 
         this._renderModelElement.addEventListener('click', (e) => {
             console.log('fetching...');
@@ -59,12 +66,15 @@ class FilterComponent {
             }
         })
     }
-    onload() {
+    onload = () => {
+        const _context = this;
+
+        console.log(_context.getBaseUrl());
         window.addEventListener('load', (event) => {
             console.log('page is fully loaded');
           });
 
-        this.fetchModels(this.apiURL + '/filter/model')
+        this.fetchModels(_context.api + '/filter/model')
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
@@ -77,16 +87,13 @@ class FilterComponent {
             
         })
     }
-    setQueryString(key, value) {
-        return this.qs.updateQueryStringParam(key, value);
-    }
-    queryStringToObject(str) {
-        return this.qs.queryStringToJSObject(str);
-    }
-    objectToQueryString(obj) {
-        return this.qs.jSObjectToQueryString(obj);
-    }
-    onClickFilterElementEventHandler() {
+    setQueryString = (key, value) => this.updateQueryStringParam(key, value);
+    
+    queryStringToObject = (str) => this.queryStringToJSObject(str);
+
+    objectToQueryString = (obj) =>  this.jSObjectToQueryString(obj);
+    
+    onClickFilterElementEventHandler = () => {
         this._filterElements.forEach((filterElement) => {
             filterElement.addEventListener('click', function() {
                 const queryString = this.setQueryString(filterElement.getAttribute('data-key'),filterElement.getAttribute('data-value'));
@@ -101,7 +108,7 @@ class FilterComponent {
                     }
                 }
                   
-                this.fetchModels(this.apiURL + '/filter/model?', params)
+                this.fetchModels(this.api + '/filter/model?', params)
                 .then(res => {
                     if(res.data.length > 0) {
                         this.setState({
@@ -127,7 +134,7 @@ class FilterComponent {
         return data;
     }
 
-    render() {
+    render = () => {
         const {models, tags, category} = this.state;
         const items = []
         const _tags = [];

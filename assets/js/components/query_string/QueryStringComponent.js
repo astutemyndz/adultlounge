@@ -8,8 +8,7 @@ export default class QueryStringComponent {
     _params;
     _updateRegex;
     _removeRegex;
-    constructor() {
-    }
+    constructor() {}
     onInit() {
         this.qs = {};
         this.s = location.search.replace( /^\?|#.*$/g, '' );
@@ -119,6 +118,9 @@ export default class QueryStringComponent {
         const entries = urlParams.entries();
         const params = Object.fromEntries(entries);
         return params;
+    }
+    test() {
+        console.log(1);
     }
      
 }
