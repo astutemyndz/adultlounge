@@ -366,10 +366,10 @@ $active_url = $controller.'/'.$method;
     <ul class="sidebar-menu">
           <li class="performers"><a href="javascript:void(0);">PERFORMERS</a>
             <ul>
-              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'GIRLS'));?>" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'GIRLS'));?>')" href="javascript:void(0);" >GIRLS</a></li>              
-              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'BOYS'));?>" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'BOYS'));?>');" href="javascript:void(0);" >BOYS</a></li>              
-              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'COUPLES'));?>" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'COUPLES'));?>');" href="javascript:void(0);" >COUPLES</a></li>              
-              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'TV_TS'));?>" onclick="onClickFilterEventHandler('performer', '<?php echo strtolower(str_replace(' ', '_', 'TV_TS'));?>');" href="javascript:void(0);" >TV/TS</a></li>    
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'GIRLS'));?>" href="javascript:void(0);" >GIRLS</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'BOYS'));?>" href="javascript:void(0);" >BOYS</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'COUPLES'));?>"  href="javascript:void(0);" >COUPLES</a></li>              
+              <li><a class="_filter" data-key="performer" data-value="<?php echo strtolower(str_replace(' ', '_', 'TV_TS'));?>"  href="javascript:void(0);" >TV/TS</a></li>    
           </ul>
       </li>
       <?php

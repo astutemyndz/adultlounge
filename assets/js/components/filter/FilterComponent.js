@@ -22,6 +22,7 @@ class FilterComponent extends QueryStringComponent {
         this.baseURL        = this.getBaseUrl();
        
         
+        
 
         this.onClickFilterElementEventHandler   = this.onClickFilterElementEventHandler.bind(this);
         this.FilterEmptyComponent               = this.FilterEmptyComponent.bind(this);
@@ -44,7 +45,10 @@ class FilterComponent extends QueryStringComponent {
         this._renderModelElement            = document.querySelector('#_render_model_element');
         this._renderFilterElement           = document.querySelector('#_render_filter_element');
         this._app                           = document.querySelector('._app');
+
+        
         this.onload();
+        this.onClickFilterElementEventHandler();
         this.reload();
         
     }
@@ -53,28 +57,22 @@ class FilterComponent extends QueryStringComponent {
     }
     reload = () => {
         //Event Delegation 
-        this._renderModelElement.addEventListener('click', (e) => {
-            console.log('fetching...');
-            if(!e.target.matches('#reload')) {
-                console.log(e.target);
-            }  else {
-                console.log(event.currentTarget);
+        this._app.addEventListener('click', (e) => {
+            console.log(e);
+            if(!e.target.matches('img')) {
+                
                 window.setTimeout(() => {
                     this.onload();
                     console.log('fetched');
                 }, 200);
+            }  else {
+                //console.log(event.currentTarget);
+                
             }
         })
     }
     onload = () => {
-        const _context = this;
-
-        console.log(_context.getBaseUrl());
-        window.addEventListener('load', (event) => {
-            console.log('page is fully loaded');
-          });
-
-        this.fetchModels(_context.api + '/filter/model')
+        this.fetchModels('http://localhost/adultlounge/api/v1/filter/model')
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
@@ -93,11 +91,15 @@ class FilterComponent extends QueryStringComponent {
 
     objectToQueryString = (obj) =>  this.jSObjectToQueryString(obj);
     
-    onClickFilterElementEventHandler = () => {
+    onClickFilterElementEventHandlerCallBack = () => {
+        
+    }
+    onClickFilterElementEventHandler = (e) => {
+        var self = this;
         this._filterElements.forEach((filterElement) => {
             filterElement.addEventListener('click', function() {
-                const queryString = this.setQueryString(filterElement.getAttribute('data-key'),filterElement.getAttribute('data-value'));
-                const params = this.queryStringToObject(queryString);
+                const queryString = self.setQueryString(filterElement.getAttribute('data-key'),filterElement.getAttribute('data-value'));
+                const params = self.queryStringToObject(queryString);
                 let paramsArr = [];
                 for (const property in params) {
                     if(property != 'category') {
@@ -108,17 +110,17 @@ class FilterComponent extends QueryStringComponent {
                     }
                 }
                   
-                this.fetchModels(this.api + '/filter/model?', params)
+                self.fetchModels('http://localhost/adultlounge/api/v1/filter/model?', params)
                 .then(res => {
                     if(res.data.length > 0) {
-                        this.setState({
+                        self.setState({
                             models: res.data,
                             tags: paramsArr,
                             category: (params.category) ? params.category: ''
                         });
-                        this._renderFilterElement.innerHTML =  this.render();
+                        self._renderFilterElement.innerHTML =  self.render();
                     } else{
-                        this._renderFilterElement.innerHTML =  this.FilterEmptyComponent({message: res.message});
+                        self._renderFilterElement.innerHTML =  self.FilterEmptyComponent({message: res.message});
                     }
                     
                 })

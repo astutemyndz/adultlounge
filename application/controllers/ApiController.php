@@ -75,7 +75,7 @@ class ApiController extends Common_Controller {
                         'display_name'      => $performer['display_name'],
                         'price_in_private'  => $performer['price_in_private'],
                         'price_in_group'    => $performer['price_in_group'],
-                        'img'             => base_url('assets/profile_image/'.$performer['image']),
+                        'img'             => (isset($performer['image'])) ? base_url('assets/profile_image/'.$performer['image']) : base_url('assets/images/noimage.png'),
                     );
                 }
                 return $this->output
