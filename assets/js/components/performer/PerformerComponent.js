@@ -1,0 +1,8 @@
+class PerformerComponent {
+    constructor() {
+        super();
+    }
+
+
+    
+}

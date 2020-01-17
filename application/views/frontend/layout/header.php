@@ -29,11 +29,13 @@ $active_url = $controller.'/'.$method;
         var API_URL = "<?=base_url()?>api/v1";
         var UserId = "<?=$this->session->userdata('UserId')?>";
         var UserType = "<?=$this->session->userdata('UserType')?>";
-
+       // mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
     </script>
 <script src="<?=base_url('assets/js/DetectRTC.js')?>"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body id="body-content" class="hide">
+
 <section class="pagewrapper">
 <section class="header-wrap">
   <div class="header-layout">
@@ -41,49 +43,15 @@ $active_url = $controller.'/'.$method;
       <div class="hdr-lft"> <a href="<?=base_url()?>" class="sitelogo"><img src="<?=base_url('assets/images/logo.png')?>" alt="Logo" /></a> </div>
       <div class="hdr-rgt">
         <div class="hdr-rwidgt">
-          <?php 
-            /*
-            <div class="search-item">
-              <form action="" method="get">
-              <input type="hidden" name="mode" value="users">
-              <div class="Typeahead Typeahead--twitterUsers">
-                <div class="u-posRelative">
-                  <input class="Typeahead-hint" type="text" tabindex="-1" readonly>
-                  <input class="Typeahead-input" id="demo-input" type="text" name="q" placeholder="Search all girls cams...">
-                  <img class="Typeahead-spinner" src="<?php echo base_url('assets/plugins/typeahead/img/spinner.gif');?>">
-                </div>
-                <div class="Typeahead-menu"></div>
-              </div>
-              <!-- <button class="u-hidden" type="submit">blah</button> -->
-            </form>
-            </div>
-            
-            <div class="select-dropdown">
-            	<select class="form-control">
-                	<option>--Select One--</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
-            </div>
-            */
-            ?>
-          <!--Advance Search--> 
-          
-          <!--Advance Search-->
           <ul class="inline-styled text-right">
-            
             <!--<li><a href="javascript:void(0)" title="country"><img src="images/icon-flag.png" alt="uk"></a></li>-->
-            
             <li><a href="<?=base_url()?>" title="Home"><img src="<?=base_url('assets/images/icon-home.png')?>" alt="Home"></a></li>
             <?php if($this->session->userdata('UserId') || $this->session->userdata('UserId') != ''){ ?>
-            <li> <a href="<?=base_url('profile')?>" title="User"> <img src="<?=base_url('assets/images/icon-user.png')?>" alt="User"> </a> </li>
+            <li> <a href="<?=base_url('profile')?>" title="My Account"> <img src="<?=base_url('assets/images/icon-user.png')?>" alt="My Account"> </a> </li>
             <?php } ?>
-            
             <!--<li><a href="javascript:void(0)" title="Briefcase"><img src="images/icon-briefcase.png" alt="briefcase"></a></li>-->
-            
             <?php if($this->session->userdata('UserType') && ($this->session->userdata('UserType') == 1 || $this->session->userdata('UserType') == 2)){ ?>
-            <li> <a href="javascript:void(0);" id="msg" class="msg"> <i class="fa fa-comments" aria-hidden="true"></i> </a> </li>
+            <li> <a href="javascript:void(0);" id="msg" class="msg" title="Chat"> <i class="fa fa-comments" aria-hidden="true"></i> </a> </li>
             <?php } ?>
             <?php if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
             <li> <a href="<?=base_url('personal-details')?>" title="Setting"> <img src="<?=base_url('assets/images/icon-setting.png')?>" alt="setting"> </a> </li>
@@ -104,58 +72,124 @@ $active_url = $controller.'/'.$method;
         </div>
       </div>
     </header>
-    <section class="header-bottom">
+    <section style="display: block;" class="header-bottom">
       <nav>
         <ul>
-          <?php //if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
-          <li><a href="javascript:void(0)">categories</a>
-            <?php if(!empty($categories)){ ?>
-            <div class="submenu">
-              <h3>Filter By: Catagories</h3>
-              <ul>
-                <?php foreach($categories as $category){ ?>
-                <li><a href="javascript:void(0);" onclick="refine_performer('category', '<?=$category->id?>')">#
-                  <?=$category->name?>
-                  </a></li>
+        <?php if(!$this->session->userdata('UserType')) { ?>
+            <li>
+              <a href="javascript:void(0)">Categories</a>
+                <?php if(!empty($categories)){ ?>
+                  <div class="submenu">
+                    <h3>Filter By: Catagories</h3>
+                    <ul>
+                      <?php foreach($categories as $category){ ?>
+                      <li><a class="_filter" data-key="category" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$category->name.''));?>" href="javascript:void(0);">#
+                        <?=$category->name?>
+                        </a></li>
+                      <?php } ?>
+                    </ul>
+                  </div>
                 <?php } ?>
-              </ul>
+            </li>
+            <li><a href="javascript:void(0);">Show Types</a>
+              <div class="submenu submenu-2">
+                <h3>Filter By: Show Type</h3>
+                <ul>
+                  <?php if(!empty($show)) { 
+                    foreach($show as $sh) { ?>
+                      <li><a class="_filter" data-key="show_type" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$sh->name.''));?>" href="javascript:;"><?php echo $sh->name;?></a></li>
+                    <?php } ?>
+                  <?php } ?>
+                </ul>
+              </div>
+            </li>
+            <li><a href="<?=base_url('awards')?>">Awards</a></li>
+            <li><a href="<?=base_url('loyalty')?>">Loyalty</a></li>
+            <div class="right-filters">
+      	<div class="search">
+        	<!--<span><img src="<?=base_url('assets/images/icon-search.png')?>" alt="search"/></span>-->
+            <div class="search-top-box">
+              <div class="container-2">
+                  <span class="icon"><img src="<?=base_url('assets/images/icon-search.png')?>" alt="search"/></span>
+                  <form action="" method="get">
+                  	<!--<input type="search" id="search" placeholder="Search..." />-->
+                    <input type="hidden" name="mode" value="users">
+                      <div class="Typeahead Typeahead--twitterUsers">
+                        <div class="u-posRelative">
+                          <input class="Typeahead-hint" id="search" type="text" tabindex="-1" readonly>
+                          <input class="Typeahead-input" id="demo-input" type="text" name="q" placeholder="Search all girls cams...">
+                          <img class="Typeahead-spinner" src="<?php echo base_url('assets/plugins/typeahead/img/spinner.gif');?>">
+                        </div>
+                        <div class="Typeahead-menu"></div>
+                      </div>
+                  </form>
+              </div>
             </div>
-            <?php //} ?>
-          </li>
-          <li><a href="javascript:void(0);">Show Types</a>
-            <div class="submenu submenu-2">
-              <h3>Filter By: Show Type</h3>
-              <ul>
-                <li><a href="javascript:;">FREEVIEW</a></li>
-                <li><a href="javascript:;">PRIVATE OPEN</a></li>
-                <li><a href="javascript:;">PRIVATE CLOSED</a></li>
-                <li><a href="javascript:;">GROUP</a></li>
-                <li><a href="javascript:;">SPY</a></li>
-                <li><a href="javascript:;">FREEVIEW</a></li>
-              </ul>
-            </div>
-          </li>
-          <li><a href="<?=base_url('awards')?>">awards</a></li>
-          <li><a href="<?=base_url('loyalty')?>">loyalty</a></li>
-          <?php }elseif($this->session->userdata('UserType') && $this->session->userdata('UserType') == 2){ ?>
-          <li><a href="<?=base_url('content')?>">CONTENT</a></li>
-          <li><a href="<?=base_url('manage-users')?>">MANAGE USERS</a></li>
-          <li><a href="<?=base_url('financial')?>">FINANCIAL</a></li>
-          <li><a href="<?=base_url('my-subscriptions')?>">SUBSCRIPTIONS</a></li>
-          <li><a href="<?=base_url('profile')?>">PROFILE</a></li>
-          <li><a href="<?=base_url('my-network')?>">MY NETWORK</a></li>
-          <li><a href="<?=base_url('loyalty')?>">LOYALTY</a></li>
-          <li><a href="<?=base_url('gifts')?>">GIFTS</a></li>
-          
+        </div>
+        <div class="drop-list select-filter">
+            <Select class="form-control">
+                <option>recommended</option>
+                <option>recommended</option>
+                <option>recommended</option>
+                <option>recommended</option>
+            </select>
+        </div>
+        <div class="switch-view">
+            <span class="list"><img src="<?=base_url('assets/images/icon-list.png')?>" alt="list"/></span>
+            <span class="grid"><img src="<?=base_url('assets/images/icon-grid.png')?>" alt="grid"/></span>
+        </div>
+      </div>
+        <?php } elseif($this->session->userdata('UserType') && $this->session->userdata('UserType') != 2) {?>
+          <li>
+              <a href="javascript:void(0)">Categories</a>
+                <?php if(!empty($categories)){ ?>
+                  <div class="submenu">
+                    <h3>Filter By: Catagories</h3>
+                    <ul>
+                      <?php foreach($categories as $category){ ?>
+                      <li><a class="_filter" data-key="category" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$category->name.''));?>">#
+                        <?=$category->name?>
+                        </a></li>
+                      <?php } ?>
+                    </ul>
+                  </div>
+                <?php } ?>
+            </li>
+            <li><a href="javascript:void(0);">Show Types</a>
+              <div class="submenu submenu-2">
+                <h3>Filter By: Show Type</h3>
+                <ul>
+                  <?php if(!empty($show)) { 
+                    foreach($show as $sh) { ?>
+                      <li><a class="_filter" data-key="show_type" data-value="<?php echo strtolower(str_replace(' ', '_', ''.$sh->name.''));?>" href="javascript:;"><?php echo $sh->name;?></a></li>
+                    <?php } ?>
+                    <?php } ?>
+                </ul>
+              </div>
+            </li>
+            <li><a href="<?=base_url('awards')?>">Awards</a></li>
+            <li><a href="<?=base_url('loyalty')?>">Loyalty</a></li>
+            
+        <?php } ?>
+            
+          <?php if($this->session->userdata('UserType') && $this->session->userdata('UserType') != 1) { ?>
+            <li><a href="<?=base_url('content')?>">CONTENT</a></li>
+            <li><a href="<?=base_url('manage-users')?>">MANAGE USERS</a></li>
+            <li><a href="<?=base_url('financial')?>">FINANCIAL</a></li>
+            <li><a href="<?=base_url('my-subscriptions')?>">SUBSCRIPTIONS</a></li>
+            <li><a href="<?=base_url('profile')?>">PROFILE</a></li>
+            <li><a href="<?=base_url('my-network')?>">MY NETWORK</a></li>
+            <li><a href="<?=base_url('loyalty')?>">LOYALTY</a></li>
+            <li><a href="<?=base_url('gifts')?>">GIFTS</a></li>
           <!--<li><a href="<?=base_url('settings')?>">SETTINGS</a></li>-->
-          
-          <li><a href="<?=base_url('help')?>">HELP</a></li>
-          <?php if($this->session->userdata('AccountVerified') == 'No'){ ?>
-          <li><a href="<?=base_url('verification')?>">Verification</a></li>
+            <li><a href="<?=base_url('help')?>">HELP</a></li>
+            <?php if($this->session->userdata('AccountVerified') == 'No') { ?>
+            <li><a href="<?=base_url('verification')?>">Verification</a></li>
           <?php } ?>
           <?php } ?>
         </ul>
       </nav>
+      <?php if($this->session->userdata('UserType') && $this->session->userdata('UserType') == 1){ ?>
       <div class="right-filters">
       	<div class="search">
         	<!--<span><img src="<?=base_url('assets/images/icon-search.png')?>" alt="search"/></span>-->
@@ -184,33 +218,13 @@ $active_url = $controller.'/'.$method;
                 <option>recommended</option>
                 <option>recommended</option>
             </select>
-            
         </div>
         <div class="switch-view">
             <span class="list"><img src="<?=base_url('assets/images/icon-list.png')?>" alt="list"/></span>
             <span class="grid"><img src="<?=base_url('assets/images/icon-grid.png')?>" alt="grid"/></span>
         </div>
-        <?php if(($this->session->userdata('UserType') || $this->session->userdata('UserType') != '') && $this->session->userdata('UserType') == '1'){ ?>
-        <!-- <div class="switch-view" style="color:#fff;"> <span class="list welcome_unm">Welcome
-          <?=$this->session->userdata('UserName')?>
-          </span> </div>
-        <?php } ?> -->
-        
-        <!--<div class="search"><span><img src="<?=base_url('assets/images/icon-search.png')?>" alt="search" /></span></div>
-<div class="drop-list">
-    <span>recommended</span>
-    <ul>
-        <li><a href="javascript:void(0)">recommended</a></li>
-        <li><a href="javascript:void(0)">recommended 1</a></li>
-        <li><a href="javascript:void(0)">recommended 2</a></li>
-    </ul>
-</div>
-<div class="switch-view">
-    <span class="list"><img src="<?=base_url('assets/images/icon-list.png')?>" alt="list" /></span>
-    <span class="grid"><img src="<?=base_url('assets/images/icon-grid.png')?>" alt="grid" /></span>
-</div>--> 
-        
       </div>
+        <?php } ?>
     </section>
   </div>
 </section>

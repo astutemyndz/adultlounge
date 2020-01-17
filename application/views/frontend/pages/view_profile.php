@@ -210,7 +210,7 @@
             ?>
             <div class="user-content-block">
                 <div class="img-masgrid">
-                    <div class="img-masgrid-lft">
+                    
                         <ul>
                             <?php
                             if (!empty($img)) {
@@ -238,69 +238,10 @@
                                     </li>
                             <?php }
                             } ?>
-                            <!--<li class="txtblock">
-                                <?php if (empty($subs)) { ?>
-                                <div class="item-subscribe">
-                                    <figure>
-                                        <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
-                                        <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
-                                    </figure>
-                                </div>
-                                <?php } else { ?>
-                                <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
-                                                                    print 'style="display:none;"';
-                                                                } ?>>
-                                    <figure>
-                                        <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
-                                        <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
-                                    </figure>
-                                </div>
-                                <?php } ?>
-                                <h3>#Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquet </h3>
-                                <img src="<?= base_url('assets/images/2.jpg') ?>">
-                            </li>
-                            <li>
-                                <?php if (empty($subs)) { ?>
-                                <div class="item-subscribe">
-                                    <figure>
-                                        <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
-                                        <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
-                                    </figure>
-                                </div>
-                                <?php } else { ?>
-                                <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
-                                                                    print 'style="display:none;"';
-                                                                } ?>>
-                                    <figure>
-                                        <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
-                                        <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
-                                    </figure>
-                                </div>
-                                <?php } ?>
-                                <img src="<?= base_url('assets/images/3.jpg') ?>">
-                            </li>
-                            <li>
-                                <?php if (empty($subs)) { ?>
-                                <div class="item-subscribe">
-                                    <figure>
-                                        <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
-                                        <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
-                                    </figure>
-                                </div>
-                                <?php } else { ?>
-                                <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
-                                                                    print 'style="display:none;"';
-                                                                } ?>>
-                                    <figure>
-                                        <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
-                                        <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
-                                    </figure>
-                                </div>
-                                <?php } ?>
-                                <img src="<?= base_url('assets/images/5.jpg') ?>">
-                            </li>-->
                         </ul>
-                    </div>
+                    
+                    <?php 
+                    /*
                     <div class="img-masgrid-rgt">
                         <ul>
                             <?php
@@ -444,6 +385,8 @@
                             </li>
                         </ul>
                     </div>
+                    */
+                    ?>
                 </div>
             </div>
             <div class="user-content-block d-none">

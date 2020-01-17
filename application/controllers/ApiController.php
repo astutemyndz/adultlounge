@@ -13,9 +13,12 @@ class ApiController extends Common_Controller {
         if(!$this->isPost()) {
             $this->setQ(($this->input->get('q')) ? $this->input->get('q') : '');
             if($this->q) {
-                $this->setPerformer($this->performer->all('Yes','','','', $this->q));
+                $this->setOption(array(
+                    'name' => $this->q,
+                ));
+                $this->setPerformer($this->performer->all(false, $this->option));
             } else {
-                $this->setPerformer($this->performer->all('Yes'));
+                $this->setPerformer($this->performer->all(false, $this->option));
             }
             if($this->performer) {
                 foreach($this->performer as $performer) {

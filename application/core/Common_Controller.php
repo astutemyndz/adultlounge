@@ -7,6 +7,7 @@ class Common_Controller extends CI_Controller {
     protected $html = '';
     protected $request      			= array();
     protected $response     			= array();
+    protected $option     			= array();
     protected $filterData;
     public $q;
     const HTTP_CONTINUE = 100;
@@ -289,6 +290,10 @@ class Common_Controller extends CI_Controller {
         if(!$this->session->userdata('UserId')){
             redirect(base_url('login'));
         }
+    }
+    public function setOption($option) {
+        $this->option = $option;
+        return $this;
     }
 
     public function getUserDetails($id = ''){

@@ -62,8 +62,8 @@
 
     <div class="ProfileCard-details">
         <div class="ProfileCard-realName">{{name}}</div>
-        <!-- <div class="ProfileCard-screenName">@{{screen_name}}</div>
-        <div class="ProfileCard-description">{{description}}</div> -->
+        <div class="ProfileCard-screenName">30 y/tests female</div>
+        <div class="ProfileCard-description">Private</div> 
     </div>
 
     <!-- <div class="ProfileCard-stats">
@@ -85,6 +85,9 @@
 <script src="<?= base_url('assets/plugins/typeahead/js/handlebars.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/typeahead/js/jquery.xdomainrequest.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/typeahead/js/typeahead.bundle.js') ?>"></script>
+
+<link href="<?=base_url('assets/css/material-components-web.min.css')?>" rel="stylesheet">
+<script src="<?=base_url('assets/js/material-components-web.min.js')?>"></script>
 
 <script src="<?= base_url('assets/js/bundler.js') ?>"></script>
 <script>
@@ -225,14 +228,26 @@
 <div class=""></div>
 <link href="<?=base_url('assets/plugins/fakeLoader/css/fakeLoader.min.css')?>" rel="stylesheet" type="text/css" />
 <script src="<?= base_url('assets/plugins/fakeLoader/js/fakeLoader.min.js') ?>"></script>
+<script src="<?= base_url('assets/js/masonry.pkgd.min.js') ?>"></script>
 <script>
     $(document).ready(function(){
-                
+      
+
                 
             });
+/*
+var elem = document.querySelector('.grid');
+var msnry = new Masonry( elem, {
+  itemSelector: '.grid-item',
+  columnWidth: 200
+});
+var msnry = new Masonry( '.grid', {
+});
+*/
 </script>
 <script type="module" defer src="<?=base_url('assets/js/components/filter/FilterComponent.js')?>"></script>
 <script type="module" defer src="<?=base_url('assets/js/components/profile/ProfileComponent.js')?>"></script>
+<script type="module" defer src="<?=base_url('assets/js/components/performer/PerformerDetailsComponent.js')?>"></script>
 </body>
 
 </html>

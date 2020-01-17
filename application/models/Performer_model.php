@@ -40,30 +40,37 @@ class Performer_model extends CI_model {
     public function search() {
         
     }
-    public function all($isVerified = '', $id = '', $type = '', $checkId = '', $name = '', $sexual_pref = ''){
+    public function all($verifiedAccount = false, $option = array()){
         $condition = array(
             'u.login_type'          => '2',
             'u.status'              => '1'
         );
-        if($sexual_pref != '') {
-            $condition['u.sexual_pref'] = $sexual_pref;
-        }
-        if($name != '') {
-            $condition['u.name LIKE'] = '%'.$name.'%';
+        // if($sexual_pref != '') {
+        //     $condition['u.sexual_pref'] = $sexual_pref;
+        // }
+        if(!empty($option) && isset($option)) {
+            if(is_array($option)) {
+                if(array_key_exists('name', $option) && in_array($option['name'], $option)) {
+                    $condition['up.display_name LIKE'] = '%'.$option['name'].'%';
+                }
+            }
         }
         
-        if($isVerified != ''){
+        
+        if($verifiedAccount){
             $condition['u.account_verified'] = 'Yes';
+        } else {
+            $condition['u.account_verified'] = 'No';
         }
-        if($id != ''){
-            $condition['u.id'] = $id;
-        }
-        if($type == '' && $checkId != ''){
-            $condition['u.age'] = $checkId;
-        }
-        if($type != '' && $checkId != ''){
-            $condition['up.'.$type.' LIKE '] = '%'.$checkId.'%';
-        }
+        // if($id != ''){
+        //     $condition['u.id'] = $id;
+        // }
+        // if($type == '' && $checkId != ''){
+        //     $condition['u.age'] = $checkId;
+        // }
+        // if($type != '' && $checkId != ''){
+        //     $condition['up.'.$type.' LIKE '] = '%'.$checkId.'%';
+        // }
         $join[] = ['table' => 'user_preference up', 'on' => 'up.user_id = u.id', 'type' => 'left'];        
         $performer = $this->cm->select('users u', $condition, 'u.id, u.name, u.email, u.phone_no, u.usernm, u.gender, u.sexual_pref, u.age, u.image, u.isLogin, up.display_name, up.height, up.weight, up.hair, up.eye, up.zodiac, up.build, up.chest, up.burst, up.cup, up.pubic_hair, up.penis, up.description,up.currency, up.price_in_private,up.price_in_group, up.category, up.attribute, up.willingness, up.appearance, up.feature, (select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id) images', 'u.id', 'desc', $join);
 

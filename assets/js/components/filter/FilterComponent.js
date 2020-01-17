@@ -3,6 +3,7 @@ import QueryStringComponent from '../query_string/QueryStringComponent.js';
 class FilterComponent extends QueryStringComponent {
     filterAttrs = null;
     _filterElements;
+    _shortListingElements;
     key;
     value;
     queryStringInstance;
@@ -54,21 +55,25 @@ class FilterComponent extends QueryStringComponent {
         this._renderModelElement            = document.querySelector('#_render_model_element');
         this._renderFilterElement           = document.querySelector('#_render_filter_element');
         this._app                           = document.querySelector('._app');
+        this._shortListingElements                  = document.querySelector('._tag');
 
         
         this.componentDidMount();
         
         this.onClickFilterElementEventHandler();
-        this.reload();
+        //this.onClickRemoveTagElementEventHandler();
+        //this.reload();
         
     }
     initReloadDOMCallBack() {
         //this._reload = document.querySelector('#_reload');
     }
     reload = () => {
+
         //Event Delegation 
+        
         this._app.addEventListener('click', (e) => {
-            console.log('fetching...');
+            console.log(this);
             if(e.target.matches('_tag')) {
                 console.log(event.currentTarget);
                 window.setTimeout(() => {
@@ -180,6 +185,34 @@ class FilterComponent extends QueryStringComponent {
             });
         })
     }
+    onClickRemoveTagElementEventHandler = (e) => {
+        var self = this;
+        this._shortListingElements.forEach((shortListingElement) => {
+            shortListingElement.addEventListener('click', function() {
+                if(e.target.matches('_tag')) {
+                    console.log(1);
+                }
+                // const queryString = self.setQueryString(filterElement.getAttribute('data-key'),filterElement.getAttribute('data-value'));
+                // const params = self.queryStringToObject(queryString);
+                // let paramsArr = [];
+                // for (const property in params) {
+                //     if(property != 'category') {
+                //         paramsArr.push({
+                //             key: property,
+                //             value: params[property],
+                //         })
+                //     }
+                // }
+                // self.setState({
+                //     ...self.state,
+                //     paramsArr: paramsArr,
+                //     params: params,
+                // })
+                // self.componentDidUpdate();
+                // self.render();
+            });
+        })
+    }
     async fetchModels(url, params) {
         const objToQueryString = this.objectToQueryString(params);
         let response = await fetch(`${url}${objToQueryString}`);
@@ -282,7 +315,7 @@ class FilterComponent extends QueryStringComponent {
                 <span class="strapbox">${performType}</span>
                 <a href="performer/${id}/${slug}"><img src="${img}" alt="${display_name}" /></a>
                 <figcaption>
-                    <h4><span class="active-circle"></span><a href="javascript:void(0)">${display_name}</a></h4>
+                    <h4><span class="active-circle"></span><a href="performer/${id}/${slug}">${display_name}</a></h4>
                     <ul>
                         <li>PRIVATE: <span>£${price_in_private}</span> p/m</li>
                         <li>GROUP: <span>£${price_in_group}</span> p/M</li>
