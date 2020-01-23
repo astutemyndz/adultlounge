@@ -48,11 +48,14 @@
 
 <script src="<?=base_url('assets/js/owl.carousel.min.js')?>"></script>
 <script src="<?=base_url('assets/js/sweetalert2.min.js')?>"></script>
+
 <script src="<?=base_url('assets/js/jquery.mCustomScrollbar.concat.min.js')?>"></script>
 <script src="<?=base_url('assets/js/jquery.multipurpose_tabcontent.js')?>"></script>
 <script src="<?=base_url('assets/js/jquery.overlayScrollbars.min.js')?>"></script>
 <script src="<?=base_url('assets/js/waitMe.min.js')?>"></script>
 <script src="<?= base_url('assets/js/jquery.switcher.min.js') ?>"></script>
+
+
 
 <!--Result Template-->
 <script id="result-template" type="text/x-handlebars-template">
@@ -228,7 +231,8 @@
 <div class=""></div>
 <link href="<?=base_url('assets/plugins/fakeLoader/css/fakeLoader.min.css')?>" rel="stylesheet" type="text/css" />
 <script src="<?= base_url('assets/plugins/fakeLoader/js/fakeLoader.min.js') ?>"></script>
-<script src="<?= base_url('assets/js/masonry.pkgd.min.js') ?>"></script>
+
+
 <script>
     $(document).ready(function(){
       
@@ -245,9 +249,27 @@ var msnry = new Masonry( '.grid', {
 });
 */
 </script>
+
+
+
 <script type="module" defer src="<?=base_url('assets/js/components/filter/FilterComponent.js')?>"></script>
 <script type="module" defer src="<?=base_url('assets/js/components/profile/ProfileComponent.js')?>"></script>
 <script type="module" defer src="<?=base_url('assets/js/components/performer/PerformerDetailsComponent.js')?>"></script>
+
+
+<script src="<?=base_url('assets/js/modernizr.custom.js')?>"></script>
+<script src="<?= base_url('assets/js/masonry.pkgd.min.js') ?>"></script>
+<script src="<?=base_url('assets/js/imagesloaded.js')?>"></script>
+<script src="<?=base_url('assets/js/classie.js')?>"></script>
+<script src="<?=base_url('assets/js/AnimOnScroll.js')?>"></script>
+<script>
+    new AnimOnScroll( document.getElementById( 'grid' ), {
+        minDuration : 0.4,
+        maxDuration : 0.7,
+        viewportFactor : 0.2
+    } );
+</script>
+
 </body>
 
 </html>

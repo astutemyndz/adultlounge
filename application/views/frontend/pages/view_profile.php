@@ -184,7 +184,7 @@
         <div class="perform-widget">
             <div class="top-bar-layout">
                 <div class="top-bar-widgets">
-                    <ul class="user-content-list">
+                    <ul class="user-content-list user-list-tab">
                         <li>
                             <a href="javascript:void(0)" class="user-free-content">FREE CONTENT</a>
                         </li>
@@ -210,8 +210,27 @@
             ?>
             <div class="user-content-block">
                 <div class="img-masgrid">
-                    
-                        <ul>
+                    <ul class="grid effect-1" id="grid">
+                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
+                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
+                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
+                    </ul>
+                        <!--<ul>
                             <?php
                             if (!empty($img)) {
                                 for ($i = 0; $i < (count($img) / 2); $i++) {
@@ -238,7 +257,8 @@
                                     </li>
                             <?php }
                             } ?>
-                        </ul>
+                        </ul>-->
+
                     
                     <?php 
                     /*
@@ -390,7 +410,108 @@
                 </div>
             </div>
             <div class="user-content-block d-none">
-                <p>Content coming soon.</p>
+                <div class="video-grid">
+                    <div class="video-view">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-view">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-view">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-view">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-view">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="user-content-block d-none pt-2">
                 <h2>Performer Details</h2>
@@ -464,3 +585,5 @@
     </section>
 </main>
 </section>
+
+
