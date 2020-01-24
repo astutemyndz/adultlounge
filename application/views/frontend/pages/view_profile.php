@@ -211,17 +211,20 @@
             <div class="user-content-block">
                 <div class="img-masgrid">
                     <ul class="grid effect-1" id="grid">
-                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                        <li class="image-blur tooltip"><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                        <span class="tooltiptext">Subscribe to view this image</span>
                             <div class="lock-video">
                                 <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
                             </div>
                         </li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg">
+                        <li class="image-blur tooltip"><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg">
+                        <span class="tooltiptext">Subscribe to view this image</span>
                             <div class="lock-video">
                                 <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
                             </div>
                         </li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                        <li class="image-blur tooltip"><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                        <span class="tooltiptext">Subscribe to view this image</span>
                             <div class="lock-video">
                                 <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
                             </div>
@@ -414,9 +417,10 @@
             </div>
             <div class="user-content-block d-none">
                 <div class="video-grid">
-                    <div class="video-view">
+                    <div class="video-view tooltip">
                         <div class="video-play">
                             <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
                             <div class="lock-video">
                                 <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
                             </div>
@@ -434,9 +438,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="video-view">
+                    <div class="video-view tooltip">
                         <div class="video-play">
                             <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
                             <div class="lock-video">
                                 <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
                             </div>
@@ -454,9 +459,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="video-view">
+                    <div class="video-view tooltip">
                         <div class="video-play">
                             <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
                             <div class="lock-video">
                                 <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
                             </div>
@@ -474,9 +480,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="video-view">
+                    <div class="video-view tooltip">
                         <div class="video-play">
                             <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
                             <div class="lock-video">
                                 <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
                             </div>
@@ -494,9 +501,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="video-view">
+                    <div class="video-view tooltip">
                         <div class="video-play">
                             <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
                             <div class="lock-video">
                                 <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
                             </div>
