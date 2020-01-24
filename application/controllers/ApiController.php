@@ -116,4 +116,14 @@ class ApiController extends Common_Controller {
         }
         
     }
+
+    public function freeContent() {
+        return $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(200)
+                ->set_output(json_encode(array(
+                    'data' => $this->performer->getPremimunContent(32,2)
+                )));
+   
+    }
 }

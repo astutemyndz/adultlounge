@@ -34,6 +34,10 @@ class Performer_model extends CI_model {
         $this->tables['users_show_type']        = 'users_show_type';
         $this->tables['users_categories']       = 'users_categories';
         $this->tables['users_willingness']      = 'users_willingness';
+        $this->tables['performer_gallery']      = 'performer_gallery';
+        $this->tables['performer_video_gallery']      = 'performer_video_gallery';
+        $this->tables['subscribe']      = 'subscribe';
+
     }
     
 
@@ -76,32 +80,173 @@ class Performer_model extends CI_model {
 
         return $performer;
     }
+    
+    public function getFreeContent($performer_id) {
+        $this->db->from($this->tables['users'].' as u');
+        $this->db->join($this->tables['performer_video_gallery'].' as pvg', 'pvg.user_id = u.id', 'left outer');
+        $this->db->join($this->tables['performer_gallery'].' as pg', 'pg.user_id = u.id', 'left outer');
+        $this->db->where(array(
+            'u.id' => $performer_id,
+        ));
+        $this->db->select('u.id,(select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id AND pg.type = 1) imageArr,(select GROUP_CONCAT(pvg.video) from performer_video_gallery pvg where pvg.user_id = u.id AND pvg.type = 1) videoArr');
+        
+        $this->setQuery($this->db->get());
+        $freeContent = array();
+        if($this->query) {
+            if($this->query->result_array()) {
+                $subscribe = true;
+                foreach($this->query->result_array() as $value) {
+                    $freeContent = array(
+                        'imageArr' => explode(',', $value['imageArr']),
+                        'videoArr' => explode(',', $value['videoArr']),
+                    );
+                }
+                
+            }
+        }
+        $newImageArr = array();
+        $newVideoArr = array();
+        if(isset($freeContent['imageArr'])) {
+            foreach($freeContent['imageArr'] as $video) {
+                $newVideoArr[] = array(
+                    'video' => $video
+                );
+            }
+        }
+        if(isset($freeContent['videoArr'])) {
+            foreach($freeContent['videoArr'] as $img) {
+                $newImageArr[] = array(
+                    'img' => $img
+                );
+            }
+        }
+        return array(
+            'images' => $newImageArr,
+            'videos' => $newVideoArr
+        );
+    }
+
+    public function getPremimunContent($performer_id, $customer_id) {
+        $premiumContent = array();
+        $this->db->from($this->tables['users'].' as u');
+        $this->db->join($this->tables['performer_video_gallery'].' as pvg', 'pvg.user_id = u.id', 'left outer');
+        $this->db->join($this->tables['performer_gallery'].' as pg', 'pg.user_id = u.id', 'left outer');
+        $this->db->join($this->tables['subscribe'].' as sub', 'sub.user_id = u.id', 'left outer');
+        $this->db->where(array(
+            'sub.performer_id' => $performer_id,
+            'sub.user_id' => $customer_id,
+        ));
+        $this->db->select('u.id,(select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id AND pg.type = 1) imageArr,(select GROUP_CONCAT(pvg.video) from performer_video_gallery pvg where pvg.user_id = u.id AND pvg.type = 1) videoArr');
+        $this->setQuery($this->db->get());
+        echo $this->db->last_query();
+        exit;
+        if($this->query) {
+            if($this->query->result_array()) {
+                $subscribe = true;
+                foreach($this->query->result_array() as $subscribeContent) {
+                    $premiumContent = array(
+                        'imageArr' => explode(',', $subscribeContent['imageArr']),
+                        'videoArr' => explode(',', $subscribeContent['videoArr']),
+                    );
+                }
+                $newImageArr = array();
+                $newVideoArr = array();
+                if(isset($premiumContent['imageArr'])) {
+                    foreach($premiumContent['imageArr'] as $video) {
+                        $newVideoArr[] = array(
+                            'video' => $video
+                        );
+                    }
+                }
+                if(isset($premiumContent['videoArr'])) {
+                    foreach($premiumContent['videoArr'] as $img) {
+                        $newImageArr[] = array(
+                            'img' => $img
+                        );
+                    }
+                }
+                return array(
+                    'images' => $this->query->result_array(),
+                    'videos' => $newVideoArr,
+                    'subscribe' => $subscribe
+                );
+                
+            } else {
+                $subscribe = false;
+                $this->db->from($this->tables['users'].' as u');
+                $this->db->join($this->tables['performer_video_gallery'].' as pvg', 'pvg.user_id = u.id', 'left outer');
+                $this->db->join($this->tables['performer_gallery'].' as pg', 'pg.user_id = u.id', 'left outer');
+
+                $this->db->where(array(
+                    'u.id' => $performer_id,
+                ));
+                $this->db->select('u.id,(select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id AND pg.type = 1) imageArr,(select GROUP_CONCAT(pvg.video) from performer_video_gallery pvg where pvg.user_id = u.id AND pvg.type = 1) videoArr');
+                $this->setQuery($this->db->get());
+                
+                if($this->query->result_array()) {
+                    foreach($this->query->result_array() as $NonSubscribeContent) {
+                        $premiumContent = array(
+                            'imageArr' => explode(',', $NonSubscribeContent['imageArr']),
+                            'videoArr' => explode(',', $NonSubscribeContent['videoArr']),
+                        );
+                    }
+                }
+            }
+        }
+        // return array(
+        //     'premiumContent' => $premiumContent,
+        //     'subscribe' => $subscribe
+        // );
+    }
+
+
+    
     public function filter($data) {
         if(!empty($data) && is_array($data)) {
             $this->data = $data;
             foreach($this->data as $key => $value) {
-                if(array_key_exists('performer', $this->data)) {
+                if(array_key_exists('performer', $this->data) && isset($this->data['performer']) && !empty($this->data['performer'])) {
                     $this->conditions['up.performer_type'] = $this->data['performer'];
                 }
-                if(array_key_exists('category', $this->data)) {
+                if(array_key_exists('category', $this->data) && isset($this->data['category']) && !empty($this->data['category'])) {
                     $this->conditions['c.name LIKE'] = '%'.$this->data['category'].'%';
                 }
-                if(array_key_exists('show_type', $this->data)) {
+                if(array_key_exists('show_type', $this->data) && isset($this->data['show_type']) && !empty($this->data['show_type'])) {
                     $this->conditions['st.name LIKE'] = '%'.$this->data['show_type'].'%';
                 }
-                if(array_key_exists('age', $this->data)) {
+                if(array_key_exists('age', $this->data) && isset($this->data['age']) && !empty($this->data['age'])) {
                     $this->conditions['u.age'] = $this->data['age'];
                 }
-                if(array_key_exists('willingness', $this->data)) {
+                if(array_key_exists('willingness', $this->data) && isset($this->data['willingness']) && !empty($this->data['willingness'])) {
                     $this->conditions['wi.name LIKE'] = '%'.$this->data['willingness'].'%';
                 }
-                if(array_key_exists('appearances', $this->data)) {
+                if(array_key_exists('appearances', $this->data) && isset($this->data['appearances']) && !empty($this->data['appearances'])) {
                     $this->conditions['ap.name LIKE'] = '%'.$this->data['appearances'].'%';
                 }
+                
+                
+                // if(array_key_exists('customer_id', $this->data) && isset($this->data['customer_id']) && !empty($this->data['customer_id']) && array_key_exists('id', $this->data) && isset($this->data['id']) && !empty($this->data['id'])) {
+                    
+                //     $this->conditions['sub.user_id']        = $this->data['customer_id'];
+                //     $this->conditions['sub.performer_id']   = $this->data['id'];
+                //     // $this->conditions['pg.type'] = 1;
+                //     // $this->conditions['pvg.type'] = 1;
+                // } else 
+                
+                if(array_key_exists('id', $this->data) && isset($this->data['id']) && !empty($this->data['id'])) {
+                    $this->conditions['u.id'] = $this->data['id'];
+                }
+                
                 
             }
            
         }
+        // echo "<pre>";
+        // print_r($this->conditions);
+        // exit;
+        // $this->conditions['pg.type'] = '0';
+        // $this->conditions['pg.type'] = '0';
+
         if($this->conditions) {
             $this->db->from($this->tables['users'].' as u');
             $this->db->join($this->tables['user_preference'].' as up', 'up.user_id = u.id', 'left outer');
@@ -113,6 +258,9 @@ class Performer_model extends CI_model {
             $this->db->join($this->tables['willingness'].' as wi', 'wi.id = uwi.id_willingness', 'left outer');
             $this->db->join($this->tables['users_appearance'].' as uap', 'uap.id_users = u.id', 'left outer');
             $this->db->join($this->tables['appearance'].' as ap', 'ap.id = uap.id_appearence', 'left outer');
+            $this->db->join($this->tables['performer_video_gallery'].' as pvg', 'pvg.user_id = u.id', 'left outer');
+            $this->db->join($this->tables['performer_gallery'].' as pg', 'pg.user_id = u.id', 'left outer');
+            
             $this->db->where($this->conditions);
             $this->db->group_by('u.id');
             $this->db->order_by('u.id', 'DESC');
@@ -123,7 +271,7 @@ class Performer_model extends CI_model {
             up.price_in_private,up.price_in_group, up.category, up.attribute, 
             up.willingness, up.appearance, up.feature, 
             up.performer_type,
-            (select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id) images,
+            (select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id) images,(select GROUP_CONCAT(pvg.video) from performer_video_gallery pvg where pvg.user_id = u.id) videos,
             c.id as categoryId, c.name as categoryName,st.id as showId, st.name as showName, ap.id as appearanceId, ap.name as appearanceName, wi.id as willingnessId, wi.name as willingness
             ');
             $this->setQuery($this->db->get());

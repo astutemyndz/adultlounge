@@ -23,23 +23,23 @@ export default class ViewPerformerComponent extends JSComponent {
 
     componentDidMount = () => {
         
-        this.fetch('http://localhost/adultlounge/api/v1/view/performer')
-        .then(data => {
-            if(data) {
-                this.setState({
-                    ...this.state,
-                    freeContents: data.freeContents,
-                    premiumContents: data.premiumContents,
-                    performerDetails: data.performerDetails,
-                });
-                console.log('componentDidMount',this.state);
-            } else {
-                console.log('else componentDidMount',this.state);
-                this.setState({
-                    ...this.state,
-                })
-            }
-        })
+        // this.fetch('http://localhost/adultlounge/api/v1/view/performer')
+        // .then(data => {
+        //     if(data) {
+        //         this.setState({
+        //             ...this.state,
+        //             freeContents: data.freeContents,
+        //             premiumContents: data.premiumContents,
+        //             performerDetails: data.performerDetails,
+        //         });
+        //         console.log('componentDidMount',this.state);
+        //     } else {
+        //         console.log('else componentDidMount',this.state);
+        //         this.setState({
+        //             ...this.state,
+        //         })
+        //     }
+        // })
         
     }
 }

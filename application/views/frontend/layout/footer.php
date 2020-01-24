@@ -269,7 +269,7 @@ var msnry = new Masonry( '.grid', {
         viewportFactor : 0.2
     } );
 </script> -->
-
+<script></script>
 </body>
 
 </html>
