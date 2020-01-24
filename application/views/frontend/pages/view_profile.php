@@ -211,9 +211,21 @@
             <div class="user-content-block">
                 <div class="img-masgrid">
                     <ul class="grid effect-1" id="grid">
-                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                        </li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg">
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                        </li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                        </li>
                         <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
                         <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
                         <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
