@@ -1,4 +1,4 @@
-export default class StateFullComponent {
+export default class JSComponent {
     state = {};
     constructor() {
         //super();
@@ -9,5 +9,12 @@ export default class StateFullComponent {
     }
     getState() {
         return this.state;
+    }
+
+    
+    async fetch(url) {
+        let response = await fetch(url);
+        let data = await response.json()
+        return data;
     }
 }

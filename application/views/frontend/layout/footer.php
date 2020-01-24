@@ -254,10 +254,10 @@ var msnry = new Masonry( '.grid', {
 
 <script type="module" defer src="<?=base_url('assets/js/components/filter/FilterComponent.js')?>"></script>
 <script type="module" defer src="<?=base_url('assets/js/components/profile/ProfileComponent.js')?>"></script>
-<script type="module" defer src="<?=base_url('assets/js/components/performer/PerformerDetailsComponent.js')?>"></script>
+<script type="module" defer src="<?=base_url('assets/js/components/performer/ViewPerformerComponent.js')?>"></script>
 
 
-<script src="<?=base_url('assets/js/modernizr.custom.js')?>"></script>
+<!-- <script src="<?=base_url('assets/js/modernizr.custom.js')?>"></script>
 <script src="<?= base_url('assets/js/masonry.pkgd.min.js') ?>"></script>
 <script src="<?=base_url('assets/js/imagesloaded.js')?>"></script>
 <script src="<?=base_url('assets/js/classie.js')?>"></script>
@@ -268,7 +268,7 @@ var msnry = new Masonry( '.grid', {
         maxDuration : 0.7,
         viewportFactor : 0.2
     } );
-</script>
+</script> -->
 
 </body>
 

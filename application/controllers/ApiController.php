@@ -106,4 +106,14 @@ class ApiController extends Common_Controller {
         }
     }
 
+    /**
+     * Performer free contents or gallery images
+     */
+
+    public function viewPerformer() {
+        if(!$this->isPost()) {
+                
+        }
+        
+    }
 }
