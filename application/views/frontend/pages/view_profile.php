@@ -228,7 +228,7 @@
                             <h4>Lorem Ipsum Dolor Text</h4>
                             <div class="video-pricing-area">
                                 <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
+                                <p>29 Dec, 2019</p>
                             </div>
                         </div>
                     </div>
@@ -249,7 +249,7 @@
                             <h4>Lorem Ipsum Dolor Text</h4>
                             <div class="video-pricing-area">
                                 <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
+                                <p>29 Dec, 2019</p>
                             </div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                             <h4>Lorem Ipsum Dolor Text</h4>
                             <div class="video-pricing-area">
                                 <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
+                                <p>29 Dec, 2019</p>
                             </div>
                         </div>
                     </div>
@@ -291,7 +291,7 @@
                             <h4>Lorem Ipsum Dolor Text</h4>
                             <div class="video-pricing-area">
                                 <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
+                                <p>29 Dec, 2019</p>
                             </div>
                         </div>
                     </div>
