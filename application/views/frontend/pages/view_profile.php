@@ -209,27 +209,111 @@
             }
             ?>
             <div class="user-content-block">
+                <div class="video-grid">
+                    <h4 class="free-image-heading">Free Video</h4>
+                    <div class="video-view ">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            
+                            <div class="lock-video free-video">
+                                <a href="#"><img src="<?= base_url('assets/images/show.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-view ">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                           
+                            <div class="lock-video free-video">
+                                <a href="#"><img src="<?= base_url('assets/images/show.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-view ">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            
+                            <div class="lock-video free-video">
+                                <a href="#"><img src="<?= base_url('assets/images/show.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-view ">
+                        <div class="video-play">
+                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                          
+                            <div class="lock-video free-video">
+                                <a href="#"><img src="<?= base_url('assets/images/show.png') ?>"></a>
+                            </div>
+                            <div class="video-time">
+                                <div class="time-show">
+                                    <h5>4:57</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Lorem Ipsum Dolor Text</h4>
+                            <div class="video-pricing-area">
+                                <h5>User Id: 6474314</h5>
+                                <a href="#" class="video-price-btn">$20.00</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="load-more-btn">
+                    <a href="#" class="btn-load-more">Load More...</a>
+                </div>
+
+                <hr class="hr-devider" />
+
                 <div class="img-masgrid">
+                    <h4 class="free-image-heading">Free Image</h4>
                     <ul class="grid effect-1" id="grid">
-                        <li class="image-blur tooltip"><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                        <span class="tooltiptext">Subscribe to view this image</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
+                        <li class=" "><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
                         </li>
-                        <li class="image-blur tooltip"><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg">
-                        <span class="tooltiptext">Subscribe to view this image</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
+                        <li class=" "><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg">
                         </li>
-                        <li class="image-blur tooltip"><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                        <span class="tooltiptext">Subscribe to view this image</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
+                        <li class=""><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
                         </li>
                         <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
+                        <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
                         <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
                         <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
                     </ul>
@@ -416,28 +500,8 @@
                 </div>
             </div>
             <div class="user-content-block d-none">
-                <div class="video-grid">
-                    <div class="video-view tooltip">
-                        <div class="video-play">
-                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                            <div class="video-time">
-                                <div class="time-show">
-                                    <h5>4:57</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="video-details">
-                            <h4>Lorem Ipsum Dolor Text</h4>
-                            <div class="video-pricing-area">
-                                <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
-                            </div>
-                        </div>
-                    </div>
+            <div class="video-grid">
+                    <h4 class="free-image-heading">Premium Video</h4>
                     <div class="video-view tooltip">
                         <div class="video-play">
                             <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
@@ -525,6 +589,218 @@
                 </div>
                 <div class="load-more-btn">
                     <a href="#" class="btn-load-more">Load More...</a>
+                </div>
+
+                <hr class="hr-devider" />
+
+                <div class="img-masgrid">
+                    <h4 class="free-image-heading">Premium Image</h4>
+                    <ul class="grid effect-1" id="grid">
+                        <li class="image-blur tooltip"><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                        <span class="tooltiptext">Subscribe to view this image</span>
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                        </li>
+                        <li class="image-blur tooltip"><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg">
+                        <span class="tooltiptext">Subscribe to view this image</span>
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                        </li>
+                        <li class="image-blur tooltip"><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                        <span class="tooltiptext">Subscribe to view this image</span>
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                        </li>
+                        <li class="image-blur tooltip"><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
+                            <span class="tooltiptext">Subscribe to view this image</span>
+                            <div class="lock-video">
+                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="load-more-btn">
+                        <a href="#" class="btn-load-more">Load More...</a>
+                    </div>
+                        <!--<ul>
+                            <?php
+                            if (!empty($img)) {
+                                for ($i = 0; $i < (count($img) / 2); $i++) {
+                                    ?>
+                                    <li>
+                                        <?php if (empty($subs)) { ?>
+                                            <div class="item-subscribe">
+                                                <figure>
+                                                    <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                    <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                </figure>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
+                                                                                        print 'style="display:none;"';
+                                                                                    } ?>>
+                                                <figure>
+                                                    <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                    <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                </figure>
+                                            </div>
+                                        <?php } ?>
+                                        <img src="<?= base_url('assets/performer_gallery/' . $img[$i]) ?>">
+                                    </li>
+                            <?php }
+                            } ?>
+                        </ul>-->
+
+                    
+                    <?php 
+                    /*
+                    <div class="img-masgrid-rgt">
+                        <ul>
+                            <?php
+                            //if(!empty($img)){
+                            //for($i = (count($img)/2); $i < count($img); $i++){
+                            ?>
+                            <li>
+                                <?php if (empty($subs)) { ?>
+                                    <div class="item-subscribe">
+                                        <figure>
+                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                            <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                        </figure>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
+                                                                        print 'style="display:none;"';
+                                                                    } ?>>
+                                        <figure>
+                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                            <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                        </figure>
+                                    </div>
+                                <?php } ?>
+                                <img src="<?= base_url('assets/images/2.jpg') ?>">
+                            </li>
+                            <?php //} } 
+                            ?>
+                            <li>
+                                <?php if (empty($subs)) { ?>
+                                    <div class="item-subscribe">
+                                        <figure>
+                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                            <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                        </figure>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
+                                                                        print 'style="display:none;"';
+                                                                    } ?>>
+                                        <figure>
+                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                            <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                        </figure>
+                                    </div>
+                                <?php } ?>
+                                <img src="<?= base_url('assets/images/4.jpg') ?>">
+                            </li>
+                            <li>
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <?php if (empty($subs)) { ?>
+                                                    <div class="item-subscribe">
+                                                        <figure>
+                                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                            <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                        </figure>
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
+                                                                                        print 'style="display:none;"';
+                                                                                    } ?>>
+                                                        <figure>
+                                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                            <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                        </figure>
+                                                    </div>
+                                                <?php } ?>
+                                                <img src="<?= base_url('assets/images/6') ?>.jpg">
+                                            </li>
+                                            <li>
+                                                <?php if (empty($subs)) { ?>
+                                                    <div class="item-subscribe">
+                                                        <figure>
+                                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                            <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                        </figure>
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
+                                                                                        print 'style="display:none;"';
+                                                                                    } ?>>
+                                                        <figure>
+                                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                            <a href="javascript:void(0)" onclick="subscribe('<?= $user[0]['id'] ?>', '<?= $this->session->userdata('UserId') ?>')" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                        </figure>
+                                                    </div>
+                                                <?php } ?>
+                                                <img src="<?= base_url('assets/images/8.jpg') ?>">
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <?php if (empty($subs)) { ?>
+                                                    <div class="item-subscribe">
+                                                        <figure>
+                                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                            <a href="javascript:void(0)" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                        </figure>
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
+                                                                                        print 'style="display:none;"';
+                                                                                    } ?>>
+                                                        <figure>
+                                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                            <a href="javascript:void(0)" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                        </figure>
+                                                    </div>
+                                                <?php } ?>
+                                                <img src="<?= base_url('assets/images/7.jpg') ?>">
+                                            </li>
+                                            <li class="txtblock">
+                                                <?php if (empty($subs)) { ?>
+                                                    <div class="item-subscribe">
+                                                        <figure>
+                                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                            <a href="javascript:void(0)" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                        </figure>
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="item-subscribe" <?php if ($subs[0]->status == 1) {
+                                                                                        print 'style="display:none;"';
+                                                                                    } ?>>
+                                                        <figure>
+                                                            <img src="<?= base_url('assets/images/lock-icon.png') ?>" alt="lock" />
+                                                            <a href="javascript:void(0)" class="btn subscribebtn">SUBSCRIBE TO UNLOCK</a>
+                                                        </figure>
+                                                    </div>
+                                                <?php } ?>
+                                                <h3>#Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquet </h3>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    */
+                    ?>
                 </div>
             </div>
             <div class="user-content-block d-none pt-2">

@@ -56,7 +56,7 @@
                 <h1>GENERAL INFORMATION</h1>
             </div>
             <div class="box-content-widget per">
-                <div class="leftsc">
+                <div class="leftsc ">
                     <!--<p> The registered account owner can be an individual or a company, and must also <br>
                         be the payee, and taxable entity (if applicable).</p>-->
                     <p>SUBMIT BASIC DETAILS FOR APPROVAL</p>
@@ -70,7 +70,7 @@
                 <div class="clear"></div>
                 <form id="editprofile-form" method="post" autocomplete="off" class="form-catagories">
                     <div class="box-content-widget pl-0">
-                        <div class="form-two-col per2 leftsc">
+                        <div class="form-two-col per2 leftsc ">
                             <div class="show show2">
                                 <h3>PROFILE PHOTO</h3>
                                 <div class="form-group">
@@ -293,7 +293,7 @@
                         $this->session->userdata('UserType') == 2
                     ){ ?>
                     <div class="box-content-widget pl-0">
-                        <div class="form-two-col per2 leftsc">
+                        <div class="form-two-col per2 leftsc ">
                             <div id="image-lightgallery" class="show show2">
                                 <h3>GALLERY</h3>
                                 <?php
@@ -312,11 +312,11 @@
                                 <br />
                                 <input type="hidden" id="gallery_cnt" value="1">
                                 <div class="row">
-                                <div class="form-group">
+                                <div class="form-group gallery-brouser-area">
                                     <div class="proo">
-                                        <img src="<?=base_url('assets/images/noimage.png')?>" alt="" style="height:49px; width:45px;" id="display_gal_img1">
+                                        <img src="<?=base_url('assets/images/noimage.png')?>" alt="" style="height:40px; width:45px;" id="display_gal_img1">
                                     </div>
-                                    <input type="file" class="form-control username formsm display_gal_img1" onchange="disp_img('1', this)" data-count="1" name="gallery[]" id="gallery_image1" />
+                                    <input type="file" class="form-control username formsm display_gal_img1 brouse-input" onchange="disp_img('1', this)" data-count="1" name="gallery[]" id="gallery_image1" />
                                     <div class="brows editpro_gal_image_brows" data-count="1">BROWSER</div>
                                     <select name="video_type" id="video_type" class="form-control username formsm display_gal_img1">
                                         <option value="free_view">Free View</option>
@@ -345,7 +345,7 @@
                     }
                     ?>
                     <div class="box-content-widget pl-0">
-                        <div class="form-two-col per2 leftsc">
+                        <div class="form-two-col per2 leftsc ">
                             <div class="show show2">
                                 <h3>VIDEO GALLERY <button type="button" id="add-video-btn" class="px-2 py-1 border-0 ml-2">Add New</button></h3>
                                 <div class="video-container mt-2">  
@@ -374,19 +374,19 @@
                     </div>
 
                     <?php } ?>
-                    <div class="box-content-widget">
+                    <div class="box-content-widget pl-0 checkbox-area">
                         <h4>LANGUAGES</h4>
 
-                        <div class="form-two-col per2 leftsc">
+                        <div class="form-two-col per2 leftsc float-left-none">
                             <div class="show">
                                 <?php if(!empty($categories)){ ?>
                                 <h3>CATEGORIES</h3>
-                                <div class="inline-items">
+                                <div class="inline-items display-inline">
                                     <?php
                                     for($p=0;$p<count($categories); $p++){
                                     $o = $p%2;
                                     ?>
-                                    <?php if($o == 0){ ?><div class="flex-coloum"><?php } ?>
+                                    <?php if($o == 0){ ?><div class="flex-coloum display-inline-block"><?php } ?>
                                         <div class="form-check">
                                             <label class="check"><?=strtoupper($categories[$p]->name)?>
                                                 <input type="checkbox" name="editpro_category[]" value="<?=$categories[$p]->id?>" <?php if(count(explode($categories[$p]->id, $user[0]['category']))>1){ print 'checked'; }?>>
@@ -399,12 +399,12 @@
                                 <?php } ?>
                                 <?php if(!empty($show)){ ?>
                                 <h3>SHOW TYPES</h3>
-                                <div class="inline-items">
+                                <div class="inline-items display-inline">
                                     <?php
                                     for($p=0;$p<count($show); $p++){
                                     $o = $p%2;
                                     ?>
-                                    <?php if($o == 0){ ?><div class="flex-coloum"><?php } ?>
+                                    <?php if($o == 0){ ?><div class="flex-coloum display-inline-block"><?php } ?>
                                         <div class="form-check">
                                             <label class="check"><?=strtoupper($show[$p]->name)?>
                                                 <input type="checkbox" name="editpro_attr[]" value="<?=$show[$p]->id?>" <?php if(count(explode($show[$p]->id, $user[0]['attribute']))>1){ print 'checked'; }?>>
@@ -521,12 +521,12 @@
                                 <?php } ?>
                                 <?php if(!empty($will)){ ?>
                                 <h3>WILLINGNESS</h3>
-                                <div class="inline-items">
+                                <div class="inline-items display-inline">
                                     <?php
                                     for($p=0;$p<count($will); $p++){
                                     $o = $p%2;
                                     ?>
-                                    <?php if($o == 0){ ?><div class="flex-coloum"><?php } ?>
+                                    <?php if($o == 0){ ?><div class="flex-coloum display-inline-block"><?php } ?>
                                         <div class="form-check">
                                             <label class="check"><?=strtoupper($will[$p]->name)?>
                                                 <input type="checkbox" name="editpro_will[]" value="<?=$will[$p]->id?>" <?php if(count(explode($will[$p]->id, $user[0]['willingness']))>1){ print 'checked'; }?>>
@@ -539,12 +539,12 @@
                                 <?php } ?>
                                 <?php if(!empty($appearence)){ ?>
                                 <h3>APPEARENCE</h3>
-                                <div class="inline-items">
+                                <div class="inline-items display-inline">
                                     <?php
                                     for($p=0;$p<count($appearence); $p++){
                                     $o = $p%2;
                                     ?>
-                                    <?php if($o == 0){ ?><div class="flex-coloum"><?php } ?>
+                                    <?php if($o == 0){ ?><div class="flex-coloum display-inline-block"><?php } ?>
                                         <div class="form-check">
                                             <label class="check"><?=strtoupper($appearence[$p]->name)?>
                                                 <input type="checkbox" name="editpro_aprnc[]" value="<?=$appearence[$p]->id?>" <?php if(count(explode($appearence[$p]->id, $user[0]['appearance']))>1){ print 'checked'; }?>>
