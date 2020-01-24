@@ -217,19 +217,10 @@
                         <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
                         <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
                         <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
-                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
-                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
-                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
-                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
                     </ul>
+                    <div class="load-more-btn">
+                        <a href="#" class="btn-load-more">Load More...</a>
+                    </div>
                         <!--<ul>
                             <?php
                             if (!empty($img)) {
@@ -511,6 +502,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="load-more-btn">
+                    <a href="#" class="btn-load-more">Load More...</a>
                 </div>
             </div>
             <div class="user-content-block d-none pt-2">

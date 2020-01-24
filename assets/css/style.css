@@ -627,7 +627,7 @@ aside .sidebar {
 }
 .img-masgrid ul li {
 	position: relative;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 	display: -ms-flexbox;
 	display: -webkit-flex;
 	display: flex;
@@ -4906,13 +4906,16 @@ body { font-family: sans-serif; }
 
 .video-grid{
 	margin: 20px 0;
+	width: 100%;
+    display: block;
+    float: left;
 }
 .video-view{
-	width: 32%;
+	width: 24%;
     float: left;
     background: #232323;
 	padding: 7px;
-	margin: 0 1% 20px 0;
+	margin: 0 14px 14px 0;
 	position: relative;
 }
 .video-play > img{
@@ -5005,4 +5008,43 @@ body { font-family: sans-serif; }
 
 #user-content-list.user-list-tab li a{
 	color: #fff;
+}
+
+.load-more-btn{
+	display: block;
+    text-align: center;
+	width: 100%;
+	margin: 10px 0 15px;
+}
+.load-more-btn a.btn-load-more{
+	font-family: 'Gotham-Light';
+    border-radius: 7px;
+    padding: 8px 20px 8px;
+    line-height: 1;
+    background: rgba(227, 196, 124, 1);
+    background: -moz-linear-gradient(left, rgba(227, 196, 124, 1) 0%, rgba(170, 142, 82, 1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(227, 196, 124, 1)), color-stop(100%, rgba(170, 142, 82, 1)));
+    background: -webkit-linear-gradient(left, rgba(227, 196, 124, 1) 0%, rgba(170, 142, 82, 1) 100%);
+    background: -o-linear-gradient(left, rgba(227, 196, 124, 1) 0%, rgba(170, 142, 82, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(227, 196, 124, 1) 0%, rgba(170, 142, 82, 1) 100%);
+    background: linear-gradient(to right, rgba(227, 196, 124, 1) 0%, rgba(170, 142, 82, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#e3c47c', endColorstr='#aa8e52', GradientType=1);
+}
+.grid li{
+	width: 25%;
+}
+@media(max-width: 991px){
+.grid li{
+	width: 33%;
+}
+}
+@media(max-width: 767px){
+.grid li{
+	width: 50%;
+}
+}
+@media(max-width: 575px){
+.grid li{
+	width: 100%;
+}
 }
