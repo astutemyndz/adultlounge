@@ -12,8 +12,14 @@ class Performer_model extends CI_model {
     public $showTypes;
     public $willingness;
     public $userId;
-
+    public $image = array();
+    public $video = array();
     public $query;
+    public $content;
+
+    public $performerID;
+    public $customerID;
+    public $isFreeContent;
 
     public function __construct(){
         parent::__construct();
@@ -40,7 +46,29 @@ class Performer_model extends CI_model {
 
     }
     
-
+    public function setImage($value) {
+        $this->image = $value;
+        return $this;
+    }
+    public function setVideo($value) {
+        $this->video = $value;
+        return $this;
+    }
+    public function getContent() {
+        return $this->content;
+    }
+    public function setCustomerID($value) {
+        $this->customerID = $value;
+        return $this;
+    }
+    public function setPerformerID($value) {
+        $this->performerID = $value;
+        return $this;
+    }
+    public function setIsFreeContent($value) {
+        $this->isFreeContent = $value;
+        return $this;
+    }
     public function search() {
         
     }
@@ -80,125 +108,252 @@ class Performer_model extends CI_model {
 
         return $performer;
     }
-    
-    public function getFreeContent($performer_id) {
-        $this->db->from($this->tables['users'].' as u');
-        $this->db->join($this->tables['performer_video_gallery'].' as pvg', 'pvg.user_id = u.id', 'left outer');
-        $this->db->join($this->tables['performer_gallery'].' as pg', 'pg.user_id = u.id', 'left outer');
-        $this->db->where(array(
-            'u.id' => $performer_id,
-        ));
-        $this->db->select('u.id,(select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id AND pg.type = 1) imageArr,(select GROUP_CONCAT(pvg.video) from performer_video_gallery pvg where pvg.user_id = u.id AND pvg.type = 1) videoArr');
-        
-        $this->setQuery($this->db->get());
-        $freeContent = array();
-        if($this->query) {
-            if($this->query->result_array()) {
-                $subscribe = true;
-                foreach($this->query->result_array() as $value) {
-                    $freeContent = array(
-                        'imageArr' => explode(',', $value['imageArr']),
-                        'videoArr' => explode(',', $value['videoArr']),
-                    );
-                }
-                
+    public function getFreeContent($options = array()) {
+        if(!empty($options) && is_array($options)) {
+            if(array_key_exists('performer_id', $options) && isset($options['performer_id']) && !empty($options['performer_id'])) {
+                $this->setPerformerID($options['performer_id']);
+            }
+            if(array_key_exists('customer_id', $options) && isset($options['customer_id']) && !empty($options['customer_id'])) {
+                $this->setCustomerID($options['customer_id']);
+            }
+            if(array_key_exists('isFreeContent', $options) && isset($options['isFreeContent']) && !empty($options['isFreeContent'])) {
+                $this->setIsFreeContent($options['isFreeContent']);
             }
         }
-        $newImageArr = array();
-        $newVideoArr = array();
-        if(isset($freeContent['imageArr'])) {
-            foreach($freeContent['imageArr'] as $video) {
-                $newVideoArr[] = array(
-                    'video' => $video
-                );
-            }
-        }
-        if(isset($freeContent['videoArr'])) {
-            foreach($freeContent['videoArr'] as $img) {
-                $newImageArr[] = array(
-                    'img' => $img
-                );
-            }
-        }
-        return array(
-            'images' => $newImageArr,
-            'videos' => $newVideoArr
-        );
-    }
 
-    public function getPremimunContent($performer_id, $customer_id) {
-        $premiumContent = array();
-        $this->db->from($this->tables['users'].' as u');
-        $this->db->join($this->tables['performer_video_gallery'].' as pvg', 'pvg.user_id = u.id', 'left outer');
-        $this->db->join($this->tables['performer_gallery'].' as pg', 'pg.user_id = u.id', 'left outer');
-        $this->db->join($this->tables['subscribe'].' as sub', 'sub.user_id = u.id', 'left outer');
-        $this->db->where(array(
-            'sub.performer_id' => $performer_id,
-            'sub.user_id' => $customer_id,
-        ));
-        $this->db->select('u.id,(select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id AND pg.type = 1) imageArr,(select GROUP_CONCAT(pvg.video) from performer_video_gallery pvg where pvg.user_id = u.id AND pvg.type = 1) videoArr');
-        $this->setQuery($this->db->get());
-        echo $this->db->last_query();
-        exit;
-        if($this->query) {
-            if($this->query->result_array()) {
-                $subscribe = true;
-                foreach($this->query->result_array() as $subscribeContent) {
-                    $premiumContent = array(
-                        'imageArr' => explode(',', $subscribeContent['imageArr']),
-                        'videoArr' => explode(',', $subscribeContent['videoArr']),
+        $this->data['videos'] = array();
+        $this->data['images'] = array();
+        if($this->performerID && $this->customerID) {
+                $imagRows = $this->db->from($this->tables['performer_gallery'].' as pg')
+                                    ->select('pg.user_id as modelID,pg.image')
+                                    ->where(array(
+                                            'pg.type' => '1',
+                                            'pg.user_id' => $this->performerID
+                                        ))->get()
+                                    ->result_array();
+                if(!empty($imagRows)) {
+                    foreach($imagRows as $imagRow) {
+                        $this->data['images'][] = array(
+                            'modelID'       => $imagRow['modelID'],
+                            'customerID'    => $this->customerID,
+                            'imagePath'     => 'assets/performer_gallery/'.$imagRow['image'],
+                        );
+                    }
+                    $this->setImage($this->data);
+                }
+
+                $videoRows = $this->db->from($this->tables['performer_video_gallery'].' as pvg')
+                                                    ->select('pvg.user_id as modelID,pvg.video')
+                                                    ->where(array(
+                                                            'pvg.type' => '1',
+                                                            'pvg.user_id' => $this->performerID
+                                                        ))->get()
+                                                    ->result_array();
+                if(!empty($videoRows)) {
+                    foreach($videoRows as $videoRow) {
+                        $this->data['videos'][] = array(
+                            'modelID' => $videoRow['modelID'],
+                            'customerID' => $this->customerID,
+                            'videoPath' => 'assets/profile_videos/'.$videoRow['video'],
+                        );
+                    }
+                    $this->setVideo($this->data);
+                } 
+            
+            return $this->data;
+        }
+    }
+    public function getPremiumContent($options = array()) {
+        if(!empty($options) && is_array($options)) {
+            if(array_key_exists('performer_id', $options) && isset($options['performer_id']) && !empty($options['performer_id'])) {
+                $this->setPerformerID($options['performer_id']);
+            }
+            if(array_key_exists('customer_id', $options) && isset($options['customer_id']) && !empty($options['customer_id'])) {
+                $this->setCustomerID($options['customer_id']);
+            }
+            if(array_key_exists('isFreeContent', $options) && isset($options['isFreeContent']) && !empty($options['isFreeContent'])) {
+                $this->setIsFreeContent($options['isFreeContent']);
+            }
+        }
+        $this->data['videos'] = array();
+        $this->data['images'] = array();
+        if($this->performerID && $this->customerID) {
+            
+            $subscribeVideos = $this->db->from($this->tables['performer_video_gallery'].' as pvg')
+                                ->join('subscribe as sb', 'sb.performer_id = pvg.user_id')
+                                ->select('pvg.user_id as modelID,sb.user_id as customerID, pvg.video')
+                                ->where(array(
+                                        'sb.user_id' => $this->customerID,
+                                        'sb.performer_id' => $this->performerID,
+                                        'pvg.type' => '2'
+                                    ))->get()
+                                ->result_array();
+            if(!empty($subscribeVideos)) {
+                foreach($subscribeVideos as $subscribeVideo) {
+                    $this->data['videos'][] = array(
+                        'modelID' => $subscribeVideo['modelID'],
+                        'customerID' => $subscribeVideo['customerID'],
+                        'videoPath' => 'assets/profile_videos/'.$subscribeVideo['video'],
+                        'subscribe' => TRUE
                     );
+
                 }
-                $newImageArr = array();
-                $newVideoArr = array();
-                if(isset($premiumContent['imageArr'])) {
-                    foreach($premiumContent['imageArr'] as $video) {
-                        $newVideoArr[] = array(
-                            'video' => $video
-                        );
-                    }
-                }
-                if(isset($premiumContent['videoArr'])) {
-                    foreach($premiumContent['videoArr'] as $img) {
-                        $newImageArr[] = array(
-                            'img' => $img
-                        );
-                    }
-                }
-                return array(
-                    'images' => $this->query->result_array(),
-                    'videos' => $newVideoArr,
-                    'subscribe' => $subscribe
-                );
-                
+                $this->setVideo($this->data['videos']);
             } else {
-                $subscribe = false;
-                $this->db->from($this->tables['users'].' as u');
-                $this->db->join($this->tables['performer_video_gallery'].' as pvg', 'pvg.user_id = u.id', 'left outer');
-                $this->db->join($this->tables['performer_gallery'].' as pg', 'pg.user_id = u.id', 'left outer');
-
-                $this->db->where(array(
-                    'u.id' => $performer_id,
-                ));
-                $this->db->select('u.id,(select GROUP_CONCAT(pg.image) from performer_gallery pg where pg.user_id = u.id AND pg.type = 1) imageArr,(select GROUP_CONCAT(pvg.video) from performer_video_gallery pvg where pvg.user_id = u.id AND pvg.type = 1) videoArr');
-                $this->setQuery($this->db->get());
-                
-                if($this->query->result_array()) {
-                    foreach($this->query->result_array() as $NonSubscribeContent) {
-                        $premiumContent = array(
-                            'imageArr' => explode(',', $NonSubscribeContent['imageArr']),
-                            'videoArr' => explode(',', $NonSubscribeContent['videoArr']),
+                $nonSubscribeVideos = $this->db->from($this->tables['performer_video_gallery'].' as pvg')
+                                                ->select('pvg.user_id as modelID,pvg.video')
+                                                ->where(array(
+                                                        'pvg.type' => '2'
+                                                    ))->get()
+                                                ->result_array();
+                if(!empty($nonSubscribeVideos)) {
+                    foreach($nonSubscribeVideos as $nonSubscribeVideo) {
+                        $this->data['videos'][] = array(
+                            'modelID' => $nonSubscribeVideo['modelID'],
+                            'customerID' => $this->customerID,
+                            'videoPath' => 'assets/profile_videos/'.$nonSubscribeVideo['video'],
+                            'subscribe' => FALSE
                         );
                     }
+                    $this->setVideo($this->data['videos']);
                 }
             }
-        }
-        // return array(
-        //     'premiumContent' => $premiumContent,
-        //     'subscribe' => $subscribe
-        // );
-    }
 
+            $subscribeImages = $this->db->from($this->tables['performer_gallery'].' as pg')
+                                    ->join('subscribe as sb', 'sb.performer_id = pg.user_id')
+                                    ->select('pg.user_id as modelID,sb.user_id as customerID, pg.image')
+                                    ->where(array(
+                                            'sb.user_id' => $this->customerID,
+                                            'sb.performer_id' => $this->performerID,
+                                            'pg.type' => '2'
+                                        ))->get()
+                                    ->result_array();
+            if(!empty($subscribeImages)) {
+                foreach($subscribeImages as $subscribeImage) {
+                    $this->data['images'][] = array(
+                        'modelID' => $subscribeImage['modelID'],
+                        'customerID' => $subscribeImage['customerID'],
+                        'imagePath' => 'assets/performer_gallery/'.$subscribeImage['image'],
+                        'subscribe' => TRUE
+                    );
+                }
+                $this->setImage($this->data['images']);
+            } else {
+                $nonSubscribeImages = $this->db->from($this->tables['performer_gallery'].' as pg')
+                                                ->select('pg.user_id as modelID,pg.image')
+                                                ->where(array(
+                                                        'pg.type' => '2'
+                                                    ))->get()
+                                                ->result_array();
+                if(!empty($nonSubscribeImages)) {
+                    foreach($nonSubscribeImages as $nonsubscribeImage) {
+                        $this->data['images'][] = array(
+                            'modelID' => $nonsubscribeImage['modelID'],
+                            'customerID' => $this->customerID,
+                            'imagePath' => 'assets/performer_gallery/'.$nonsubscribeImage['image'],
+                            'subscribe' => FALSE
+                        );
+                    }
+                    $this->setImage($this->data['images']);
+                }
+            }
+            
+        }
+       return $this->data;
+    }
+    /*
+    public function getPremiumContent($performer_id, $user_id) {
+        $videoData = array();
+        $imageData = array();
+        ############################ Premium Videos ########################################
+        $subscribeVideos = $this->db->from($this->tables['performer_video_gallery'].' as pvg')
+                                    ->join('subscribe as sb', 'sb.performer_id = pvg.user_id')
+                                    ->select('pvg.user_id as modelID,sb.user_id as customerID, pvg.video')
+                                    ->where(array(
+                                            'sb.user_id' => $user_id,
+                                            'sb.performer_id' => $performer_id,
+                                            'pvg.type' => '2'
+                                        ))->get()
+                                    ->result_array();
+        if(!empty($subscribeVideos)) {
+            foreach($subscribeVideos as $subscribeVideo) {
+                $videoData[] = array(
+                    'modelID' => $subscribeVideo['modelID'],
+                    'customerID' => $subscribeVideo['customerID'],
+                    'videoPath' => 'assets/profile_videos/'.$subscribeVideo['video'],
+                    'subscribe' => TRUE
+                );
+            }
+           $this->setVideo($videoData);
+        } else {
+            $nonSubscribeVideos = $this->db->from($this->tables['performer_video_gallery'].' as pvg')
+                                            ->select('pvg.user_id as modelID,pvg.video')
+                                            ->where(array(
+                                                    'pvg.type' => '2'
+                                                ))->get()
+                                            ->result_array();
+            if(!empty($nonSubscribeVideos)) {
+                foreach($nonSubscribeVideos as $nonSubscribeVideo) {
+                    $imageData[] = array(
+                        'modelID' => $nonSubscribeVideo['modelID'],
+                        'customerID' => $user_id,
+                        'videoPath' => 'assets/profile_videos/'.$nonSubscribeVideo['video'],
+                        'subscribe' => FALSE
+                    );
+                }
+                $this->setVideo($imageData);
+                //return $premiumContent;
+                
+            }
+            
+        }
+        ############################ Premium Videos ########################################
+        $subscribeImages = $this->db->from($this->tables['performer_gallery'].' as pg')
+                                    ->join('subscribe as sb', 'sb.performer_id = pg.user_id')
+                                    ->select('pg.user_id as modelID,sb.user_id as customerID, pg.image')
+                                    ->where(array(
+                                            'sb.user_id' => $user_id,
+                                            'sb.performer_id' => $performer_id,
+                                            'pg.type' => '2'
+                                        ))->get()
+                                    ->result_array();
+        if(!empty($subscribeImages)) {
+            foreach($subscribeImages as $subscribeImage) {
+                $imageData[] = array(
+                    'modelID' => $subscribeImage['modelID'],
+                    'customerID' => $subscribeImage['customerID'],
+                    'imagePath' => 'assets/performer_gallery/'.$subscribeImage['image'],
+                    'subscribe' => TRUE
+                );
+            }
+           $this->setImage($imageData);
+        } else {
+            $nonSubscribeImages = $this->db->from($this->tables['performer_gallery'].' as pg')
+                                            ->select('pg.user_id as modelID,pg.image')
+                                            ->where(array(
+                                                    'pg.type' => '2'
+                                                ))->get()
+                                            ->result_array();
+            if(!empty($nonSubscribeImages)) {
+                foreach($nonSubscribeImages as $nonsubscribeImage) {
+                    $imageData[] = array(
+                        'modelID' => $nonsubscribeImage['modelID'],
+                        'customerID' => $user_id,
+                        'imagePath' => 'assets/performer_gallery/'.$nonsubscribeImage['image'],
+                        'subscribe' => FALSE
+                    );
+                }
+                $this->setImage($imageData);
+            }
+        }
+
+        $this->setContent(array(
+                'images' => $this->image,
+                'videos' => $this->video,
+        ));
+        return $this->content;
+    }
+    */
 
     
     public function filter($data) {

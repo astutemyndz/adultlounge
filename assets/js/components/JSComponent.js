@@ -1,7 +1,10 @@
+import QueryStringComponent from './query_string/QueryStringComponent.js';
 export default class JSComponent {
+    queryStringComponentInstance;
     state = {};
     constructor() {
         //super();
+        this.queryStringComponentInstance = new QueryStringComponent();
     }
     setState(state) {
         this.state = state;
@@ -16,5 +19,9 @@ export default class JSComponent {
         let response = await fetch(url);
         let data = await response.json()
         return data;
+    }
+
+    baseUrl() {
+        return this.queryStringComponentInstance.baseUrl();
     }
 }

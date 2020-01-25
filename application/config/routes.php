@@ -18,5 +18,5 @@ require APPPATH . '/routes/admin.php';
 
 $route['api/v1/search/model'] = 'ApiController/searchModel';
 $route['api/v1/filter/model'] = 'ApiController/filterModel';
-$route['api/v1/view/performer'] = 'ApiController/freeContent';
+$route['api/v1/performer/contents'] = 'ApiController/contents';
 ///$route['search'] = 'Home/search';

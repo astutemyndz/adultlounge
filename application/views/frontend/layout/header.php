@@ -29,6 +29,8 @@ $active_url = $controller.'/'.$method;
         var base_url = "<?=base_url()?>";
         var API_URL = "<?=base_url()?>api/v1";
         var UserId = "<?=$this->session->userdata('UserId')?>";
+        var performerID = "<?php echo $this->uri->segment('2');?>";
+        var customerID = UserId;
         var UserType = "<?=$this->session->userdata('UserType')?>";
        // mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
     </script>

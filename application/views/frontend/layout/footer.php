@@ -94,7 +94,8 @@
 
 <script src="<?= base_url('assets/js/bundler.js') ?>"></script>
 <script>
-
+    var base_url = '<?php echo base_url();?>';
+    
     $(document).ready(function() {
         $('.sidebar-menu > li > a').click(function() {
             $(this).next().slideToggle();

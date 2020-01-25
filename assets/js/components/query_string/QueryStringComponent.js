@@ -122,6 +122,10 @@ export default class QueryStringComponent {
     test() {
         console.log(1);
     }
+
+    baseUrl() {
+        return window.location.origin;
+    }
      
 }
 

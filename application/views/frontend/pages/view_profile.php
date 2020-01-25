@@ -209,9 +209,9 @@
             }
             ?>
             <div class="user-content-block">
-                <div class="video-grid">
+                <div class="video-grid __freeVideoGridEl">
                     <h4 class="free-image-heading">Free Video</h4>
-                    <div class="video-view ">
+                    <!-- <div class="video-view ">
                         <div class="video-play">
                             <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
                             
@@ -294,7 +294,7 @@
                                 <p>29 Dec, 2019</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="load-more-btn">
                     <a href="#" class="btn-load-more">Load More...</a>
@@ -304,18 +304,8 @@
 
                 <div class="img-masgrid">
                     <h4 class="free-image-heading">Free Image</h4>
-                    <ul class="grid effect-1" id="grid">
-                        <li class=" "><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                        </li>
-                        <li class=" "><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg">
-                        </li>
-                        <li class=""><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                        </li>
-                        <li><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg"></li>
-                        <li><img src="http://localhost/adultlounge/assets/profile_image/7fa3533ed73464c0987c412c7044cca4.jpg"></li>
+                    <ul class="grid effect-1 __freeImageGridEl" id="grid">
+                        
                     </ul>
                     <div class="load-more-btn">
                         <a href="#" class="btn-load-more">Load More...</a>
@@ -500,92 +490,9 @@
                 </div>
             </div>
             <div class="user-content-block d-none">
-            <div class="video-grid">
+            <div class="video-grid __premiumVideoGridEl">
                     <h4 class="free-image-heading">Premium Video</h4>
-                    <div class="video-view tooltip">
-                        <div class="video-play">
-                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                            <div class="video-time">
-                                <div class="time-show">
-                                    <h5>4:57</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="video-details">
-                            <h4>Lorem Ipsum Dolor Text</h4>
-                            <div class="video-pricing-area">
-                                <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-view tooltip">
-                        <div class="video-play">
-                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                            <div class="video-time">
-                                <div class="time-show">
-                                    <h5>4:57</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="video-details">
-                            <h4>Lorem Ipsum Dolor Text</h4>
-                            <div class="video-pricing-area">
-                                <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-view tooltip">
-                        <div class="video-play">
-                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                            <div class="video-time">
-                                <div class="time-show">
-                                    <h5>4:57</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="video-details">
-                            <h4>Lorem Ipsum Dolor Text</h4>
-                            <div class="video-pricing-area">
-                                <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-view tooltip">
-                        <div class="video-play">
-                            <img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                            <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                            <div class="video-time">
-                                <div class="time-show">
-                                    <h5>4:57</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="video-details">
-                            <h4>Lorem Ipsum Dolor Text</h4>
-                            <div class="video-pricing-area">
-                                <h5>User Id: 6474314</h5>
-                                <a href="#" class="video-price-btn">$20.00</a>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="load-more-btn">
                     <a href="#" class="btn-load-more">Load More...</a>
@@ -595,31 +502,9 @@
 
                 <div class="img-masgrid">
                     <h4 class="free-image-heading">Premium Image</h4>
-                    <ul class="grid effect-1" id="grid">
-                        <li class="image-blur tooltip"><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                        <span class="tooltiptext">Subscribe to view this image</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                        </li>
-                        <li class="image-blur tooltip"><img src="http://localhost/adultlounge/assets/profile_image/7822ad5f679c48c77a78bcf9192e3347.jpg">
-                        <span class="tooltiptext">Subscribe to view this image</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                        </li>
-                        <li class="image-blur tooltip"><img src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                        <span class="tooltiptext">Subscribe to view this image</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                        </li>
-                        <li class="image-blur tooltip"><img  src="http://localhost/adultlounge/assets/profile_image/7250dcd4809e968b6a12911db9cb816f.jpg">
-                            <span class="tooltiptext">Subscribe to view this image</span>
-                            <div class="lock-video">
-                                <a href="#"><img src="<?= base_url('assets/images/lock-icon.png') ?>"></a>
-                            </div>
-                        </li>
+                    <ul class="grid effect-1 __premiumImageGridEl" id="grid">
+                        
+                        
                     </ul>
                     <div class="load-more-btn">
                         <a href="#" class="btn-load-more">Load More...</a>

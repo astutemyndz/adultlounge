@@ -1,13 +1,22 @@
 <?php 
 
 class ApiController extends Common_Controller {
+    private $freeContent = array();
+    private $premiumContent = array();
 
     public function __construct(){
         parent::__construct();
         $this->load->model('Performer_model', 'performer');
     }
 
-
+    public function setFreeContent($value) {
+        $this->freeContent = $value;
+        return $this;
+    }
+    public function setPremiumContent($value) {
+        $this->premiumContent = $value;
+        return $this;
+    }
     public function searchModel() {
         
         if(!$this->isPost()) {
@@ -106,24 +115,33 @@ class ApiController extends Common_Controller {
         }
     }
 
-    /**
-     * Performer free contents or gallery images
-     */
-
-    public function viewPerformer() {
+    public function contents() {
         if(!$this->isPost()) {
-                
-        }
-        
-    }
+            $this->setRequest($this->input->get());
+            if(!empty($this->request) && is_array($this->request)) {
+                $this->setFilterData($this->request);
+            }
+            
+            if($this->filterData) {
+               $this->setFreeContent($this->performer->getFreeContent($this->filterData));
+               $this->setPremiumContent($this->performer->getPremiumContent($this->filterData));
+            }
 
-    public function freeContent() {
-        return $this->output
+            $this->setResponse(array(
+                'freeContents' => $this->freeContent,
+                'premiumContents' => $this->premiumContent,
+            ));
+            return $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(200)
+                ->set_output(json_encode($this->response));
+        } else {
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(405)
                 ->set_output(json_encode(array(
-                    'data' => $this->performer->getPremimunContent(32,2)
+                    'message'   => Common_Controller::$statusTexts[405]
                 )));
-   
+        }
     }
 }
