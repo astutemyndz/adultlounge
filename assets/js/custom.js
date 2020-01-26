@@ -803,13 +803,17 @@ $('.add-more-gal-img').click(function () {
     var old_cnt = $('#gallery_cnt').val();
     var new_cnt = parseInt($('#gallery_cnt').val()) + parseInt(1);
     $('#gallery_cnt').val(new_cnt);
-    $('.galdiv' + old_cnt).append('<br/><br/>\
-                                <div class="form-group galdiv' + new_cnt + '">\
+    $('.galdiv').append('<br/><br/>\
+                                <div class="form-group galdiv' + new_cnt + ' gallery-brouser-area">\
                                     <div class="proo">\
                                         <img src="' + base_url + 'assets/images/noimage.png" alt="" style="height:49px; width:45px;" id="display_gal_img' + new_cnt + '">\
                                     </div>\
-                                    <input type="file" class="form-control username formsm display_gal_img' + new_cnt + '" onchange="disp_img(\'' + new_cnt + '\', this)" data-count="' + new_cnt + '" name="gallery[]" id="gallery_image' + new_cnt + '" />\
+                                    <input type="file" class="form-control username formsm display_gal_img' + new_cnt + ' brouse-input" onchange="disp_img(\'' + new_cnt + '\', this)" data-count="' + new_cnt + '" name="gallery[]" id="gallery_image' + new_cnt + '" />\
                                     <div class="brows editpro_gal_image_brows" data-count="' + new_cnt + '">BROWSER</div>\
+                                    <select name="type[]" id="type" class="form-control username formsm display_gal_img1">\
+                                            <option value="1">Free Content</option>\
+                                            <option value="2">Premium Content</option>\
+                                        </select>\
                                 </div>');
 });
 

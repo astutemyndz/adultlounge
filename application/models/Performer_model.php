@@ -203,7 +203,8 @@ class Performer_model extends CI_model {
                 $nonSubscribeVideos = $this->db->from($this->tables['performer_video_gallery'].' as pvg')
                                                 ->select('pvg.user_id as modelID,pvg.video')
                                                 ->where(array(
-                                                        'pvg.type' => '2'
+                                                        'pvg.type' => '2',
+                                                        'pvg.user_id' => $this->performerID,
                                                     ))->get()
                                                 ->result_array();
                 if(!empty($nonSubscribeVideos)) {
@@ -242,7 +243,8 @@ class Performer_model extends CI_model {
                 $nonSubscribeImages = $this->db->from($this->tables['performer_gallery'].' as pg')
                                                 ->select('pg.user_id as modelID,pg.image')
                                                 ->where(array(
-                                                        'pg.type' => '2'
+                                                        'pg.type' => '2',
+                                                        'pg.user_id' => $this->performerID,
                                                     ))->get()
                                                 ->result_array();
                 if(!empty($nonSubscribeImages)) {

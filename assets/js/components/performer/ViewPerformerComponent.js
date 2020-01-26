@@ -135,26 +135,26 @@ export default class ViewPerformerComponent extends JSComponent {
         const premiumImages = []
         const premiumVideos = [];
 
-        if(freeContents.images.length > 0) {
+        if(freeContents) {
             freeContents.images.map((image) => freeImages.push(this.FreeImageComponent(image)));
         }
         
-        if(freeContents.videos.length > 0) {
+        if(freeContents) {
             freeContents.videos.map((video) => freeVideos.push(this.FreeVideoComponent(video)));
         }
         //Premium
-        if(premiumContents.images.length > 0) {
+        if(premiumContents) {
             premiumContents.images.map((image) => premiumImages.push(this.PremiumImageComponent(image)));
         }
         
-        if(premiumContents.videos.length > 0) {
+        if(premiumContents) {
             premiumContents.videos.map((video) => premiumVideos.push(this.PremiumVideoComponent(video)));
         }
 
         if(freeImages.length > 0) {
             this.__freeImageGridEl.innerHTML = freeImages;
         } else {
-            this.__freeVideoGridEl.innerHTML = this.EmptyImageComponent();
+            this.__freeImageGridEl.innerHTML = this.EmptyImageComponent();
         }
         
         if(freeVideos.length > 0) {
@@ -167,7 +167,7 @@ export default class ViewPerformerComponent extends JSComponent {
         if(premiumImages.length > 0) {
             this.__premiumImageGridEl.innerHTML = premiumImages;
         } else {
-            this.__premiumVideoGridEl.innerHTML = this.EmptyImageComponent();
+            this.__premiumImageGridEl.innerHTML = this.EmptyImageComponent();
         }
         
         if(premiumVideos.length > 0) {
