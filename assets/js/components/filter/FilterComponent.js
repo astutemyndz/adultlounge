@@ -94,7 +94,7 @@ class FilterComponent extends QueryStringComponent {
     }
     componentDidMount = () => {
         const {paramsArr, params} = this.state;
-        this.fetchModels('http://localhost/adultlounge/api/v1/filter/model')
+        this.fetchModels(API_URL + 'filter/model')
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
@@ -116,14 +116,14 @@ class FilterComponent extends QueryStringComponent {
                 })
                 this.render();
             }
-            console.log('componentDidMount',this.state);
+            //console.log('componentDidMount',this.state);
         })
         
     }
     componentDidUpdate = () => {
         
         const {paramsArr, params} = this.state;
-        this.fetchModels('http://localhost/adultlounge/api/v1/filter/model?', params)
+        this.fetchModels(API_URL + 'filter/model?', params)
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
@@ -145,7 +145,7 @@ class FilterComponent extends QueryStringComponent {
                 })
                 this.render();
             }
-            console.log('componentDidUpdate',this.state);
+            //console.log('componentDidUpdate',this.state);
         })
     }
 
@@ -215,7 +215,7 @@ class FilterComponent extends QueryStringComponent {
     }
     async fetchModels(url, params) {
         const objToQueryString = this.objectToQueryString(params);
-        let response = await fetch(`${url}${objToQueryString}`);
+        let response = await fetch(url  + `${objToQueryString}`);
         let data = await response.json()
         return data;
     }
@@ -328,4 +328,5 @@ class FilterComponent extends QueryStringComponent {
    
 
 }
+
 new FilterComponent();

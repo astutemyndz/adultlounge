@@ -131,8 +131,6 @@ export default class QueryStringComponent {
 
 
 /*
-
-
     //examples
     //instantiation
     var qs = new QS;

@@ -27,7 +27,7 @@ $active_url = $controller.'/'.$method;
 <link href="<?=base_url('assets/css/custom.css')?>" rel="stylesheet" type="text/css" />
 <script>
         var base_url = "<?=base_url()?>";
-        var API_URL = "<?=base_url()?>api/v1";
+        var API_URL = "<?=base_url()?>api/v1/";
         var UserId = "<?=$this->session->userdata('UserId')?>";
         var performerID = "<?php echo $this->uri->segment('2');?>";
         var customerID = UserId;

@@ -253,9 +253,9 @@ var msnry = new Masonry( '.grid', {
 
 
 
-<script type="module" defer src="<?=base_url('assets/js/components/filter/FilterComponent.js')?>"></script>
+
 <script type="module" defer src="<?=base_url('assets/js/components/profile/ProfileComponent.js')?>"></script>
-<script type="module" defer src="<?=base_url('assets/js/components/performer/ViewPerformerComponent.js')?>"></script>
+
 
 
 <!-- <script src="<?=base_url('assets/js/modernizr.custom.js')?>"></script>

@@ -762,3 +762,5 @@
 </section>
 
 
+
+<script type="module" defer src="<?=base_url('assets/js/components/performer/ViewPerformerComponent.js')?>"></script>

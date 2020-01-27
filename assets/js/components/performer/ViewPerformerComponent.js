@@ -27,8 +27,8 @@ export default class ViewPerformerComponent extends JSComponent {
     }
 
     componentDidMount = (callback) => {
-        console.log(customerID);
-        this.fetch(`http://localhost/adultlounge/api/v1/performer/contents?customer_id=${customerID}&performer_id=${performerID}`)
+        //console.log(customerID);
+        this.fetch(API_URL + `performer/contents?customer_id=${customerID}&performer_id=${performerID}`)
         .then(data => {
             if(data) {
                 //console.log(data)
@@ -86,7 +86,7 @@ export default class ViewPerformerComponent extends JSComponent {
         return(`
             <span class="tooltiptext">Inpremium, login to view & purchase videos</span>
             <div class="lock-video">
-                <a href="#"><img src="http://localhost/adultlounge/assets/images/lock-icon.png"></a>
+                <a href="#"><img src="${base_url}assets/images/lock-icon.png"></a>
             </div>
         `);
     }

@@ -219,3 +219,4 @@ if(!$this->session->userdata('UserType') || $this->session->userdata('UserType')
     }
 }
 ?>
+<script type="module" defer src="<?=base_url('assets/js/components/filter/FilterComponent.js')?>"></script>

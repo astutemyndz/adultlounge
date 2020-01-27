@@ -220,7 +220,8 @@ class Service extends Common_Controller
         if ($filename) {
             $this->cm->insert('performer_video_gallery', [
                 'user_id'    => $user_id,
-                'video_type' => $this->input->post('video_type'),
+                //'video_type' => $this->input->post('video_type'),
+                'type'       => $this->input->post('type'),
                 'video'      => $filename,
             ]);
 
