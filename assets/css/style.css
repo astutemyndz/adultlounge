@@ -5015,6 +5015,7 @@ body { font-family: sans-serif; }
     text-align: right;
 	width: 100%;
 	margin: 0;
+	float: left;
 }
 .load-more-btn a.btn-load-more{
 	font-family: 'Gotham-Light';
@@ -5135,7 +5136,8 @@ body { font-family: sans-serif; }
   .hr-devider{
 	margin: 15px 0;
     border: none;
-    border-top: 1px solid #6d5b35;
+	border-top: 1px solid #6d5b35;
+	width: 100%;
   }
   .free-video{
 	  background: rgba(0,0,0,.5);
@@ -5146,4 +5148,29 @@ body { font-family: sans-serif; }
 	  font-family: 'ADAM-CGPRO';
 	  float: right;
 	  line-height: 27px;
+  }
+  .img-masgrid ul.masonary-ul li{
+	  position: relative !important;
+  }
+  .premium-video-area .grid.masonary-ul li{
+	position: relative !important;
+  }
+
+
+  /**#######################*/
+/* .grid-sizer,
+.grid-item { width: 22%; }
+
+.gutter-sizer { width: 4%; }
+
+.grid-item--width2 { width: 48%; } */
+
+.grid-item {
+	background: #ccc;
+  }
+  
+  .grid-item > img {
+	margin-bottom: 10px;
+	display: block;
+	width: 300px;
   }

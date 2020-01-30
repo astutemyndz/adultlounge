@@ -130,6 +130,7 @@ class ApiController extends Common_Controller {
             $this->setResponse(array(
                 'freeContents' => $this->freeContent,
                 'premiumContents' => $this->premiumContent,
+                'lockIconPath' => base_url().'assets/images/lock-icon.png'
             ));
             return $this->output
                 ->set_content_type('application/json')

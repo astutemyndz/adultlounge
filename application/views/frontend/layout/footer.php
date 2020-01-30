@@ -249,13 +249,14 @@ var msnry = new Masonry( elem, {
 var msnry = new Masonry( '.grid', {
 });
 */
+
 </script>
 
 
 
 
 <script type="module" defer src="<?=base_url('assets/js/components/profile/ProfileComponent.js')?>"></script>
-
+<script src="<?=base_url('app/dist/index.js')?>"></script>
 
 
 <!-- <script src="<?=base_url('assets/js/modernizr.custom.js')?>"></script>

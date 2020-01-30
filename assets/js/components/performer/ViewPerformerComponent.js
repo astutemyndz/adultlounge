@@ -152,26 +152,26 @@ export default class ViewPerformerComponent extends JSComponent {
         }
 
         if(freeImages.length > 0) {
-            this.__freeImageGridEl.innerHTML = freeImages;
+            this.__freeImageGridEl.insertAdjacentHTML('beforeend', freeImages);
         } else {
             this.__freeImageGridEl.innerHTML = this.EmptyImageComponent();
         }
         
         if(freeVideos.length > 0) {
-            this.__freeVideoGridEl.innerHTML = freeVideos;
+            this.__freeVideoGridEl.insertAdjacentHTML('beforeend', freeVideos);
         } else {
             this.__freeVideoGridEl.innerHTML = this.EmptyVideoComponent();
         }
 
         // Premium
         if(premiumImages.length > 0) {
-            this.__premiumImageGridEl.innerHTML = premiumImages;
+            this.__premiumImageGridEl.insertAdjacentHTML('beforeend', premiumImages);
         } else {
             this.__premiumImageGridEl.innerHTML = this.EmptyImageComponent();
         }
         
         if(premiumVideos.length > 0) {
-            this.__premiumVideoGridEl.innerHTML = premiumVideos;
+            this.__premiumVideoGridEl.insertAdjacentHTML('beforeend', premiumVideos );
         } else {
             this.__premiumVideoGridEl.innerHTML = this.EmptyVideoComponent();
         }

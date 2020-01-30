@@ -136,7 +136,8 @@ class Performer_model extends CI_model {
                         $this->data['images'][] = array(
                             'modelID'       => $imagRow['modelID'],
                             'customerID'    => $this->customerID,
-                            'imagePath'     => 'assets/performer_gallery/'.$imagRow['image'],
+                            'imagePath'     => base_url().'assets/performer_gallery/'.$imagRow['image'],
+                            'subscribe' => FALSE
                         );
                     }
                     $this->setImage($this->data);
@@ -154,7 +155,8 @@ class Performer_model extends CI_model {
                         $this->data['videos'][] = array(
                             'modelID' => $videoRow['modelID'],
                             'customerID' => $this->customerID,
-                            'videoPath' => 'assets/profile_videos/'.$videoRow['video'],
+                            'videoPath' => base_url().'assets/profile_videos/'.$videoRow['video'],
+                            'subscribe' => FALSE
                         );
                     }
                     $this->setVideo($this->data);
@@ -193,7 +195,7 @@ class Performer_model extends CI_model {
                     $this->data['videos'][] = array(
                         'modelID' => $subscribeVideo['modelID'],
                         'customerID' => $subscribeVideo['customerID'],
-                        'videoPath' => 'assets/profile_videos/'.$subscribeVideo['video'],
+                        'videoPath' => base_url().'assets/profile_videos/'.$subscribeVideo['video'],
                         'subscribe' => TRUE
                     );
 
@@ -212,7 +214,7 @@ class Performer_model extends CI_model {
                         $this->data['videos'][] = array(
                             'modelID' => $nonSubscribeVideo['modelID'],
                             'customerID' => $this->customerID,
-                            'videoPath' => 'assets/profile_videos/'.$nonSubscribeVideo['video'],
+                            'videoPath' => base_url().'assets/profile_videos/'.$nonSubscribeVideo['video'],
                             'subscribe' => FALSE
                         );
                     }
@@ -234,7 +236,7 @@ class Performer_model extends CI_model {
                     $this->data['images'][] = array(
                         'modelID' => $subscribeImage['modelID'],
                         'customerID' => $subscribeImage['customerID'],
-                        'imagePath' => 'assets/performer_gallery/'.$subscribeImage['image'],
+                        'imagePath' => base_url().'assets/performer_gallery/'.$subscribeImage['image'],
                         'subscribe' => TRUE
                     );
                 }
@@ -252,7 +254,7 @@ class Performer_model extends CI_model {
                         $this->data['images'][] = array(
                             'modelID' => $nonsubscribeImage['modelID'],
                             'customerID' => $this->customerID,
-                            'imagePath' => 'assets/performer_gallery/'.$nonsubscribeImage['image'],
+                            'imagePath' => base_url().'assets/performer_gallery/'.$nonsubscribeImage['image'],
                             'subscribe' => FALSE
                         );
                     }

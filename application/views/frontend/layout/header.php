@@ -25,6 +25,7 @@ $active_url = $controller.'/'.$method;
 <link href="<?=base_url('assets/css/component.css')?>" rel="stylesheet" type="text/css" />
 <link href="<?=base_url('assets/css/style.css')?>" rel="stylesheet" type="text/css" />
 <link href="<?=base_url('assets/css/custom.css')?>" rel="stylesheet" type="text/css" />
+<link href="<?=base_url('app/dist/index.css')?>" rel="stylesheet" type="text/css" />
 <script>
         var base_url = "<?=base_url()?>";
         var API_URL = "<?=base_url()?>api/v1/";
