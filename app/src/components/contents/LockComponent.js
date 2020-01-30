@@ -1,22 +1,23 @@
-import React from 'react'
+import React,{useStyles}from 'react'
 import ReactModal from 'react-modal';
+import PopupComponent from '../popup/PopupComponent';
 
 class LockComponent extends React.Component {
     constructor(props) {
         super();
         this.state = {
-        showModal: false
+        modalIsOpen: false
         };
         
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
     handleOpenModal () {
-        this.setState({ showModal: true });
+        this.setState({ modalIsOpen: true });
     }
       
     handleCloseModal () {
-        this.setState({ showModal: false });
+        this.setState({ modalIsOpen: false });
     }
     lockRender() {
         return(
@@ -30,40 +31,26 @@ class LockComponent extends React.Component {
             </div>
         )
     }
-
+    
     render() {
-        const customStyles = {
-            content : {
-              top                   : '50%',
-              left                  : '50%',
-              right                 : 'auto',
-              bottom                : 'auto',
-              marginRight           : '-50%',
-              transform             : 'translate(-50%, -50%)'
-            }
-          };
-        return(
-            <div>
-                {this.lockRender()}
-            
-            { this.state.showModal && (
-               <ReactModal 
-               isOpen={this.state.showModal}
-               contentLabel="onRequestClose Example"
-               onRequestClose={this.handleCloseModal}
-               shouldCloseOnOverlayClick={false}
-               style={customStyles}
-            >
-              <div>I am a modal</div>
-                <form>
-                    
-                </form>
-              <button onClick={this.handleCloseModal}>Close Modal</button>
-            </ReactModal>
-              
-            )}
-            </div>
-        )
+        if(this.state.modalIsOpen) {
+            return(<PopupComponent portalClassName={""} className={""} overlayClassName={""} modalIsOpen={this.state.modalIsOpen}>
+                <div className="modal-header">
+                        <h2>Subscribe</h2>
+                        <p>You currently have <span className="credit-total">4511 Credit</span></p>
+                        <span className="close" onClick={this.handleCloseModal}>×</span>
+                       
+                    </div>
+                    <form>
+                        <button>Do Subscribe</button>
+                    </form>
+            </PopupComponent>)
+        } else {
+            return(<React.Fragment>
+                {this.lockRender()} 
+            </React.Fragment>)
+        }
+        
     }
 }
 export default LockComponent;

@@ -1,65 +1,57 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal';
-const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
-    }
-  };
-export default class PopupComponent extends Component {
-    constructor() {
-        super();
+
+class PopupComponent extends Component {
+      constructor(props) {
+        super(props);
      
         this.state = {
-          modalIsOpen: false
+          modalIsOpen: this.props.modalIsOpen
         };
      
         this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        console.log(this.state);
       }
      
       openModal() {
         this.setState({modalIsOpen: true});
       }
      
-      afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        this.subtitle.style.color = '#f00';
-      }
-     
       closeModal() {
         this.setState({modalIsOpen: false});
       }
+
+      componentWillMount() {
+        Modal.setAppElement('body');
+    }
      
       render() {
+        const customStyles = {
+          content : {
+            top                   : '50%',
+            left                  : '50%',
+            right                 : 'auto',
+            bottom                : 'auto',
+            marginRight           : '-50%',
+            transform             : 'translate(-50%, -50%)'
+          }
+        };
         return (
           <div>
             <button onClick={this.openModal}>Open Modal</button>
-            <Modal
-              isOpen={this.state.modalIsOpen}
-              onAfterOpen={this.afterOpenModal}
-              onRequestClose={this.closeModal}
-              style={customStyles}
-              contentLabel="Example Modal"
-            >
-     
-              <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
-              <button onClick={this.closeModal}>close</button>
-              <div>I am a modal</div>
-              <form>
-                <input />
-                <button>tab navigation</button>
-                <button>stays</button>
-                <button>inside</button>
-                <button>the modal</button>
-              </form>
+              <Modal
+                isOpen={this.state.modalIsOpen}
+                onRequestClose={this.closeModal}
+                shouldCloseOnOverlayClick={false}
+                style={customStyles}
+                contentLabel="Example Modal"
+                {...this.props}
+              >
+              {this.props.children}
             </Modal>
           </div>
         );
       }
 }
+export default PopupComponent;
