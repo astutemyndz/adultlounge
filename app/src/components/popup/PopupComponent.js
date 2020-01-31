@@ -27,16 +27,7 @@ class PopupComponent extends Component {
     }
      
       render() {
-        const customStyles = {
-          content : {
-            top                   : '50%',
-            left                  : '50%',
-            right                 : 'auto',
-            bottom                : 'auto',
-            marginRight           : '-50%',
-            transform             : 'translate(-50%, -50%)'
-          }
-        };
+        
         return (
           <div>
             <button onClick={this.openModal}>Open Modal</button>
@@ -44,8 +35,6 @@ class PopupComponent extends Component {
                 isOpen={this.state.modalIsOpen}
                 onRequestClose={this.closeModal}
                 shouldCloseOnOverlayClick={false}
-                style={customStyles}
-                contentLabel="Example Modal"
                 {...this.props}
               >
               {this.props.children}

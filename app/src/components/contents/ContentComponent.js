@@ -42,7 +42,7 @@ export default class ContentComponent extends Component {
                 self.setState({
                     ...self.state,
                     freeContents: data.freeContents,
-                    premiumContents: data.premiumContents,
+                    premiumContents: data.freeContents,
                     freeLoadMore: self.freeLoadMore,
                     premiumLoadMore: self.premiumLoadMore,
                     lockIconPath: data.lockIconPath

@@ -33,23 +33,65 @@ class LockComponent extends React.Component {
     }
     
     render() {
-        if(this.state.modalIsOpen) {
-            return(<PopupComponent portalClassName={""} className={""} overlayClassName={""} modalIsOpen={this.state.modalIsOpen}>
-                <div className="modal-header">
-                        <h2>Subscribe</h2>
-                        <p>You currently have <span className="credit-total">4511 Credit</span></p>
-                        <span className="close" onClick={this.handleCloseModal}>×</span>
-                       
-                    </div>
-                    <form>
-                        <button>Do Subscribe</button>
-                    </form>
-            </PopupComponent>)
-        } else {
-            return(<React.Fragment>
-                {this.lockRender()} 
+        const customStyles = {
+            content : {
+              top                   : '50%',
+              left                  : '50%',
+              right                 : 'auto',
+              bottom                : 'auto',
+              marginRight           : '-50%',
+              transform             : 'translate(-50%, -50%)',
+            }
+          };
+            return(
+                <React.Fragment>
+                    {this.lockRender()}
+                    {this.state.modalIsOpen && (
+                    <PopupComponent style={customStyles} portalClassName={"modal buy_modal __subscribeModal"} className={""} overlayClassName={"Overlay"} modalIsOpen={this.state.modalIsOpen}>
+                        
+                        <div className="modal-content">
+    <div className="modal-header">
+        <h2>Subscribe</h2>
+        <span className="close" onClick={this.handleCloseModal}>&times;</span>
+    </div>
+    
+    <div className="modal-body">
+        <div className="clearfix"></div>
+        <div className="credit-slider">
+        <div className="credit-list">
+        <h3>
+         6 Months
+        </h3>
+            <h2>£99.90</h2>
+            <p>Lorem Ipsum is simply dummy text</p>
+            <a href="http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB" className="btn">SUBSCRIBE
+            </a>
+        </div>
+        <div className="credit-list">
+        <h3>
+            1 Years
+        </h3>
+            <h2>£99.90</h2>
+            <p>Lorem Ipsum is simply dummy text</p>
+            <a href="http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB" className="btn">SUBSCRIBE
+            </a>
+        </div>
+        <div className="credit-list">
+        <h3>
+        3 Years
+        </h3>
+            <h2>£99.90</h2>
+            <p>Lorem Ipsum is simply dummy text</p>
+            <a href="http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB" className="btn">SUBSCRIBE
+            </a>
+        </div>
+           
+        </div>
+    </div>
+</div>
+            </PopupComponent>)}
             </React.Fragment>)
-        }
+        
         
     }
 }

@@ -45869,24 +45869,12 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var customStyles = {
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)'
-        }
-      };
       return _react.default.createElement("div", null, _react.default.createElement("button", {
         onClick: this.openModal
       }, "Open Modal"), _react.default.createElement(_reactModal.default, _extends({
         isOpen: this.state.modalIsOpen,
         onRequestClose: this.closeModal,
-        shouldCloseOnOverlayClick: false,
-        style: customStyles,
-        contentLabel: "Example Modal"
+        shouldCloseOnOverlayClick: false
       }, this.props), this.props.children));
     }
   }]);
@@ -45984,23 +45972,51 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      if (this.state.modalIsOpen) {
-        return _react.default.createElement(_PopupComponent.default, {
-          portalClassName: "",
-          className: "",
-          overlayClassName: "",
-          modalIsOpen: this.state.modalIsOpen
-        }, _react.default.createElement("div", {
-          className: "modal-header"
-        }, _react.default.createElement("h2", null, "Subscribe"), _react.default.createElement("p", null, "You currently have ", _react.default.createElement("span", {
-          className: "credit-total"
-        }, "4511 Credit")), _react.default.createElement("span", {
-          className: "close",
-          onClick: this.handleCloseModal
-        }, "\xD7")), _react.default.createElement("form", null, _react.default.createElement("button", null, "Do Subscribe")));
-      } else {
-        return _react.default.createElement(_react.default.Fragment, null, this.lockRender());
-      }
+      var customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)'
+        }
+      };
+      return _react.default.createElement(_react.default.Fragment, null, this.lockRender(), this.state.modalIsOpen && _react.default.createElement(_PopupComponent.default, {
+        style: customStyles,
+        portalClassName: "modal buy_modal __subscribeModal",
+        className: "",
+        overlayClassName: "Overlay",
+        modalIsOpen: this.state.modalIsOpen
+      }, _react.default.createElement("div", {
+        className: "modal-content"
+      }, _react.default.createElement("div", {
+        className: "modal-header"
+      }, _react.default.createElement("h2", null, "Subscribe"), _react.default.createElement("span", {
+        className: "close",
+        onClick: this.handleCloseModal
+      }, "\xD7")), _react.default.createElement("div", {
+        className: "modal-body"
+      }, _react.default.createElement("div", {
+        className: "clearfix"
+      }), _react.default.createElement("div", {
+        className: "credit-slider"
+      }, _react.default.createElement("div", {
+        className: "credit-list"
+      }, _react.default.createElement("h3", null, "6 Months"), _react.default.createElement("h2", null, "\xA399.90"), _react.default.createElement("p", null, "Lorem Ipsum is simply dummy text"), _react.default.createElement("a", {
+        href: "http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB",
+        className: "btn"
+      }, "SUBSCRIBE")), _react.default.createElement("div", {
+        className: "credit-list"
+      }, _react.default.createElement("h3", null, "1 Years"), _react.default.createElement("h2", null, "\xA399.90"), _react.default.createElement("p", null, "Lorem Ipsum is simply dummy text"), _react.default.createElement("a", {
+        href: "http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB",
+        className: "btn"
+      }, "SUBSCRIBE")), _react.default.createElement("div", {
+        className: "credit-list"
+      }, _react.default.createElement("h3", null, "3 Years"), _react.default.createElement("h2", null, "\xA399.90"), _react.default.createElement("p", null, "Lorem Ipsum is simply dummy text"), _react.default.createElement("a", {
+        href: "http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB",
+        className: "btn"
+      }, "SUBSCRIBE")))))));
     }
   }]);
 
@@ -60456,7 +60472,7 @@ function (_Component) {
         if (data) {
           self.setState(_objectSpread({}, self.state, {
             freeContents: data.freeContents,
-            premiumContents: data.premiumContents,
+            premiumContents: data.freeContents,
             freeLoadMore: self.freeLoadMore,
             premiumLoadMore: self.premiumLoadMore,
             lockIconPath: data.lockIconPath
@@ -60520,7 +60536,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39395" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44897" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
