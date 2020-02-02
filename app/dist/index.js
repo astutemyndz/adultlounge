@@ -45789,7 +45789,682 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _Modal2.default;
 module.exports = exports["default"];
-},{"./components/Modal":"node_modules/react-modal/lib/components/Modal.js"}],"src/components/popup/PopupComponent.js":[function(require,module,exports) {
+},{"./components/Modal":"node_modules/react-modal/lib/components/Modal.js"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/components/performer/SubscribeModalComponent.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/react-stripe-checkout/dist/main.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var scriptLoading = false;
+var scriptLoaded = false;
+var scriptDidError = false;
+
+var ReactStripeCheckout = function (_React$Component) {
+  _inherits(ReactStripeCheckout, _React$Component);
+
+  function ReactStripeCheckout(props) {
+    _classCallCheck(this, ReactStripeCheckout);
+
+    var _this = _possibleConstructorReturn(this, (ReactStripeCheckout.__proto__ || Object.getPrototypeOf(ReactStripeCheckout)).call(this, props));
+
+    _this.onScriptLoaded = function () {
+      if (!ReactStripeCheckout.stripeHandler) {
+        ReactStripeCheckout.stripeHandler = StripeCheckout.configure({
+          key: _this.props.stripeKey
+        });
+        if (_this.hasPendingClick) {
+          _this.showStripeDialog();
+        }
+      }
+    };
+
+    _this.onScriptError = function () {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      _this.hideLoadingDialog();
+      if (_this.props.onScriptError) {
+        _this.props.onScriptError.apply(_this, args);
+      }
+    };
+
+    _this.onClosed = function () {
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      if (_this._isMounted) _this.setState({ open: false });
+      if (_this.props.closed) {
+        _this.props.closed.apply(_this, args);
+      }
+    };
+
+    _this.onOpened = function () {
+      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
+      }
+
+      _this.setState({ open: true });
+      if (_this.props.opened) {
+        _this.props.opened.apply(_this, args);
+      }
+    };
+
+    _this.getConfig = function () {
+      return ['token', 'image', 'name', 'description', 'amount', 'locale', 'currency', 'panelLabel', 'zipCode', 'shippingAddress', 'billingAddress', 'email', 'allowRememberMe', 'bitcoin', 'alipay', 'alipayReusable'].reduce(function (config, key) {
+        return _extends({}, config, _this.props.hasOwnProperty(key) && _defineProperty({}, key, _this.props[key]));
+      }, {
+        opened: _this.onOpened,
+        closed: _this.onClosed
+      });
+    };
+
+    _this.onClick = function () {
+      // eslint-disable-line react/sort-comp
+      if (_this.props.disabled) {
+        return;
+      }
+
+      if (scriptDidError) {
+        try {
+          throw new Error('Tried to call onClick, but StripeCheckout failed to load');
+        } catch (x) {} // eslint-disable-line no-empty
+      } else if (ReactStripeCheckout.stripeHandler) {
+        _this.showStripeDialog();
+      } else {
+        _this.showLoadingDialog();
+        _this.hasPendingClick = true;
+      }
+    };
+
+    _this.handleOnMouseDown = function () {
+      _this.setState({
+        buttonActive: true
+      });
+    };
+
+    _this.handleOnMouseUp = function () {
+      _this.setState({
+        buttonActive: false
+      });
+    };
+
+    _this.state = {
+      open: false,
+      buttonActive: false
+    };
+    return _this;
+  }
+
+  _createClass(ReactStripeCheckout, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this._isMounted = true;
+      if (scriptLoaded) {
+        return;
+      }
+
+      if (scriptLoading) {
+        return;
+      }
+
+      scriptLoading = true;
+
+      var script = document.createElement('script');
+      if (typeof this.props.onScriptTagCreated === 'function') {
+        this.props.onScriptTagCreated(script);
+      }
+
+      script.src = 'https://checkout.stripe.com/checkout.js';
+      script.async = 1;
+
+      this.loadPromise = function () {
+        var canceled = false;
+        var promise = new Promise(function (resolve, reject) {
+          script.onload = function () {
+            scriptLoaded = true;
+            scriptLoading = false;
+            resolve();
+            _this2.onScriptLoaded();
+          };
+          script.onerror = function (event) {
+            scriptDidError = true;
+            scriptLoading = false;
+            reject(event);
+            _this2.onScriptError(event);
+          };
+        });
+        var wrappedPromise = new Promise(function (accept, cancel) {
+          promise.then(function () {
+            return canceled ? cancel({ isCanceled: true }) : accept();
+          }); // eslint-disable-line no-confusing-arrow
+          promise.catch(function (error) {
+            return canceled ? cancel({ isCanceled: true }) : cancel(error);
+          }); // eslint-disable-line no-confusing-arrow
+        });
+
+        return {
+          promise: wrappedPromise,
+          cancel: function cancel() {
+            canceled = true;
+          }
+        };
+      }();
+
+      this.loadPromise.promise.then(this.onScriptLoaded).catch(this.onScriptError);
+
+      document.body.appendChild(script);
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      if (!scriptLoading) {
+        this.updateStripeHandler();
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._isMounted = false;
+      if (this.loadPromise) {
+        this.loadPromise.cancel();
+      }
+      if (ReactStripeCheckout.stripeHandler && this.state.open) {
+        ReactStripeCheckout.stripeHandler.close();
+      }
+    }
+  }, {
+    key: 'updateStripeHandler',
+    value: function updateStripeHandler() {
+      if (!ReactStripeCheckout.stripeHandler || this.props.reconfigureOnUpdate) {
+        ReactStripeCheckout.stripeHandler = StripeCheckout.configure({
+          key: this.props.stripeKey
+        });
+      }
+    }
+  }, {
+    key: 'showLoadingDialog',
+    value: function showLoadingDialog() {
+      if (this.props.showLoadingDialog) {
+        for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          args[_key4] = arguments[_key4];
+        }
+
+        this.props.showLoadingDialog.apply(this, args);
+      }
+    }
+  }, {
+    key: 'hideLoadingDialog',
+    value: function hideLoadingDialog() {
+      if (this.props.hideLoadingDialog) {
+        for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          args[_key5] = arguments[_key5];
+        }
+
+        this.props.hideLoadingDialog.apply(this, args);
+      }
+    }
+  }, {
+    key: 'showStripeDialog',
+    value: function showStripeDialog() {
+      this.hideLoadingDialog();
+      ReactStripeCheckout.stripeHandler.open(this.getConfig());
+    }
+  }, {
+    key: 'renderDefaultStripeButton',
+    value: function renderDefaultStripeButton() {
+      return _react2.default.createElement(
+        'button',
+        _extends({}, _defineProperty({}, this.props.triggerEvent, this.onClick), {
+          className: this.props.className,
+          onMouseDown: this.handleOnMouseDown,
+          onFocus: this.handleOnMouseDown,
+          onMouseUp: this.handleOnMouseUp,
+          onMouseOut: this.handleOnMouseUp,
+          onBlur: this.handleOnMouseUp,
+          style: _extends({}, {
+            overflow: 'hidden',
+            display: 'inline-block',
+            background: 'linear-gradient(#28a0e5,#015e94)',
+            border: 0,
+            padding: 1,
+            textDecoration: 'none',
+            borderRadius: 5,
+            boxShadow: '0 1px 0 rgba(0,0,0,0.2)',
+            cursor: 'pointer',
+            visibility: 'visible',
+            userSelect: 'none'
+          }, this.state.buttonActive && {
+            background: '#005d93'
+          }, this.props.style)
+        }),
+        _react2.default.createElement(
+          'span',
+          {
+            style: _extends({}, {
+              backgroundImage: 'linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4)',
+              fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
+              fontSize: 14,
+              position: 'relative',
+              padding: '0 12px',
+              display: 'block',
+              height: 30,
+              lineHeight: '30px',
+              color: '#fff',
+              fontWeight: 'bold',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.25)',
+              textShadow: '0 -1px 0 rgba(0,0,0,0.25)',
+              borderRadius: 4
+            }, this.state.buttonActive && {
+              color: '#eee',
+              boxShadow: 'inset 0 1px 0 rgba(0,0,0,0.1)',
+              backgroundImage: 'linear-gradient(#008cdd,#008cdd 85%,#239adf)'
+            }, this.props.textStyle)
+          },
+          this.props.label
+        )
+      );
+    }
+  }, {
+    key: 'renderDisabledButton',
+    value: function renderDisabledButton() {
+      return _react2.default.createElement(
+        'button',
+        {
+          disabled: true,
+          style: {
+            background: 'rgba(0,0,0,0.2)',
+            overflow: 'hidden',
+            display: 'inline-block',
+            border: 0,
+            padding: 1,
+            textDecoration: 'none',
+            borderRadius: 5,
+            userSelect: 'none'
+          }
+        },
+        _react2.default.createElement(
+          'span',
+          {
+            style: {
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.25)',
+              fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
+              fontSize: 14,
+              position: 'relative',
+              padding: '0 12px',
+              display: 'block',
+              height: 30,
+              lineHeight: '30px',
+              borderRadius: 4,
+              color: '#999',
+              background: '#f8f9fa',
+              textShadow: '0 1px 0 rgba(255,255,255,0.5)'
+            }
+          },
+          this.props.label
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.props.desktopShowModal === true && !this.state.open) {
+        this.onClick();
+      } else if (this.props.desktopShowModal === false && this.state.open) {
+        ReactStripeCheckout.stripeHandler.close();
+      }
+
+      var ComponentClass = this.props.ComponentClass;
+
+      if (this.props.children) {
+        return _react2.default.createElement(ComponentClass, _extends({}, _defineProperty({}, this.props.triggerEvent, this.onClick), {
+          children: this.props.children
+        }));
+      }
+      return this.props.disabled ? this.renderDisabledButton() : this.renderDefaultStripeButton();
+    }
+  }]);
+
+  return ReactStripeCheckout;
+}(_react2.default.Component);
+
+ReactStripeCheckout.defaultProps = {
+  className: 'StripeCheckout',
+  label: 'Pay With Card',
+  locale: 'auto',
+  ComponentClass: 'span',
+  reconfigureOnUpdate: false,
+  triggerEvent: 'onClick'
+};
+ReactStripeCheckout.propTypes = {
+  // Opens / closes the checkout modal by value
+  // WARNING: does not work on mobile due to browser security restrictions
+  // NOTE: Must be set to false when receiving token to prevent modal from
+  //       opening automatically after closing
+  desktopShowModal: _propTypes2.default.bool,
+
+  triggerEvent: _propTypes2.default.oneOf(['onClick', 'onTouchTap', 'onTouchStart']),
+
+  // If included, will render the default blue button with label text.
+  // (Requires including stripe-checkout.css or adding the .styl file
+  // to your pipeline)
+  label: _propTypes2.default.string,
+
+  // Custom styling for default button
+  style: _propTypes2.default.object,
+  // Custom styling for <span> tag inside default button
+  textStyle: _propTypes2.default.object,
+
+  // Prevents any events from opening the popup
+  // Adds the disabled prop to the button and adjusts the styling as well
+  disabled: _propTypes2.default.bool,
+
+  // Named component to wrap button (eg. div)
+  ComponentClass: _propTypes2.default.string,
+
+  // Show a loading indicator
+  showLoadingDialog: _propTypes2.default.func,
+  // Hide the loading indicator
+  hideLoadingDialog: _propTypes2.default.func,
+
+  // Run this method when the scrupt fails to load. Will run if the internet
+  // connection is offline when attemting to load the script.
+  onScriptError: _propTypes2.default.func,
+
+  // Runs when the script tag is created, but before it is added to the DOM
+  onScriptTagCreated: _propTypes2.default.func,
+
+  // By default, any time the React component is updated, it will call
+  // StripeCheckout.configure, which may result in additional XHR calls to the
+  // stripe API.  If you know the first configuration is all you need, you
+  // can set this to false.  Subsequent updates will affect the StripeCheckout.open
+  // (e.g. different prices)
+  reconfigureOnUpdate: _propTypes2.default.bool,
+
+  // =====================================================
+  // Required by stripe
+  // see Stripe docs for more info:
+  //   https://stripe.com/docs/checkout#integration-custom
+  // =====================================================
+
+  // Your publishable key (test or live).
+  // can't use "key" as a prop in react, so have to change the keyname
+  stripeKey: _propTypes2.default.string.isRequired,
+
+  // The callback to invoke when the Checkout process is complete.
+  //   function(token)
+  //     token is the token object created.
+  //     token.id can be used to create a charge or customer.
+  //     token.email contains the email address entered by the user.
+  token: _propTypes2.default.func.isRequired,
+
+  // ==========================
+  // Highly Recommended Options
+  // ==========================
+
+  // Name of the company or website.
+  name: _propTypes2.default.string,
+
+  // A description of the product or service being purchased.
+  description: _propTypes2.default.string,
+
+  // A relative URL pointing to a square image of your brand or product. The
+  // recommended minimum size is 128x128px. The recommended image types are
+  // .gif, .jpeg, and .png.
+  image: _propTypes2.default.string,
+
+  // The amount (in cents) that's shown to the user. Note that you will still
+  // have to explicitly include it when you create a charge using the API.
+  amount: _propTypes2.default.number,
+
+  // Specify auto to display Checkout in the user's preferred language, if
+  // available. English will be used by default.
+  //
+  // https://stripe.com/docs/checkout#supported-languages
+  // for more info.
+  locale: _propTypes2.default.oneOf(['auto', // (Default) Automatically chosen by checkout
+  'zh', // Simplified Chinese
+  'da', // Danish
+  'nl', // Dutch
+  'en', // English
+  'fr', // French
+  'de', // German
+  'it', // Italian
+  'ja', // Japanease
+  'no', // Norwegian
+  'es', // Spanish
+  'sv']),
+
+  // ==============
+  // Optional Props
+  // ==============
+
+  // The currency of the amount (3-letter ISO code). The default is USD.
+  currency: _propTypes2.default.oneOf(['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', // eslint-disable-line comma-spacing
+  'BDT', 'BGN', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BWP', 'BZD', 'CAD', 'CDF', // eslint-disable-line comma-spacing
+  'CHF', 'CLP', 'CNY', 'COP', 'CRC', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EEK', // eslint-disable-line comma-spacing
+  'EGP', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', // eslint-disable-line comma-spacing
+  'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JMD', 'JPY', 'KES', // eslint-disable-line comma-spacing
+  'KGS', 'KHR', 'KMF', 'KRW', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LTL', // eslint-disable-line comma-spacing
+  'LVL', 'MAD', 'MDL', 'MGA', 'MKD', 'MNT', 'MOP', 'MRO', 'MUR', 'MVR', 'MWK', 'MXN', // eslint-disable-line comma-spacing
+  'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NOK', 'NPR', 'NZD', 'PAB', 'PEN', 'PGK', 'PHP', // eslint-disable-line comma-spacing
+  'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SEK', // eslint-disable-line comma-spacing
+  'SGD', 'SHP', 'SLL', 'SOS', 'SRD', 'STD', 'SVC', 'SZL', 'THB', 'TJS', 'TOP', 'TRY', // eslint-disable-line comma-spacing
+  'TTD', 'TWD', 'TZS', 'UAH', 'UGX', 'USD', 'UYU', 'UZS', 'VND', 'VUV', 'WST', 'XAF', // eslint-disable-line comma-spacing
+  'XCD', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMW']),
+
+  // The label of the payment button in the Checkout form (e.g. “Subscribe”,
+  // “Pay {{amount}}”, etc.). If you include {{amount}}, it will be replaced
+  // by the provided amount. Otherwise, the amount will be appended to the
+  // end of your label.
+  panelLabel: _propTypes2.default.string,
+
+  // Specify whether Checkout should validate the billing ZIP code (true or
+  // false)
+  zipCode: _propTypes2.default.bool,
+
+  // Specify whether Checkout should collect the user's billing address
+  // (true or false). The default is false.
+  billingAddress: _propTypes2.default.bool,
+
+  // Specify whether Checkout should collect the user's shipping address
+  // (true or false). The default is false.
+  shippingAddress: _propTypes2.default.bool,
+
+  // Specify whether Checkout should validate the billing ZIP code (true or
+  // false). The default is false.
+  email: _propTypes2.default.string,
+
+  // Specify whether to include the option to "Remember Me" for future
+  // purchases (true or false). The default is true.
+  allowRememberMe: _propTypes2.default.bool,
+
+  // Specify whether to accept Bitcoin in Checkout. The default is false.
+  bitcoin: _propTypes2.default.bool,
+
+  // Specify whether to accept Alipay ('auto', true, or false). The default
+  // is false.
+  alipay: _propTypes2.default.oneOf(['auto', true, false]),
+
+  // Specify if you need reusable access to the customer's Alipay account
+  // (true or false). The default is false.
+  alipayReusable: _propTypes2.default.bool,
+
+  // function() The callback to invoke when Checkout is opened (not supported
+  // in IE6 and IE7).
+  opened: _propTypes2.default.func,
+
+  // function() The callback to invoke when Checkout is closed (not supported
+  // in IE6 and IE7).
+  closed: _propTypes2.default.func
+};
+ReactStripeCheckout._isMounted = false;
+exports.default = ReactStripeCheckout;
+
+},{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"src/components/performer/SubscribePackage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactStripeCheckout = _interopRequireDefault(require("react-stripe-checkout"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SubscribePackage = function SubscribePackage() {
+  var handleToken = function handleToken(token, addresses) {
+    console.log({
+      token: token,
+      addresses: addresses
+    });
+  };
+
+  return _react.default.createElement("div", {
+    className: "credit-list"
+  }, _react.default.createElement("h3", null, "6 Months"), _react.default.createElement("h2", null, "\xA399.90"), _react.default.createElement("p", null, "Lorem Ipsum is simply dummy text"), _react.default.createElement(_reactStripeCheckout.default, {
+    stripeKey: "pk_test_9X1Edj5lTitMBPOAzC1Q2xcV",
+    token: handleToken,
+    name: "Adult Lounge" // the pop-in header title
+    ,
+    description: "Cams & Escorts" // the pop-in header subtitle
+    ,
+    image: "http://localhost/adultlounge/assets/images/logo.png" // the pop-in header image (default none)
+    ,
+    ComponentClass: "div",
+    panelLabel: "Pay Now" // prepended to the amount in the bottom pay button
+    ,
+    amount: 1 // cents
+    ,
+    currency: "EUR",
+    locale: "UK",
+    email: "dev.rakesh2k14@gmail.com" // Note: Enabling either address option will give the user the ability to
+    // fill out both. Addresses are sent as a second parameter in the token callback.
+    ,
+    shippingAddress: false,
+    billingAddress: false // Note: enabling both zipCode checks and billing or shipping address will
+    // cause zipCheck to be pulled from billing address (set to shipping if none provided).
+    ,
+    zipCode: false //alipay // accept Alipay (default false)
+    //bitcoin // accept Bitcoins (default false)
+    ,
+    allowRememberMe: true // "Remember Me" option (default true)
+    //opened={this.onOpened} // called when the checkout popin is opened (no IE6/7)
+    //closed={this.onClosed} // called when the checkout popin is closed (no IE6/7)
+    // Note: `reconfigureOnUpdate` should be set to true IFF, for some reason
+    // you are using multiple stripe keys
+    ,
+    reconfigureOnUpdate: false // Note: you can change the event to `onTouchTap`, `onClick`, `onTouchStart`
+    // useful if you're using React-Tap-Event-Plugin
+    //triggerEvent="onTouchTap"
+
+  }));
+};
+
+var _default = SubscribePackage;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-stripe-checkout":"node_modules/react-stripe-checkout/dist/main.js"}],"src/components/performer/SubscribeModalComponent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45801,13 +46476,17 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactModal = _interopRequireDefault(require("react-modal"));
 
+require("./SubscribeModalComponent.css");
+
+var _SubscribePackage = _interopRequireDefault(require("./SubscribePackage"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -45819,49 +46498,45 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var PopupComponent =
+var SubscribeModalComponent =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(PopupComponent, _Component);
+  _inherits(SubscribeModalComponent, _Component);
 
-  function PopupComponent(props) {
+  function SubscribeModalComponent(props) {
     var _this;
 
-    _classCallCheck(this, PopupComponent);
+    _classCallCheck(this, SubscribeModalComponent);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PopupComponent).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SubscribeModalComponent).call(this, props));
+
+    _this.openModal = function () {
+      _this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    _this.closeModal = function () {
+      _this.setState({
+        modalIsOpen: false
+      });
+    };
+
     _this.state = {
       modalIsOpen: _this.props.modalIsOpen
     };
-    _this.openModal = _this.openModal.bind(_assertThisInitialized(_this));
-    _this.closeModal = _this.closeModal.bind(_assertThisInitialized(_this));
-    console.log(_this.state);
     return _this;
   }
 
-  _createClass(PopupComponent, [{
-    key: "openModal",
-    value: function openModal() {
-      this.setState({
-        modalIsOpen: true
-      });
-    }
-  }, {
-    key: "closeModal",
-    value: function closeModal() {
-      this.setState({
-        modalIsOpen: false
-      });
-    }
-  }, {
+  _createClass(SubscribeModalComponent, [{
     key: "componentWillMount",
     value: function componentWillMount() {
       _reactModal.default.setAppElement('body');
@@ -45869,22 +46544,44 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("button", {
-        onClick: this.openModal
-      }, "Open Modal"), _react.default.createElement(_reactModal.default, _extends({
+      var _subscribePackages = [];
+      var i = 0;
+
+      for (; i < 3; i++) {
+        _subscribePackages.push(_react.default.createElement(_SubscribePackage.default, null));
+      }
+
+      return _react.default.createElement("div", null, _react.default.createElement(_reactModal.default, _extends({
         isOpen: this.state.modalIsOpen,
         onRequestClose: this.closeModal,
         shouldCloseOnOverlayClick: false
-      }, this.props), this.props.children));
+      }, this.props, {
+        portalClassName: "modal buy_modal __subscribeModal",
+        className: "",
+        overlayClassName: "Overlay"
+      }), _react.default.createElement("div", {
+        className: "modal-content"
+      }, _react.default.createElement("div", {
+        className: "modal-header"
+      }, _react.default.createElement("h2", null, "Subscribe"), _react.default.createElement("span", {
+        className: "close",
+        onClick: this.props.closeModal
+      }, "\xD7")), _react.default.createElement("div", {
+        className: "modal-body"
+      }, _react.default.createElement("div", {
+        className: "clearfix"
+      }), _react.default.createElement("div", {
+        className: "credit-slider"
+      }, _subscribePackages)))));
     }
   }]);
 
-  return PopupComponent;
+  return SubscribeModalComponent;
 }(_react.Component);
 
-var _default = PopupComponent;
+var _default = SubscribeModalComponent;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-modal":"node_modules/react-modal/lib/index.js"}],"src/components/contents/LockComponent.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-modal":"node_modules/react-modal/lib/index.js","./SubscribeModalComponent.css":"src/components/performer/SubscribeModalComponent.css","./SubscribePackage":"src/components/performer/SubscribePackage.js"}],"src/components/contents/LockComponent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45894,9 +46591,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactModal = _interopRequireDefault(require("react-modal"));
-
-var _PopupComponent = _interopRequireDefault(require("../popup/PopupComponent"));
+var _SubscribeModalComponent = _interopRequireDefault(require("../performer/SubscribeModalComponent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45904,7 +46599,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -45982,41 +46677,11 @@ function (_React$Component) {
           transform: 'translate(-50%, -50%)'
         }
       };
-      return _react.default.createElement(_react.default.Fragment, null, this.lockRender(), this.state.modalIsOpen && _react.default.createElement(_PopupComponent.default, {
+      return _react.default.createElement(_react.default.Fragment, null, this.lockRender(), this.state.modalIsOpen && _react.default.createElement(_SubscribeModalComponent.default, {
+        closeModal: this.handleCloseModal,
         style: customStyles,
-        portalClassName: "modal buy_modal __subscribeModal",
-        className: "",
-        overlayClassName: "Overlay",
         modalIsOpen: this.state.modalIsOpen
-      }, _react.default.createElement("div", {
-        className: "modal-content"
-      }, _react.default.createElement("div", {
-        className: "modal-header"
-      }, _react.default.createElement("h2", null, "Subscribe"), _react.default.createElement("span", {
-        className: "close",
-        onClick: this.handleCloseModal
-      }, "\xD7")), _react.default.createElement("div", {
-        className: "modal-body"
-      }, _react.default.createElement("div", {
-        className: "clearfix"
-      }), _react.default.createElement("div", {
-        className: "credit-slider"
-      }, _react.default.createElement("div", {
-        className: "credit-list"
-      }, _react.default.createElement("h3", null, "6 Months"), _react.default.createElement("h2", null, "\xA399.90"), _react.default.createElement("p", null, "Lorem Ipsum is simply dummy text"), _react.default.createElement("a", {
-        href: "http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB",
-        className: "btn"
-      }, "SUBSCRIBE")), _react.default.createElement("div", {
-        className: "credit-list"
-      }, _react.default.createElement("h3", null, "1 Years"), _react.default.createElement("h2", null, "\xA399.90"), _react.default.createElement("p", null, "Lorem Ipsum is simply dummy text"), _react.default.createElement("a", {
-        href: "http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB",
-        className: "btn"
-      }, "SUBSCRIBE")), _react.default.createElement("div", {
-        className: "credit-list"
-      }, _react.default.createElement("h3", null, "3 Years"), _react.default.createElement("h2", null, "\xA399.90"), _react.default.createElement("p", null, "Lorem Ipsum is simply dummy text"), _react.default.createElement("a", {
-        href: "http://localhost/adultlounge/process-payment/4q2VolejRejNmGQB",
-        className: "btn"
-      }, "SUBSCRIBE")))))));
+      }));
     }
   }]);
 
@@ -46025,7 +46690,7 @@ function (_React$Component) {
 
 var _default = LockComponent;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-modal":"node_modules/react-modal/lib/index.js","../popup/PopupComponent":"src/components/popup/PopupComponent.js"}],"src/components/contents/ImageComponent.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../performer/SubscribeModalComponent":"src/components/performer/SubscribeModalComponent.js"}],"src/components/contents/ImageComponent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46083,74 +46748,7 @@ function LoadMoreComponent(props) {
     className: "btn-load-more"
   }, "Load More..."));
 }
-},{"react":"node_modules/react/index.js"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/components/hoc/LoadingHOC.css":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"src/components/hoc/LoadingHOC.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -46169,7 +46767,7 @@ require("./LoadingHOC.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -48284,7 +48882,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -53087,7 +53685,7 @@ function stepper(secondPerFrame, x, v, destX, k, b, precision) {
 
 module.exports = exports["default"];
 // array reference around.
-},{}],"node_modules/react-motion/node_modules/performance-now/lib/performance-now.js":[function(require,module,exports) {
+},{}],"node_modules/performance-now/lib/performance-now.js":[function(require,module,exports) {
 var process = require("process");
 // Generated by CoffeeScript 1.7.1
 (function() {
@@ -53122,7 +53720,7 @@ var process = require("process");
 
 }).call(this);
 
-},{"process":"../../../../../usr/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"node_modules/performance-now/lib/performance-now.js":[function(require,module,exports) {
+},{"process":"../../../../../usr/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"node_modules/raf/node_modules/performance-now/lib/performance-now.js":[function(require,module,exports) {
 var process = require("process");
 // Generated by CoffeeScript 1.12.2
 (function() {
@@ -53239,7 +53837,7 @@ module.exports.polyfill = function(object) {
   object.cancelAnimationFrame = caf
 }
 
-},{"performance-now":"node_modules/performance-now/lib/performance-now.js"}],"node_modules/react-motion/lib/shouldStopAnimation.js":[function(require,module,exports) {
+},{"performance-now":"node_modules/raf/node_modules/performance-now/lib/performance-now.js"}],"node_modules/react-motion/lib/shouldStopAnimation.js":[function(require,module,exports) {
 
 
 // usage assumption: currentStyle values have already been rendered but it says
@@ -53539,7 +54137,7 @@ module.exports = exports['default'];
 // after checking for unreadPropStyle != null, we manually go set the
 // non-interpolating values (those that are a number, without a spring
 // config)
-},{"./mapToZero":"node_modules/react-motion/lib/mapToZero.js","./stripStyle":"node_modules/react-motion/lib/stripStyle.js","./stepper":"node_modules/react-motion/lib/stepper.js","performance-now":"node_modules/react-motion/node_modules/performance-now/lib/performance-now.js","raf":"node_modules/raf/index.js","./shouldStopAnimation":"node_modules/react-motion/lib/shouldStopAnimation.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"node_modules/react-motion/lib/StaggeredMotion.js":[function(require,module,exports) {
+},{"./mapToZero":"node_modules/react-motion/lib/mapToZero.js","./stripStyle":"node_modules/react-motion/lib/stripStyle.js","./stepper":"node_modules/react-motion/lib/stepper.js","performance-now":"node_modules/performance-now/lib/performance-now.js","raf":"node_modules/raf/index.js","./shouldStopAnimation":"node_modules/react-motion/lib/shouldStopAnimation.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"node_modules/react-motion/lib/StaggeredMotion.js":[function(require,module,exports) {
 'use strict';
 
 exports.__esModule = true;
@@ -53828,7 +54426,7 @@ module.exports = exports['default'];
 // after checking for unreadPropStyles != null, we manually go set the
 // non-interpolating values (those that are a number, without a spring
 // config)
-},{"./mapToZero":"node_modules/react-motion/lib/mapToZero.js","./stripStyle":"node_modules/react-motion/lib/stripStyle.js","./stepper":"node_modules/react-motion/lib/stepper.js","performance-now":"node_modules/react-motion/node_modules/performance-now/lib/performance-now.js","raf":"node_modules/raf/index.js","./shouldStopAnimation":"node_modules/react-motion/lib/shouldStopAnimation.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"node_modules/react-motion/lib/mergeDiff.js":[function(require,module,exports) {
+},{"./mapToZero":"node_modules/react-motion/lib/mapToZero.js","./stripStyle":"node_modules/react-motion/lib/stripStyle.js","./stepper":"node_modules/react-motion/lib/stepper.js","performance-now":"node_modules/performance-now/lib/performance-now.js","raf":"node_modules/raf/index.js","./shouldStopAnimation":"node_modules/react-motion/lib/shouldStopAnimation.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"node_modules/react-motion/lib/mergeDiff.js":[function(require,module,exports) {
 
 
 // core keys merging algorithm. If previous render's keys are [a, b], and the
@@ -54460,7 +55058,7 @@ module.exports = exports['default'];
 // at 0 (didn't have time to tick and interpolate even once). If we naively
 // compare currentStyle with destVal it'll be 0 === 0 (no animation, stop).
 // In reality currentStyle should be 400
-},{"./mapToZero":"node_modules/react-motion/lib/mapToZero.js","./stripStyle":"node_modules/react-motion/lib/stripStyle.js","./stepper":"node_modules/react-motion/lib/stepper.js","./mergeDiff":"node_modules/react-motion/lib/mergeDiff.js","performance-now":"node_modules/react-motion/node_modules/performance-now/lib/performance-now.js","raf":"node_modules/raf/index.js","./shouldStopAnimation":"node_modules/react-motion/lib/shouldStopAnimation.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"node_modules/react-motion/lib/presets.js":[function(require,module,exports) {
+},{"./mapToZero":"node_modules/react-motion/lib/mapToZero.js","./stripStyle":"node_modules/react-motion/lib/stripStyle.js","./stepper":"node_modules/react-motion/lib/stepper.js","./mergeDiff":"node_modules/react-motion/lib/mergeDiff.js","performance-now":"node_modules/performance-now/lib/performance-now.js","raf":"node_modules/raf/index.js","./shouldStopAnimation":"node_modules/react-motion/lib/shouldStopAnimation.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"node_modules/react-motion/lib/presets.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -56453,7 +57051,7 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = _interopRequireDefault;
-},{}],"node_modules/dom-helpers/class/hasClass.js":[function(require,module,exports) {
+},{}],"node_modules/react-images/node_modules/dom-helpers/class/hasClass.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -56464,7 +57062,7 @@ function hasClass(element, className) {
 }
 
 module.exports = exports["default"];
-},{}],"node_modules/dom-helpers/class/addClass.js":[function(require,module,exports) {
+},{}],"node_modules/react-images/node_modules/dom-helpers/class/addClass.js":[function(require,module,exports) {
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -56479,7 +57077,7 @@ function addClass(element, className) {
 }
 
 module.exports = exports["default"];
-},{"@babel/runtime/helpers/interopRequireDefault":"node_modules/@babel/runtime/helpers/interopRequireDefault.js","./hasClass":"node_modules/dom-helpers/class/hasClass.js"}],"node_modules/dom-helpers/class/removeClass.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"node_modules/@babel/runtime/helpers/interopRequireDefault.js","./hasClass":"node_modules/react-images/node_modules/dom-helpers/class/hasClass.js"}],"node_modules/react-images/node_modules/dom-helpers/class/removeClass.js":[function(require,module,exports) {
 'use strict';
 
 function replaceClassName(origClass, classToRemove) {
@@ -56489,7 +57087,7 @@ function replaceClassName(origClass, classToRemove) {
 module.exports = function removeClass(element, className) {
   if (element.classList) element.classList.remove(className);else if (typeof element.className === 'string') element.className = replaceClassName(element.className, className);else element.setAttribute('class', replaceClassName(element.className && element.className.baseVal || '', className));
 };
-},{}],"node_modules/react-transition-group/utils/PropTypes.js":[function(require,module,exports) {
+},{}],"node_modules/react-images/node_modules/react-transition-group/utils/PropTypes.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -56522,7 +57120,7 @@ var classNamesShape = "development" !== 'production' ? _propTypes.default.oneOfT
   exitActive: _propTypes.default.string
 })]) : null;
 exports.classNamesShape = classNamesShape;
-},{"prop-types":"node_modules/prop-types/index.js"}],"node_modules/react-transition-group/Transition.js":[function(require,module,exports) {
+},{"prop-types":"node_modules/prop-types/index.js"}],"node_modules/react-images/node_modules/react-transition-group/Transition.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -57176,7 +57774,7 @@ Transition.EXITING = 4;
 var _default = (0, _reactLifecyclesCompat.polyfill)(Transition);
 
 exports.default = _default;
-},{"prop-types":"node_modules/prop-types/index.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-lifecycles-compat":"node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js","./utils/PropTypes":"node_modules/react-transition-group/utils/PropTypes.js"}],"node_modules/react-transition-group/CSSTransition.js":[function(require,module,exports) {
+},{"prop-types":"node_modules/prop-types/index.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-lifecycles-compat":"node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js","./utils/PropTypes":"node_modules/react-images/node_modules/react-transition-group/utils/PropTypes.js"}],"node_modules/react-images/node_modules/react-transition-group/CSSTransition.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -57588,7 +58186,7 @@ CSSTransition.propTypes = "development" !== "production" ? _extends({}, _Transit
 var _default = CSSTransition;
 exports.default = _default;
 module.exports = exports["default"];
-},{"prop-types":"node_modules/prop-types/index.js","dom-helpers/class/addClass":"node_modules/dom-helpers/class/addClass.js","dom-helpers/class/removeClass":"node_modules/dom-helpers/class/removeClass.js","react":"node_modules/react/index.js","./Transition":"node_modules/react-transition-group/Transition.js","./utils/PropTypes":"node_modules/react-transition-group/utils/PropTypes.js"}],"node_modules/react-transition-group/utils/ChildMapping.js":[function(require,module,exports) {
+},{"prop-types":"node_modules/prop-types/index.js","dom-helpers/class/addClass":"node_modules/react-images/node_modules/dom-helpers/class/addClass.js","dom-helpers/class/removeClass":"node_modules/react-images/node_modules/dom-helpers/class/removeClass.js","react":"node_modules/react/index.js","./Transition":"node_modules/react-images/node_modules/react-transition-group/Transition.js","./utils/PropTypes":"node_modules/react-images/node_modules/react-transition-group/utils/PropTypes.js"}],"node_modules/react-images/node_modules/react-transition-group/utils/ChildMapping.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -57739,7 +58337,7 @@ function getNextChildMapping(nextProps, prevChildMapping, onExited) {
   });
   return children;
 }
-},{"react":"node_modules/react/index.js"}],"node_modules/react-transition-group/TransitionGroup.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"node_modules/react-images/node_modules/react-transition-group/TransitionGroup.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -57991,7 +58589,7 @@ var _default = (0, _reactLifecyclesCompat.polyfill)(TransitionGroup);
 
 exports.default = _default;
 module.exports = exports["default"];
-},{"prop-types":"node_modules/prop-types/index.js","react":"node_modules/react/index.js","react-lifecycles-compat":"node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js","./utils/ChildMapping":"node_modules/react-transition-group/utils/ChildMapping.js"}],"node_modules/react-transition-group/ReplaceTransition.js":[function(require,module,exports) {
+},{"prop-types":"node_modules/prop-types/index.js","react":"node_modules/react/index.js","react-lifecycles-compat":"node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js","./utils/ChildMapping":"node_modules/react-images/node_modules/react-transition-group/utils/ChildMapping.js"}],"node_modules/react-images/node_modules/react-transition-group/ReplaceTransition.js":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -58164,7 +58762,7 @@ ReplaceTransition.propTypes = "development" !== "production" ? {
 var _default = ReplaceTransition;
 exports.default = _default;
 module.exports = exports["default"];
-},{"prop-types":"node_modules/prop-types/index.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./TransitionGroup":"node_modules/react-transition-group/TransitionGroup.js"}],"node_modules/react-transition-group/index.js":[function(require,module,exports) {
+},{"prop-types":"node_modules/prop-types/index.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./TransitionGroup":"node_modules/react-images/node_modules/react-transition-group/TransitionGroup.js"}],"node_modules/react-images/node_modules/react-transition-group/index.js":[function(require,module,exports) {
 "use strict";
 
 var _CSSTransition = _interopRequireDefault(require("./CSSTransition"));
@@ -58183,7 +58781,7 @@ module.exports = {
   ReplaceTransition: _ReplaceTransition.default,
   CSSTransition: _CSSTransition.default
 };
-},{"./CSSTransition":"node_modules/react-transition-group/CSSTransition.js","./ReplaceTransition":"node_modules/react-transition-group/ReplaceTransition.js","./TransitionGroup":"node_modules/react-transition-group/TransitionGroup.js","./Transition":"node_modules/react-transition-group/Transition.js"}],"node_modules/react-images/dist/react-images.es.js":[function(require,module,exports) {
+},{"./CSSTransition":"node_modules/react-images/node_modules/react-transition-group/CSSTransition.js","./ReplaceTransition":"node_modules/react-images/node_modules/react-transition-group/ReplaceTransition.js","./TransitionGroup":"node_modules/react-images/node_modules/react-transition-group/TransitionGroup.js","./Transition":"node_modules/react-images/node_modules/react-transition-group/Transition.js"}],"node_modules/react-images/dist/react-images.es.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -59769,7 +60367,7 @@ ModalGateway.defaultProps = {
 };
 var _default = Carousel$1;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","glam":"node_modules/glam/lib/index.js","raf-schd":"node_modules/raf-schd/esm/index.js","react-view-pager":"node_modules/react-view-pager/lib/react-view-pager.js","react-full-screen":"node_modules/react-full-screen/dist/index.js","react-scrolllock":"node_modules/react-scrolllock/dist/index.js","a11y-focus-store":"node_modules/a11y-focus-store/index.js","react-transition-group":"node_modules/react-transition-group/index.js"}],"src/components/contents/GalleryComponent.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","glam":"node_modules/glam/lib/index.js","raf-schd":"node_modules/raf-schd/esm/index.js","react-view-pager":"node_modules/react-view-pager/lib/react-view-pager.js","react-full-screen":"node_modules/react-full-screen/dist/index.js","react-scrolllock":"node_modules/react-scrolllock/dist/index.js","a11y-focus-store":"node_modules/a11y-focus-store/index.js","react-transition-group":"node_modules/react-images/node_modules/react-transition-group/index.js"}],"src/components/contents/GalleryComponent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -59791,7 +60389,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -59998,68 +60596,7 @@ var FreeContentComponent = function FreeContentComponent(props) {
 
 var _default = FreeContentComponent;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./FreeImageGalleryComponent":"src/components/contents/FreeImageGalleryComponent.js","./FreeVideoGalleryComponent":"src/components/contents/FreeVideoGalleryComponent.js","./EmptyGalleryComponent":"src/components/contents/EmptyGalleryComponent.js","./GalleryComponent":"src/components/contents/GalleryComponent.js"}],"src/components/contents/ImageGalleryComponent.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactMasonryComponent = _interopRequireDefault(require("react-masonry-component"));
-
-var _ImageComponent = _interopRequireDefault(require("./ImageComponent"));
-
-var _LoadMoreComponent = _interopRequireDefault(require("../LoadMoreComponent"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var masonryOptions = {
-  percentPosition: true,
-  fitWidth: true,
-  horizontalOrder: true
-};
-
-var ImageGalleryComponent = function ImageGalleryComponent(props) {
-  var visible = props.visible,
-      images = props.images,
-      loadMore = props.loadMore,
-      lockIconPath = props.lockIconPath;
-  var isFree = null;
-  var _imageComponents = '';
-
-  if (images) {
-    _imageComponents = images.slice(0, visible).map(function (image, index) {
-      if (image.subscribe) {
-        isFree = true;
-      } else {
-        isFree = false;
-      }
-
-      return _react.default.createElement(_ImageComponent.default, {
-        key: index,
-        lockIconPath: lockIconPath,
-        subscribe: image.subscribe,
-        isFree: isFree,
-        image: image
-      });
-    });
-  }
-
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMasonryComponent.default, {
-    className: 'grid masonary-ul',
-    elementType: 'ul',
-    options: masonryOptions
-  }, _imageComponents), visible < images.length && _react.default.createElement(_LoadMoreComponent.default, {
-    loadMore: loadMore
-  }));
-};
-
-var _default = ImageGalleryComponent;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-masonry-component":"node_modules/react-masonry-component/lib/index.js","./ImageComponent":"src/components/contents/ImageComponent.js","../LoadMoreComponent":"src/components/LoadMoreComponent.js"}],"src/components/contents/PremiumVideoGalleryComponent.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./FreeImageGalleryComponent":"src/components/contents/FreeImageGalleryComponent.js","./FreeVideoGalleryComponent":"src/components/contents/FreeVideoGalleryComponent.js","./EmptyGalleryComponent":"src/components/contents/EmptyGalleryComponent.js","./GalleryComponent":"src/components/contents/GalleryComponent.js"}],"src/components/contents/PremiumVideoGalleryComponent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60125,7 +60662,7 @@ require("react-image-lightbox/style.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -60251,31 +60788,7 @@ function (_React$Component) {
   return PremiumImageGalleryComponent;
 }(_react.default.Component);
 
-var _default = (0, _LoaderHOC.default)('images')(PremiumImageGalleryComponent); // const PremiumImageGalleryComponent = (props) => {
-//     const {visible, images, loadMore, lockIconPath} = props;
-//     let _imageComponents = '';
-//     if(images) {
-//         _imageComponents = images.slice(0, visible).map(function(image, index) {
-//             return <ImageComponent key={index} lockIconPath={lockIconPath} subscribe={image.subscribe} isFree={(image.subscribe) ? true : false} image={image}/>
-//         });
-//     }
-//     return (
-//         <React.Fragment>
-//             <Masonry
-//                     className={'grid masonary-ul'}
-//                     elementType={'ul'}
-//                     options={masonryOptions}
-//             >
-//                 {_imageComponents}
-//             </Masonry>
-//             {visible < images.length &&
-//                 <LoadMoreComponent loadMore={loadMore}/>
-//             }
-//         </React.Fragment>
-//     )
-// }
-// export default LoaderHOC('images')(PremiumImageGalleryComponent);
-
+var _default = (0, _LoaderHOC.default)('images')(PremiumImageGalleryComponent);
 
 exports.default = _default;
 },{"react":"node_modules/react/index.js","react-masonry-component":"node_modules/react-masonry-component/lib/index.js","./ImageComponent":"src/components/contents/ImageComponent.js","../LoadMoreComponent":"src/components/LoadMoreComponent.js","../hoc/LoaderHOC":"src/components/hoc/LoaderHOC.js","react-image-lightbox":"node_modules/react-image-lightbox/dist/index.es.js","react-image-lightbox/style.css":"node_modules/react-image-lightbox/style.css"}],"src/components/contents/PremiumContentComponent.js":[function(require,module,exports) {
@@ -60288,15 +60801,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _ImageGalleryComponent = _interopRequireDefault(require("./ImageGalleryComponent"));
-
 var _PremiumVideoGalleryComponent = _interopRequireDefault(require("./PremiumVideoGalleryComponent"));
 
 var _EmptyGalleryComponent = _interopRequireDefault(require("./EmptyGalleryComponent"));
 
 var _PremiumImageGalleryComponent = _interopRequireDefault(require("./PremiumImageGalleryComponent"));
-
-var _GalleryComponent = _interopRequireDefault(require("./GalleryComponent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60304,35 +60813,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-// import React, { Component } from 'react'
-// import ImageGalleryComponent from './ImageGalleryComponent';
-// import VideoGalleryComponent from './VideoGalleryComponent';
-// import EmptyGalleryComponent from './EmptyGalleryComponent';
-// const PremiumContentComponent = (props) => {
-//     const {videos, images} = props.premiumContents;
-//     const options = {
-//         videos: videos,
-//         images: images,
-//         visible: props.visible,
-//         loadMore: props.loadMore,
-//         lockIconPath: props.lockIconPath,
-//         isFree: false
-//     }
-//     return(
-//         <div className="user-content-block d-none" id="PremiumContent">
-//             <div className="video-grid">
-//                 <h4 className="free-image-heading">Premium Video</h4>
-//                     {(videos.length > 0) ? <VideoGalleryComponent {...options}/> : <EmptyGalleryComponent/>}
-//             </div>
-//             <hr className="hr-devider" />
-//             <div className="premium-video-area">
-//                 <h4 className="free-image-heading">Premium Image</h4>
-//                     {(images.length > 0) ? <ImageGalleryComponent {...options}/> : <EmptyGalleryComponent/>}
-//             </div>
-//         </div>
-//     )
-// }
-// export default PremiumContentComponent;
 var PremiumContentComponent = function PremiumContentComponent(props) {
   var _props$premiumContent = props.premiumContents,
       videos = _props$premiumContent.videos,
@@ -60345,7 +60825,6 @@ var PremiumContentComponent = function PremiumContentComponent(props) {
     lockIconPath: props.lockIconPath,
     isFree: false
   };
-  console.log('premium:', options);
   return _react.default.createElement("div", {
     className: "user-content-block d-none",
     id: "PremiumContent"
@@ -60368,7 +60847,7 @@ var PremiumContentComponent = function PremiumContentComponent(props) {
 
 var _default = PremiumContentComponent;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./ImageGalleryComponent":"src/components/contents/ImageGalleryComponent.js","./PremiumVideoGalleryComponent":"src/components/contents/PremiumVideoGalleryComponent.js","./EmptyGalleryComponent":"src/components/contents/EmptyGalleryComponent.js","./PremiumImageGalleryComponent":"src/components/contents/PremiumImageGalleryComponent.js","./GalleryComponent":"src/components/contents/GalleryComponent.js"}],"src/components/contents/ContentComponent.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./PremiumVideoGalleryComponent":"src/components/contents/PremiumVideoGalleryComponent.js","./EmptyGalleryComponent":"src/components/contents/EmptyGalleryComponent.js","./PremiumImageGalleryComponent":"src/components/contents/PremiumImageGalleryComponent.js"}],"src/components/contents/ContentComponent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60390,7 +60869,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -60536,7 +61015,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44897" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38423" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

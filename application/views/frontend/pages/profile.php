@@ -311,7 +311,7 @@
                                 <br />
                                 <br />
                                 <input type="hidden" id="gallery_cnt" value="1">
-                                <div class="row">
+                                <div class="row add-new-browse">
                                     <div class="form-group gallery-brouser-area">
                                         <div class="proo">
                                             <img src="<?=base_url('assets/images/noimage.png')?>" alt="" style="height:40px; width:45px;" id="display_gal_img1">
@@ -323,11 +323,14 @@
                                             <option value="2">Premium Content</option>
                                         </select>
                                     </div>
-                                    <div class="form-group add-more-gal"><br /><br />
+                                    <div class="form-group add-more-gal">
                                         <a href="javascript:void(0);" class="add-more-gal-img">Add More</a>
                                     </div>  
                                 </div>
-                                <div class="galdiv"></div>
+                                <div class="galdiv">
+
+
+                                </div>
                                 
                             </div>
                         </div>
@@ -589,7 +592,30 @@
                                     <div class="form-group form-action mt-0">
                                         <input type="submit" value="Update" id="editpro_submit_btn">
                                     </div>
-                                </div>                                
+                                </div> 
+                                <h3>SUBSCRIBE RATE </h3>
+                                <!-- <p>PLEASE WRITE A DESCRIPTION TO GRAB ATTENTION OF THE USER</p> -->
+                                <div class="form-widget __subscribeWiget">
+                                    <div class="form-three-col">
+                                        <div class="form-group">
+                                            <select class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">1</option>
+                                                <option value="3">3</option>
+                                                <option value="Both">Both</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="0.00" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control">
+                                                <option value="year">Year</option>
+                                                <option value="month">Month</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>                           
                             </div>
                         </div>
                         <div class="clear"></div>

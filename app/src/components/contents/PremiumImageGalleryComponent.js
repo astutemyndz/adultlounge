@@ -91,29 +91,3 @@ class PremiumImageGalleryComponent extends React.Component {
 
 }
 export default LoaderHOC('images')(PremiumImageGalleryComponent)
-
-// const PremiumImageGalleryComponent = (props) => {
-//     const {visible, images, loadMore, lockIconPath} = props;
-//     let _imageComponents = '';
-//     if(images) {
-//         _imageComponents = images.slice(0, visible).map(function(image, index) {
-//             return <ImageComponent key={index} lockIconPath={lockIconPath} subscribe={image.subscribe} isFree={(image.subscribe) ? true : false} image={image}/>
-//         });
-//     }
-    
-//     return (
-//         <React.Fragment>
-//             <Masonry
-//                     className={'grid masonary-ul'}
-//                     elementType={'ul'}
-//                     options={masonryOptions}
-//             >
-//                 {_imageComponents}
-//             </Masonry>
-//             {visible < images.length &&
-//                 <LoadMoreComponent loadMore={loadMore}/>
-//             }
-//         </React.Fragment>
-//     )
-// }
-// export default LoaderHOC('images')(PremiumImageGalleryComponent);

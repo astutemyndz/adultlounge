@@ -796,17 +796,16 @@ $('#veriry_agreement').click(function () {
         $("#verify_submit_btn").prop('disabled', true);
     }
 });
-$(".editpro_gal_image_brows").click(function () {
-    $("#gallery_image" + $(this).attr('data-count')).click();
-});
-$('.add-more-gal-img').click(function () {
+// $(".editpro_gal_image_brows").click(function () {
+   
+// });
+$(document).on('click', '.add-more-gal-img', function() {
     var old_cnt = $('#gallery_cnt').val();
     var new_cnt = parseInt($('#gallery_cnt').val()) + parseInt(1);
     $('#gallery_cnt').val(new_cnt);
-    $('.galdiv').append('<br/><br/>\
-                                <div class="form-group galdiv' + new_cnt + ' gallery-brouser-area">\
+    $('.galdiv').append('<div class="row add-new-browse"><div class="form-group galdiv' + new_cnt + ' gallery-brouser-area">\
                                     <div class="proo">\
-                                        <img src="' + base_url + 'assets/images/noimage.png" alt="" style="height:49px; width:45px;" id="display_gal_img' + new_cnt + '">\
+                                        <img src="' + base_url + 'assets/images/noimage.png" alt="" style="height:40px; width:45px;" id="display_gal_img' + new_cnt + '">\
                                     </div>\
                                     <input type="file" class="form-control username formsm display_gal_img' + new_cnt + ' brouse-input" onchange="disp_img(\'' + new_cnt + '\', this)" data-count="' + new_cnt + '" name="gallery[]" id="gallery_image' + new_cnt + '" />\
                                     <div class="brows editpro_gal_image_brows" data-count="' + new_cnt + '">BROWSER</div>\
@@ -814,8 +813,14 @@ $('.add-more-gal-img').click(function () {
                                             <option value="1">Free Content</option>\
                                             <option value="2">Premium Content</option>\
                                         </select>\
-                                </div>');
+                                </div></div>');
+}).on('click', '.editpro_gal_image_brows', function(){
+    //console.log("#gallery_image" + $(this).attr('data-count'));
+    $("#gallery_image" + $(this).attr('data-count')).click();
 });
+// $('.add-more-gal-img').click(function () {
+    
+// });
 
 function disp_img(tmp, ths) {
     var tmp = $(ths).attr('data-count');

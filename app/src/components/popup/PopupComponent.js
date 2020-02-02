@@ -4,27 +4,19 @@ import Modal from 'react-modal';
 class PopupComponent extends Component {
       constructor(props) {
         super(props);
-     
         this.state = {
           modalIsOpen: this.props.modalIsOpen
         };
-     
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        console.log(this.state);
       }
-     
-      openModal() {
+      openModal = () => {
         this.setState({modalIsOpen: true});
       }
-     
-      closeModal() {
+      closeModal = () => {
         this.setState({modalIsOpen: false});
       }
-
       componentWillMount() {
         Modal.setAppElement('body');
-    }
+      }
      
       render() {
         

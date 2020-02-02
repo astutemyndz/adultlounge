@@ -1913,7 +1913,7 @@ input[type="radio"] + label span, input[type="radio"]:checked + label span {
 	float: left;
 	border: 1px solid #d8c17e;
 	padding: 5px;
-	margin: -12px 10px 0 0;
+	margin: 10px 10px 0 0;
 }
 .show2 {
 	width: 70%;
@@ -5109,7 +5109,7 @@ body { font-family: sans-serif; }
 	  display: none;
   }
   .gallery-brouser-area .brows.editpro_gal_image_brows{
-	width: 43%;
+	width: 35%;
     padding: 11px 20px;
     text-align: center;
   }
@@ -5187,46 +5187,22 @@ body { font-family: sans-serif; }
     background-color: papayawhip;
   }
 
-  .Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,.3) ;
-  }
-
-  .buy_modal.__subscribeModal {
-	  display: block;
-  }
-  .buy_modal.__subscribeModal .ReactModal__Content{
-	  background: none !important;
-	  border: none !important;
-	  overflow: inherit !important;
-  }
-  .buy_modal.__subscribeModal .modal-content{
-	  width: 100%;
-  }
-  .buy_modal.__subscribeModal .credit-slider{
-	  display: block;
-  }
-  .buy_modal.__subscribeModal .credit-slider .credit-list{
-	  width: 32%;
-	  float: left;
-	  margin-right: 1%;
-  }
-  .buy_modal.__subscribeModal .credit-slider .credit-list:last-child{
-	  margin-right: 0;
-  }
-  .buy_modal.__subscribeModal.modal .modal-body .credit-list p{
-	color: #d8c17e;
-	font-size: 16px;
-  }
-  .buy_modal.__subscribeModal .credit-list h2{
-	  margin-top: 30px;
-  }
-  .buy_modal.__subscribeModal .credit-list .btn{
-	  margin-top: 30px;
-	  color: #000;
-    	font-weight: 600;
-  }
+  .__subscribeWiget {
+	width: 30%;
+	width: 30;
+	margin: 30px 0 0 0;
+}
+.form-widget .form-three-col {
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin: 0 -5px;
+}
+.add-new-browse.row{
+	width: 100%;
+	float: left;
+}
+.add-new-browse.row .proo{
+	margin-top: 0;
+}

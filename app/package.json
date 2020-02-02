@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.js",
-    "build": "parcel build index.js"
+    "build": "parcel build index.js",
+    "start-dev": "env-cmd dev parcel index.js",
+    "build-dev": "env-cmd dev parcel build index.js",
+    "start-prod": "env-cmd prod parcel index.js",
+    "build-prod": "env-cmd prod parcel build index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +18,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
@@ -28,13 +33,22 @@
     "axios": "^0.19.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "braintree-web": "^3.57.0",
+    "braintree-web-drop-in-react": "^1.1.0",
+    "clear-module": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "env-cmd": "^10.0.1",
+    "final-form": "^4.18.7",
     "masonry-layout": "^4.2.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-final-form": "^6.3.5",
     "react-image-lightbox": "^5.1.1",
     "react-images": "^1.1.0-beta.3",
     "react-masonry-component": "^6.2.1",
     "react-masonry-css": "^1.0.14",
-    "react-modal": "^3.11.1"
+    "react-modal": "^3.11.1",
+    "react-stripe-checkout": "^2.6.3",
+    "react-toastify": "^5.5.0"
   }
 }
